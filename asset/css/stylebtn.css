@@ -1,0 +1,85 @@
+/* Styles pour les boutons de quantité */
+.numberstyle-qty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.numberstyle-qty .qty-btn {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background-color: #d3d3f9;
+    color: #4738de;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.numberstyle-qty .qty-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.numberstyle-qty input {
+    width: 150px; /* Ajuster la largeur pour correspondre à l'image */
+    height: 70px;
+    text-align: center;
+    font-size: 1rem;
+    border: 1px solid #4738de;
+    border-radius: 8px;
+    margin: 0 10px; /* Ajouter plus d'espace entre les boutons et l'input */
+}
+
+/* Styles pour le label customisé */
+.custom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    border: 2px solid #4738de;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #4738de;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.custom-btn.active, .custom-btn:hover {
+    background-color: #d3d3f9;
+    color: #4738de;
+}
+
+/* Styles pour le bouton "Retour" et "Suivant" */
+.btnForm .btn-light {
+    background-color: #fff;
+    color: #4738de;
+    border: 2px solid #4738de;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btnForm .btn-light:hover {
+    background-color: #d3d3f9;
+    color: #4738de;
+}
+
+.btnForm .btn-primary {
+    background-color: #4738de;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btnForm .btn-primary:hover {
+    background-color: #3728a5;
+    color: #fff;
+}

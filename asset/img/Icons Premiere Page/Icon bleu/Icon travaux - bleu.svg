@@ -1,0 +1,19 @@
+<svg id="Groupe_68" data-name="Groupe 68" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="88" height="80.134" viewBox="0 0 88 80.134">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_52" data-name="Rectangle 52" width="88" height="80.134" fill="none" stroke="#4738de" stroke-width="2"/>
+    </clipPath>
+  </defs>
+  <g id="Groupe_67" data-name="Groupe 67" clip-path="url(#clip-path)">
+    <path id="Tracé_53" data-name="Tracé 53" d="M102.715,85.126h11.371a3.94,3.94,0,0,0,3.528-5.687l-7.3-14.754-6.587-13.307a3.938,3.938,0,0,0-7.06,0L90.078,64.685l-7.3,14.754A3.938,3.938,0,0,0,86.3,85.126H97.535" transform="translate(-52.411 -31.3)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Tracé_54" data-name="Tracé 54" d="M124.093,141.452V127.21a2.59,2.59,0,1,1,5.179,0v14.243" transform="translate(-78.968 -79.304)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Tracé_55" data-name="Tracé 55" d="M128.058,171.523v13.372a4.208,4.208,0,0,1-8.416,0V171.523Z" transform="translate(-76.136 -109.151)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Tracé_56" data-name="Tracé 56" d="M64.871,69.051H45.487V81.515H59" transform="translate(-28.946 -43.942)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Tracé_57" data-name="Tracé 57" d="M167.4,81.515h10.126V69.051H161.167" transform="translate(-102.561 -43.941)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <rect id="Rectangle_49" data-name="Rectangle 49" width="29.212" height="12.464" transform="translate(16.541 0.182)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Tracé_58" data-name="Tracé 58" d="M125.82.5h29.212V12.964" transform="translate(-80.067 -0.318)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line id="Ligne_1" data-name="Ligne 1" x1="29.212" transform="translate(45.753 12.646)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <rect id="Rectangle_50" data-name="Rectangle 50" width="29.212" height="12.464" transform="translate(0.182 12.645)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <rect id="Rectangle_51" data-name="Rectangle 51" width="29.212" height="12.464" transform="translate(58.606 12.645)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

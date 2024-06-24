@@ -1,0 +1,18 @@
+<svg id="Groupe_105" data-name="Groupe 105" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38" height="44.573" viewBox="0 0 38 44.573">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_153" data-name="Rectangle 153" width="38" height="44.573" fill="none" stroke="#4738de" stroke-width="1.5"/>
+    </clipPath>
+  </defs>
+  <g id="Groupe_104" data-name="Groupe 104" clip-path="url(#clip-path)">
+    <rect id="Rectangle_149" data-name="Rectangle 149" width="4.826" height="12.373" rx="2.413" transform="translate(0.355 13.378)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Tracé_98" data-name="Tracé 98" d="M30.219,68.641H35.46a3.463,3.463,0,0,0,3.463-3.463V63.963h6.963v.672A3.463,3.463,0,0,0,49.349,68.1,11.878,11.878,0,0,1,61.227,79.976v.433H55.134q0-.124-.006-.247A4.522,4.522,0,0,0,48.646,76.4a12.772,12.772,0,0,1-9.261.667L35.3,75.806a4.554,4.554,0,0,0-1.346-.2H30.219" transform="translate(-24.861 -52.621)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <rect id="Rectangle_150" data-name="Rectangle 150" width="8.571" height="2.748" rx="1.374" transform="translate(29.074 27.88)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <rect id="Rectangle_151" data-name="Rectangle 151" width="10.645" height="3.26" rx="1.63" transform="translate(12.345 8.082)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Tracé_99" data-name="Tracé 99" d="M88.864,30.755v-3.12h3.82v3.12" transform="translate(-73.106 -22.735)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <rect id="Rectangle_152" data-name="Rectangle 152" width="6.554" height="4.447" rx="2.223" transform="translate(14.39 0.355)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Tracé_100" data-name="Tracé 100" d="M126.22,9.552h-8.1V6.811h8.1a1.37,1.37,0,0,1,0,2.741Z" transform="translate(-97.171 -5.603)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Tracé_101" data-name="Tracé 101" d="M29.025,9.552h8.1V6.811h-8.1a1.37,1.37,0,0,0,0,2.741Z" transform="translate(-22.751 -5.603)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Tracé_102" data-name="Tracé 102" d="M170.877,197.05a4.014,4.014,0,0,0,2.846-1.1,4.072,4.072,0,0,0,1.1-3.289,5.648,5.648,0,0,0-1.224-2.57,46.129,46.129,0,0,1-2.723-4.315,46.086,46.086,0,0,1-2.723,4.315,5.649,5.649,0,0,0-1.224,2.57,4.072,4.072,0,0,0,1.1,3.289A4.014,4.014,0,0,0,170.877,197.05Z" transform="translate(-137.31 -152.833)" fill="none" stroke="#4738de" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

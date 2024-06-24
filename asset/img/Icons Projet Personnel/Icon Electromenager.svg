@@ -1,0 +1,16 @@
+<svg id="Groupe_137" data-name="Groupe 137" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38" height="37.937" viewBox="0 0 38 37.937">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_187" data-name="Rectangle 187" width="38" height="37.937" fill="#4738de"/>
+    </clipPath>
+  </defs>
+  <g id="Groupe_136" data-name="Groupe 136" clip-path="url(#clip-path)">
+    <path id="Tracé_177" data-name="Tracé 177" d="M24.523,35.232a9.5,9.5,0,1,0-9.5-9.5,9.487,9.487,0,0,0,9.5,9.5m0-17.353A7.917,7.917,0,1,1,16.605,25.8a7.919,7.919,0,0,1,7.917-7.917" transform="translate(-5.586 -6.036)" fill="#4738de"/>
+    <path id="Tracé_178" data-name="Tracé 178" d="M26.4,33.939a6.333,6.333,0,1,0-6.334-6.333A6.352,6.352,0,0,0,26.4,33.939m0-11.02a4.75,4.75,0,1,1-4.751,4.75,4.784,4.784,0,0,1,4.751-4.75" transform="translate(-7.46 -7.91)" fill="#4738de"/>
+    <path id="Tracé_179" data-name="Tracé 179" d="M25.864,30.3a.83.83,0,0,0,.824-.76,1.568,1.568,0,0,1,1.583-1.583.785.785,0,0,0,.76-.824.829.829,0,0,0-.76-.824A3.136,3.136,0,0,0,25.1,29.481a.829.829,0,0,0,.76.824" transform="translate(-9.334 -9.784)" fill="#4738de"/>
+    <rect id="Rectangle_184" data-name="Rectangle 184" width="1.584" height="1.583" transform="translate(7.853 2.343)" fill="#4738de"/>
+    <rect id="Rectangle_185" data-name="Rectangle 185" width="1.584" height="1.583" transform="translate(11.02 2.343)" fill="#4738de"/>
+    <rect id="Rectangle_186" data-name="Rectangle 186" width="1.584" height="1.583" transform="translate(14.187 2.343)" fill="#4738de"/>
+    <path id="Tracé_180" data-name="Tracé 180" d="M37.113,36.354H29.2V34.77h3.167a.838.838,0,0,0,.823-.824V.76A.785.785,0,0,0,32.363,0H5.51a.829.829,0,0,0-.824.76V34.01a.838.838,0,0,0,.824.824H8.677v1.52H.76a.785.785,0,0,0-.76.823.77.77,0,0,0,.76.76H37.176a.829.829,0,0,0,.824-.76.946.946,0,0,0-.887-.823M31.6,4.687H6.27V1.52H31.6ZM6.27,6.27H31.6V33.186H6.27ZM24.447,36.354H13.427V34.771h11.02ZM10.26,34.77h1.584v1.583H10.26Zm15.77,0h1.583v1.583H26.03Z" fill="#4738de"/>
+  </g>
+</svg>

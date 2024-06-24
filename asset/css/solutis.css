@@ -1,0 +1,327 @@
+/**
+*   -----------------------------------
+*   Solutis theme
+*   css -> global
+*   @author Millet
+*   -----------------------------------
+**/
+/*général*/
+:root {
+    --cercle-active: #BFF574;
+    --color-blue: #4738de;
+    --text-black: #000;
+    --gray: #eee;
+    --error-red: #e40808;
+    --background-body: #F9F9F9;
+    --text-white: #fff;
+    --background-radio: #D1D4FF;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Neuzeit Grotesk", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+.hidden {
+    display: none !important;
+}
+
+.nbClass input[type="number"]::-webkit-inner-spin-button,
+.nbClass input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.nbClass input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+
+body {
+    background-color: var(--background-body);
+    min-height: 100vh;
+    position: relative;
+    max-width: 100%;
+}
+
+.form {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    height: 100vh;
+    max-width: 100%;
+}
+
+
+/*sidebar*/
+.form-sidebar {
+    background-color: var(--color-blue);
+    padding: 20px 10px;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0 0 30px 30px;
+    flex-direction: column;
+    height: 100%;
+    left: 0;
+}
+
+.sidebar {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-content {
+    display: none;
+}
+
+
+.step-content p {
+    color: var(--text-white);
+    font-size: 14px;
+    width: max-content;
+    display: block;
+}
+
+
+.logo {
+    display: block;
+    text-align: center;
+    width: 130px;
+    margin: 0 auto;
+}
+
+.bar {
+    border: 1px solid #D1D4FF;
+    width: 8px;
+    margin: 0 7px;
+}
+
+.circle {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--text-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-white);
+    font-weight: 700;
+}
+
+
+.active {
+    position: relative;
+}
+
+.active .circle {
+    background-color: var(--cercle-active) !important;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.active .circle::after {
+    content: '';
+    position: absolute;
+    top: -4.8px;
+    left: -5px;
+    right: -4.9px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 2px solid var(--cercle-active);
+    z-index: -1;
+}
+
+
+/*modale*/
+/* Modal Proposition CSS */
+.proposition-content {
+    border: none;
+    border-radius: 8px;
+}
+
+.proposition-body {
+    display: flex;
+    padding: 0;
+}
+
+.proposition-left {
+    background-color: white;
+    padding: 40px;
+}
+
+.proposition-right {
+    background-color: #3A3AAE;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+.proposition-left h3,
+.proposition-right h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.proposition-left p {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+}
+
+.proposition-left .btn {
+    border-radius: 25px;
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.proposition-left .btn-danger {
+    background-color: red;
+    border: none;
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.proposition-left .btn-link {
+    color: #000;
+    margin-top: 10px;
+    text-decoration: underline;
+    width: 100%;
+    text-align: center;
+}
+
+.proposition-right .chart-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.proposition-right .chart-wrapper div {
+    text-align: center;
+}
+
+.proposition-right .chart-wrapper img {
+    width: 100%;
+}
+
+.proposition-right .chart-wrapper p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.modale-propositon{
+    width: 80% !important;
+    margin: auto;
+    max-width: 100% !important;
+}
+
+
+
+
+/* CSS pour la modale de confirmation */
+#successModal .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 1080px;
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: var(--bs-modal-bg);
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: var(--bs-modal-border-radius);
+    outline: 0;
+  }
+  
+  #successModal .modal-dialog {
+    max-width: 1080px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  #successModal .modal-title {
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+  #successModal .modal-header {
+  display: block;
+  }
+  #successModal .modal-body {
+    text-align: center;
+    font-family: "New-hero";
+    font-size: 16px;
+  }
+  
+  #successModal #okBtn {
+    background-color: #dc3545 !important; 
+    border-color: #dc3545 !important; 
+    border-radius: 20px;
+    font-size: 12px;
+    width: 160px;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  #successModal #okBtn:hover {
+    background-color: #bb2d3b !important; 
+    border-color: #bb2d3b !important; 
+  }
+  
+  #successModal .modal-footer {
+    border: none;
+    text-align: center;
+    margin: auto;
+  }
+  
+  /* popup*/
+  #toastMessage {
+    width: 1104px;
+    height: 88px;
+    background-color: #E4E6FF; 
+    color: #000; 
+    font-family: 'New Hero', sans-serif; 
+    font-size: 24px; 
+    font-weight: 500; 
+    line-height: 56px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px; 
+    box-sizing: border-box;
+    border: none; 
+    border-radius: 4px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    z-index: 1000; 
+  }
+  
+  .btnForm-final2 {
+    right: 18px;
+  }
+  
+  
+  

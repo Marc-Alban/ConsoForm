@@ -67,9 +67,6 @@ button {
   padding: 3px;
 }
 
-html{
-  overflow: hidden;
-}
 
 
 #resultsList {
@@ -97,9 +94,6 @@ html{
 
 @media screen and (max-width: 767px) {
 
-  html{
-    overflow: auto;
-}
 
     #resultsList {
       background-color: white;
@@ -316,7 +310,7 @@ label.fw-bold {
 
 .sidebar {
   width: 70%;
-  margin-top: 80px;
+  margin-top: 70px;
   margin-left: auto;
   margin-right: auto;
   font-family: "New-hero";

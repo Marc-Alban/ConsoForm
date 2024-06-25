@@ -206,6 +206,7 @@ const options = {
 };
 
 class FormValidator {
+
   constructor(stepsSelector, nextButtonSelector, prevButtonSelector, summarySelector) {
     this.steps = document.querySelectorAll(stepsSelector);
     this.nextButtons = document.querySelectorAll(nextButtonSelector);
@@ -215,8 +216,11 @@ class FormValidator {
     this.formData = {};
     this.currentYear = new Date().getFullYear();
     this.userInteracted = false; // Nouveau flag pour suivre les interactions de l'utilisateur
+    this.nextClicked = false; // Flag pour suivre le clic sur le bouton "Suivant"
     this.setupEventListeners();
   }
+
+
 
   // Méthode pour mettre à jour les options de sélection
   updateOptions() {
@@ -278,17 +282,14 @@ class FormValidator {
   }
 
   showError(field) {
-    if (!this.userInteracted) return; // Ne pas afficher d'erreur si l'utilisateur n'a pas encore interagi
+    if (!this.nextClicked) return; // Ne pas afficher d'erreur si le bouton "Suivant" n'a pas encore été cliqué
 
     field.classList.add("error-form");
-    console.log(`Showing error for field: ${field.id}`);
 
     let errorContainer = document.getElementById(`error-${field.id}`);
-    console.log(`Error container: `, errorContainer);
 
     if (errorContainer && errorContainer.classList.contains("error-container")) {
       errorContainer.classList.remove("d-none");
-      console.log(`Removed d-none from error-${field.id}`);
     } else {
       console.error(`Error container not found for ${field.id}`);
     }
@@ -298,22 +299,21 @@ class FormValidator {
     }
   }
 
+
   hideError(field) {
     field.classList.remove("error-form");
-    console.log(`Hiding error for field: ${field.id}`);
 
     let errorContainer = document.getElementById(`error-${field.id}`);
-    console.log(`Error container: `, errorContainer);
 
     if (errorContainer && errorContainer.classList.contains("error-container")) {
       errorContainer.classList.add("d-none");
-      console.log(`Added d-none to error-${field.id}`);
     }
     const label = document.querySelector(`label[for="${field.id}"]`);
     if (label) {
       label.classList.remove("error-form");
     }
   }
+
 
   validateField(field) {
     if (!this.isVisible(field)) {
@@ -397,12 +397,15 @@ class FormValidator {
 
     if (isValid) {
       this.hideError(field);
-    } else {
+    } else if (this.nextClicked) { // Show error only if nextClicked is true
       this.showError(field);
     }
 
     return isValid;
   }
+
+
+
 
   isValidDate(dateString) {
     const [day, month, year] = dateString.split('/').map(Number);
@@ -411,20 +414,20 @@ class FormValidator {
   }
 
   setupEventListeners() {
-    this.steps.forEach((step) => {
+    this.steps.forEach((step, index) => {
       step.addEventListener("input", (event) => {
         const field = event.target.closest("input, select, textarea");
         if (field) {
-          this.userInteracted = true; // Marquer l'interaction de l'utilisateur
-          this.validateField(field);
+          this.userInteracted = true;
+          this.validateField(field); // Valider et afficher les erreurs si nécessaires
         }
       });
 
       step.addEventListener("change", (event) => {
         const field = event.target.closest('input[type="radio"], select');
         if (field) {
-          this.userInteracted = true; // Marquer l'interaction de l'utilisateur
-          this.validateField(field);
+          this.userInteracted = true;
+          this.validateField(field); // Valider et afficher les erreurs si nécessaires
         }
       });
 
@@ -434,7 +437,45 @@ class FormValidator {
         }
       });
     });
+
+    this.nextButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        this.nextClicked = true;
+        const stepIsValid = this.validateStep(this.currentStepIndex);
+        if (!stepIsValid) {
+          event.preventDefault();
+          this.showErrorsForCurrentStep(); // Afficher les erreurs pour l'étape actuelle
+        } else {
+          this.goToStep(1);
+        }
+      });
+    });
+
+    this.prevButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        this.goToStep(-1);
+      });
+    });
   }
+
+
+
+
+  showErrorsForCurrentStep() {
+    const step = this.steps[this.currentStepIndex];
+    if (!step) return;
+    const fields = step.querySelectorAll("input, select, textarea");
+    fields.forEach((field) => {
+      if (!this.validateField(field)) {
+        this.showError(field); // Afficher les erreurs seulement si le champ est invalide
+      }
+    });
+  }
+
+
+
+
+
 
   validateStep(stepIndex) {
     const step = this.steps[stepIndex];
@@ -451,6 +492,20 @@ class FormValidator {
     });
     return isValid;
   }
+
+
+
+  showCurrentStep() {
+    this.steps.forEach((step, index) => {
+      if (index === this.currentStepIndex) {
+        step.style.display = 'block';
+      } else {
+        step.style.display = 'none';
+      }
+    });
+  }
+
+
 
   saveStepData(stepIndex) {
     const step = this.steps[stepIndex];
@@ -647,6 +702,8 @@ class FormValidator {
     professionSelect.addEventListener('change', function () {
       updateRevenusLabels(this.value);
     });
+
+
 
     updateRevenusLabels(professionSelect.value);
 
@@ -912,14 +969,29 @@ class FormValidator {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  FormValidator.init();
-  new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
-});
 
-// Pour lier les méthodes d'instance avec les événements globaux
-document.addEventListener("DOMContentLoaded", function() {
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const selects = document.querySelectorAll('select');
+
+  selects.forEach(select => {
+      select.addEventListener('change', function() {
+          const selectOption = this.querySelector('option[value=""]');
+          if (selectOption) {
+              selectOption.disabled = true;
+          }
+      });
+  });
+
+  // Initialisation du validateur de formulaire
+  FormValidator.init();
   const formValidatorInstance = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
+
+  // Mise à jour des options en fonction des sélections
   document.getElementById('secteurActivite').addEventListener('change', () => formValidatorInstance.updateOptions());
   document.getElementById('statut').addEventListener('change', () => formValidatorInstance.updateContractOptions());
+
+  // Afficher l'étape actuelle au chargement
+  formValidatorInstance.showCurrentStep();
 });

@@ -1,6 +1,6 @@
-<div class="container text-center situation_pro tab subStepCoBorrower step" id="7-content">
-  <div data-category="Situation financière du co-emprunteur"></div>
-  <div class="row" id="situationProfessional">
+<div class="container text-center situation_pro tab subStepCoBorrower step" id="7-content" style="display: none;">
+  <div data-category="Situation professionnelle du co-emprunteur"></div>
+  <div class="row" id="situationProfessionalCo">
     <div class="title">
       <h2 class="text-primary offset-md-2 offset-md-4 text-center text-md-start">
         SITUATION PROFESSIONNELLE DU CO-EMPRUNTEUR
@@ -14,7 +14,7 @@
             <div class="row">
               <label for="secteurActiviteCo" class="col-12 col-md-4 fw-bold text-start">Secteur d'activité :</label>
               <div class="select2-selection--single col-12 col-md-8">
-                <select id="secteurActiviteCo" name="secteurActiviteCo" class="form-select situationProfession form-input col-12" onchange="updateOptionsCo()" data-type="select">
+                <select id="secteurActiviteCo" name="secteurActiviteCo" class="form-select situationProfession form-input col-12" data-type="select">
                   <option value="">Sélectionner</option>
                   <option value="public">Secteur public</option>
                   <option value="prive">Secteur privé</option>
@@ -108,97 +108,3 @@
     </div>
   </div>
 </div>
-
-<script>
-const optionsCo = {
-  public: {
-    statut: [
-      { value: "agent_service", text: "Agent de service" },
-      { value: "agent_public", text: "Agent public" },
-      { value: "aide_soignant", text: "Aide soignant hospitalier" },
-      { value: "cadre_moyen", text: "Cadre moyen instituteur" },
-      { value: "cadre_superieur", text: "Cadre supérieur et professeur" },
-      { value: "employe_administratif", text: "Employé et agent administratif" },
-      { value: "infirmiere_paramedical", text: "Infirmière et profession paramédicale" },
-      { value: "ouvrier_etat", text: "Ouvrier d'Etat" }
-    ],
-    profession: [
-      { value: "infirmiere", text: "Infirmière" },
-      { value: "agent_securite", text: "Agent de sécurité" },
-      { value: "assistante_maternelle", text: "Assistante maternelle - Employé de maison" },
-      { value: "cadre_moyen", text: "Cadre moyen" },
-      { value: "cadre_superieur", text: "Cadre supérieur" },
-      { value: "chauffeur_livreur", text: "Chauffeur et livreur" },
-      { value: "contremaitre", text: "Contremaître - agent de maîtrise" },
-      { value: "dirigeant", text: "Dirigeant de société" },
-      { value: "employe_bureau", text: "Employé de bureau" },
-      { value: "employe_commerce", text: "Employé de commerce" },
-      { value: "employe_garage", text: "Employé de garage - apporteur" },
-      { value: "ingenieur", text: "Ingénieur" },
-      { value: "ouvrier", text: "Ouvrier" },
-      { value: "representant_salarie", text: "Représentant salarié" },
-      { value: "technicien", text: "Technicien" },
-      { value: "vendeur", text: "Vendeur - caissier de magasin" }
-    ],
-    typeContrat: [
-      { value: "cdi", text: "CDI" },
-      { value: "cdi_essai", text: "CDI période d'essai non terminée" },
-      { value: "cdd", text: "CDD" },
-      { value: "stage", text: "Stage" },
-      { value: "interim", text: "Intérim" },
-      { value: "autres", text: "Autres" }
-    ]
-  },
-  prive: {
-    statut: [
-      { value: "employe_bureau", text: "Employé de bureau" },
-      { value: "employe_commerce", text: "Employé de commerce" },
-      { value: "dirigeant", text: "Dirigeant de société" },
-      { value: "ingenieur", text: "Ingénieur" },
-      { value: "ouvrier", text: "Ouvrier" },
-      { value: "technicien", text: "Technicien" },
-      { value: "vendeur", text: "Vendeur - caissier de magasin" }
-    ],
-    profession: [
-      { value: "employe_bureau", text: "Employé de bureau" },
-      { value: "employe_commerce", text: "Employé de commerce" },
-      { value: "dirigeant", text: "Dirigeant de société" },
-      { value: "ingenieur", text: "Ingénieur" },
-      { value: "ouvrier", text: "Ouvrier" },
-      { value: "technicien", text: "Technicien" },
-      { value: "vendeur", text: "Vendeur - caissier de magasin" }
-    ],
-    typeContrat: [
-      { value: "cdi", text: "CDI" },
-      { value: "cdi_essai", text: "CDI période d'essai non terminée" },
-      { value: "cdd", text: "CDD" },
-      { value: "stage", text: "Stage" },
-      { value: "interim", text: "Intérim" },
-      { value: "autres", text: "Autres" }
-    ]
-  }
-};
-
-function updateOptionsCo() {
-  const secteurActiviteCo = document.getElementById('secteurActiviteCo').value;
-  const statutCoSelect = document.getElementById('statutCo');
-  const professionCoSelect = document.getElementById('professionCo');
-  const typeContratCoSelect = document.getElementById('typeContratCo');
-
-  statutCoSelect.innerHTML = '<option value="">Sélectionner</option>';
-  professionCoSelect.innerHTML = '<option value="">Sélectionner</option>';
-  typeContratCoSelect.innerHTML = '<option value="">Sélectionner</option>';
-
-  if (optionsCo[secteurActiviteCo]) {
-    optionsCo[secteurActiviteCo].statut.forEach(option => {
-      statutCoSelect.innerHTML += `<option value="${option.value}">${option.text}</option>`;
-    });
-    optionsCo[secteurActiviteCo].profession.forEach(option => {
-      professionCoSelect.innerHTML += `<option value="${option.value}">${option.text}</option>`;
-    });
-    optionsCo[secteurActiviteCo].typeContrat.forEach(option => {
-      typeContratCoSelect.innerHTML += `<option value="${option.value}">${option.text}</option>`;
-    });
-  }
-}
-</script>

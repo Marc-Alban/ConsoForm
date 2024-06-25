@@ -2,16 +2,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1. Déclarations des variables
     const steps = document.querySelectorAll('.form-container .step');
     const stepsArray = Array.from(steps);
-    const situationFamilialeSelect = document.querySelector('.situationfamiliale');
     const btnOui = document.getElementById('oui');
     const btnNon = document.getElementById('non');
     const modal = new bootstrap.Modal(document.getElementById('propositionModal'));
     const btnOkModal = document.getElementById('btn-ok-modal');
     const formValidator = new FormValidator(".form-container .step", ".btnNext");
+    const situationFamilialeElement = document.getElementById('situationFamiliale');
 
     let hasCoBorrower = false;
     let hasSelectedNon = false;
     let currentStepOnNonSelection = null;
+    
 
     // 2. Fonctions Utilitaires
 
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (stepsArray[window.currentStep]) {
             stepsArray[window.currentStep].style.display = 'block';
         }
+        updateCoBorrowerSteps();
     }
 
     // Valide les champs visibles
@@ -42,38 +44,60 @@ document.addEventListener('DOMContentLoaded', function() {
         return formValidator.validateStep(window.currentStep);
     }
 
+    function hideAllErrors(steps) {
+        steps.forEach((step) => {
+            const fields = step.querySelectorAll("input, select, textarea");
+            fields.forEach((field) => {
+                formValidator.hideError(field); // Utiliser l'instance formValidator pour appeler hideError
+            });
+        });
+    }
+    
+
     // Navigation vers une étape spécifique
     function goToStep(stepDelta) {
         if (!validateVisibleFields()) {
             showModal();
             return;
         }
-
+    
         let potentialNextStep = window.currentStep + stepDelta;
         const maxStepIndex = stepsArray.length - 1;
-
+    
         // Si pas de co-emprunteur, ignorer les sous-étapes de co-emprunteur
         if (stepDelta > 0 && !hasCoBorrower) {
             while (potentialNextStep <= maxStepIndex && stepsArray[potentialNextStep].classList.contains('subStepCoBorrower')) {
                 potentialNextStep++;
             }
         }
-
+    
         if (stepDelta < 0 && !hasCoBorrower) {
             while (potentialNextStep >= 0 && stepsArray[potentialNextStep].classList.contains('subStepCoBorrower')) {
                 potentialNextStep--;
             }
         }
-
+    
         // S'assurer que l'étape reste dans les limites
         if (potentialNextStep < 0) potentialNextStep = 0;
         if (potentialNextStep > maxStepIndex) potentialNextStep = maxStepIndex;
-
+    
         if (window.currentStep !== potentialNextStep) {
             window.currentStep = potentialNextStep;
+            hideAllErrors(stepsArray); // Passez stepsArray à hideAllErrors
             showCurrentStep();
         }
     }
+    
+    
+    function showCurrentStep() {
+        hideAllSteps();
+        if (stepsArray[window.currentStep]) {
+            stepsArray[window.currentStep].style.display = 'block';
+        }
+        updateCoBorrowerSteps();
+    }
+    
+    
 
     // Définir une étape spécifique
     function setStep(index) {
@@ -81,7 +105,25 @@ document.addEventListener('DOMContentLoaded', function() {
         hideAllSteps();
         stepsArray[index].style.display = 'block';
         window.currentStep = index;
+        updateCoBorrowerSteps();
     }
+
+    // Met à jour le scénario de co-emprunteur
+    function updateCoBorrowerSteps() {
+        const currentStepId = stepsArray[window.currentStep]?.id;
+    
+        stepsArray.forEach(step => {
+            if (step.classList.contains('subStepCoBorrower')) {
+                // Affiche l'étape du co-emprunteur uniquement si c'est l'étape actuelle
+                if (hasCoBorrower && step.id === currentStepId) {
+                    step.style.display = 'block';
+                } else {
+                    step.style.display = 'none';
+                }
+            }
+        });
+    }
+    
 
     // Met à jour le scénario de co-emprunteur
     function updateActiveStep() {
@@ -92,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentCategory = currentFormStep ? currentFormStep.querySelector('[data-category]')?.getAttribute('data-category') : null;
         const progressSteps = document.querySelectorAll('.form-sidebar .sidebar .step');
 
-        progressSteps.forEach(function (step) {
+        progressSteps.forEach(function(step) {
             const bar = step.nextElementSibling;
             const stepContent = step.querySelector('.step-content');
             if (!stepContent) {
@@ -131,10 +173,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function goToStepByClick() {
-        document.querySelectorAll('.form-sidebar .sidebar .step').forEach(function (stepElement) {
-            stepElement.addEventListener('click', function () {
+        document.querySelectorAll('.form-sidebar .sidebar .step').forEach(function(stepElement) {
+            stepElement.addEventListener('click', function() {
                 if (this.classList.contains('non-clickable')) {
-                    console.log("Cette catégorie est non cliquable.");
+                    console.error("Cette catégorie est non cliquable.");
                     return;
                 }
 
@@ -197,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btnNon.addEventListener('change', function() {
             if (btnNon.checked) {
                 hasSelectedNon = true;
-                currentStepOnNonSelection = window.currentStep; 
+                currentStepOnNonSelection = window.currentStep;
                 window.setStep(13);
             }
         });
@@ -207,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btnOui.addEventListener('change', function() {
             if (btnOui.checked) {
                 hasSelectedNon = false;
-                currentStepOnNonSelection = window.currentStep; 
+                currentStepOnNonSelection = window.currentStep;
                 window.setStep(12);
             }
         });
@@ -218,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             const stepDelta = this.classList.contains('btnNext') ? 1 : -1;
-            goToStep(stepDelta);
+            window.goToStep(stepDelta); // Utilisez window.goToStep ici
         });
     });
 
@@ -233,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btnOk.addEventListener('click', function() {
             $('#warning-modal').modal('hide');
             $('.modal-backdrop').remove();
-            $('body').css('overflow', ''); 
+            $('body').css('overflow', '');
         });
     }
 
@@ -316,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Événements de clic pour les boutons "Suivant"
     if (btnNextProjet) {
-        btnNextProjet.addEventListener('click', function(e) {
+        btnNextProjet.addEventListener('click', function (e) {
             const isActive = Array.from(labelsProjet).some(l => l.classList.contains('active'));
             if (!isActive) {
                 e.preventDefault();
@@ -324,13 +366,13 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 errorContainerProjet.classList.add('d-none');
                 btnNextProjet.style.borderColor = '';
-                goToStep(1);
+                window.goToStep(1); // Utilisez window.goToStep ici
             }
         });
     }
 
     if (btnNextNature) {
-        btnNextNature.addEventListener('click', function(e) {
+        btnNextNature.addEventListener('click', function (e) {
             const isActive = Array.from(labelsNature).some(l => l.classList.contains('active'));
             if (!isActive) {
                 e.preventDefault();
@@ -338,7 +380,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 errorContainerNature.classList.add('d-none');
                 btnNextNature.style.borderColor = '';
-                goToStep(1);
+                window.goToStep(1); // Utilisez window.goToStep ici
             }
         });
     }
@@ -355,5 +397,15 @@ document.addEventListener('DOMContentLoaded', function() {
     window.currentStep = 0;
     showCurrentStep();
 
-    window.goToStep = goToStep; 
+    window.goToStep = goToStep;
+
+    // Écouteur de changement pour le select de situation familiale
+    if (situationFamilialeElement) {
+        situationFamilialeElement.addEventListener('change', function() {
+            const selectedValue = this.value;
+            hasCoBorrower = selectedValue === 'marie' || selectedValue === 'pacse' || selectedValue === 'union';
+            updateCoBorrowerSteps();
+        });
+    }
+    
 });

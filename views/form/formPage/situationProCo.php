@@ -108,3 +108,45 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // Initialisation du validateur de formulaire
+  const formValidatorInstance = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
+
+  const selects = document.querySelectorAll('select');
+  selects.forEach(select => {
+    select.addEventListener('change', function () {
+      const selectOption = this.querySelector('option[value=""]');
+      if (selectOption) {
+        selectOption.disabled = true;
+      }
+    });
+  });
+
+  // Mise à jour des options en fonction des sélections
+  document.getElementById('secteurActivite').addEventListener('change', () => {
+    formValidatorInstance.updateOptions();
+    formValidatorInstance.validateField(document.getElementById('secteurActivite'));
+  });
+
+  document.getElementById('statut').addEventListener('change', () => {
+    formValidatorInstance.updateContractOptions();
+    formValidatorInstance.validateField(document.getElementById('statut'));
+  });
+
+  // Mise à jour des options pour le co-emprunteur
+  document.getElementById('secteurActiviteCo').addEventListener('change', () => {
+    formValidatorInstance.updateOptionsCo();
+    formValidatorInstance.validateField(document.getElementById('secteurActiviteCo'));
+  });
+
+  document.getElementById('statutCo').addEventListener('change', () => {
+    formValidatorInstance.validateField(document.getElementById('statutCo'));
+  });
+
+  // Afficher l'étape actuelle au chargement
+  formValidatorInstance.showCurrentStep();
+});
+</script>

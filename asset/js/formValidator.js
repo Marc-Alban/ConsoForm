@@ -206,33 +206,6 @@ const options = {
 };
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const occupationField = document.getElementById("occupationField");
-  const selectedLogement = document.querySelector('input[name="logement"]:checked');
-  console.log(occupationField);
-  console.log(selectedLogement);
-
-  // Initialisation du validateur de formulaire
-  const formValidatorInstance = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
-
-  const selects = document.querySelectorAll('select');
-  selects.forEach(select => {
-    select.addEventListener('change', function () {
-      const selectOption = this.querySelector('option[value=""]');
-      if (selectOption) {
-        selectOption.disabled = true;
-      }
-    });
-  });
-
-  // Mise à jour des options en fonction des sélections
-  document.getElementById('secteurActivite').addEventListener('change', () => formValidatorInstance.updateOptions());
-  document.getElementById('statut').addEventListener('change', () => formValidatorInstance.updateContractOptions());
-
-  // Afficher l'étape actuelle au chargement
-  formValidatorInstance.showCurrentStep();
-});
-
 class FormValidator {
   constructor(stepsSelector, nextButtonSelector, prevButtonSelector, summarySelector) {
     this.steps = document.querySelectorAll(stepsSelector);
@@ -247,7 +220,7 @@ class FormValidator {
     this.setupEventListeners();
   }
 
-  // Méthode pour mettre à jour les options de sélection
+  // Mise à jour des options de sélection
   updateOptions() {
     const secteurActivite = document.getElementById('secteurActivite').value;
     const containers = {
@@ -285,6 +258,60 @@ class FormValidator {
 
       fieldsToShow.forEach(fieldConfig => {
         if (fieldConfig.field !== "secteurActivite") {
+          containers[fieldConfig.field].classList.remove('d-none');
+        }
+      });
+    } else {
+      Object.values(containers).forEach(container => container.classList.add('d-none'));
+    }
+
+    // Check if the options were correctly filled
+    Object.keys(inputs).forEach(key => {
+      if (!inputs[key].innerHTML.includes('<option value="">Sélectionner</option>')) {
+        this.showError(inputs[key]);
+      } else {
+        this.hideError(inputs[key]);
+      }
+    });
+  }
+
+  updateOptionsCo() {
+    const secteurActiviteCo = document.getElementById('secteurActiviteCo').value;
+    const containers = {
+      statut: document.getElementById('statutCoContainer'),
+      profession: document.getElementById('professionCoContainer'),
+      typeContrat: document.getElementById('typeContratCoContainer'),
+      dateDebut: document.getElementById('dateDebutCoContainer')
+    };
+
+    const inputs = {
+      statut: document.getElementById('statutCo'),
+      profession: document.getElementById('professionCo'),
+      typeContrat: document.getElementById('typeContratCo')
+    };
+
+    inputs.statut.innerHTML = '<option value="">Sélectionner</option>';
+    inputs.profession.value = "";
+    inputs.typeContrat.innerHTML = '<option value="">Sélectionner</option>';
+
+    if (options[secteurActiviteCo]) {
+      if (options[secteurActiviteCo].statut.show) {
+        options[secteurActiviteCo].statut.values.forEach(option => {
+          inputs.statut.innerHTML += `<option value="${option.value}">${option.text}</option>`;
+        });
+      }
+
+      Object.values(containers).forEach(container => container.classList.add('d-none'));
+
+      const fieldsToShow = Object.keys(options[secteurActiviteCo]).map(key => ({
+        field: key,
+        ...options[secteurActiviteCo][key]
+      })).filter(fieldConfig => fieldConfig.show);
+
+      fieldsToShow.sort((a, b) => a.order - b.order);
+
+      fieldsToShow.forEach(fieldConfig => {
+        if (fieldConfig.field !== "secteurActiviteCo") {
           containers[fieldConfig.field].classList.remove('d-none');
         }
       });
@@ -338,7 +365,7 @@ class FormValidator {
     }
   }
 
-  // Méthode pour valider un champ
+  // Validation de champ spécifique pour "profession"
   validateField(field) {
     if (!this.isVisible(field)) {
       return true; // Ignorer la validation si le champ n'est pas visible
@@ -467,7 +494,7 @@ class FormValidator {
     this.prevButtons.forEach(button => {
       button.addEventListener('click', (event) => {
         this.nextClicked = false;
-        goToStep(-1);
+        this.goToStep(-1);
       });
     });
   }
@@ -570,7 +597,6 @@ class FormValidator {
   `;
     document.head.appendChild(styleSheet);
 
-   
     function gestionAffichageChampValeur() {
       var inputVal = parseFloat($("#nbBien").val());
       var valeurBiens = $("#valeur_biens");
@@ -930,4 +956,3 @@ class FormValidator {
     }
   }
 }
-

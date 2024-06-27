@@ -11,7 +11,7 @@
       <label for="revenus" class="col-12 col-md-4 fw-bold text-start">Mon salaire net mensuel avant impôt :</label>
       <div class="select2-selection--single col-12 col-md-8">
         <div class="input-group">
-          <input type="number" inputmode="numeric" pattern="[0-9]*" id="revenus" name="revenus" class="form-control form-input col-12" placeholder='Ex : 2 300' data-type="integer">
+          <input type="number" inputmode="numeric" pattern="[0-9]*" id="revenus" name="revenus" class="form-control input-number form-input col-12" placeholder='Ex : 2 300' data-type="integer">
           <span class="input-group-text">€/mois</span>
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-revenus">

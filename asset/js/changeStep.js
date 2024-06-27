@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showCurrentStep();
         }
     }
+    
 
     // Définir une étape spécifique
     function setStep(index) {
@@ -222,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 4. Navigation entre les étapes
+    // Ajout des événements de clic pour les boutons "Précédent" et "Suivant"
     document.querySelectorAll('.btnPrev, .btnNext').forEach(function(button) {
         button.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -229,6 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
             goToStep(stepDelta); // Utilisez goToStep ici
         });
     });
+
 
     showCurrentStep();
 

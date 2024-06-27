@@ -42,7 +42,7 @@
                     <div class="row mb-3">
                         <label for="telephone" class="col-12 col-md-3 fw-bold text-start">Téléphone :</label>
                         <div class="col-12 col-md-9">
-                            <input type="tel" id="telephone" name="telephone" class="form-input col-12" placeholder='Ex : 06 12 34 45 67' data-type="phone">
+                            <input type="tel" id="telephone" name="telephone" class="form-input input-tel col-12" placeholder='Ex : 06 12 34 45 67' data-type="phone">
                             <div class="col-12 error-container d-none text-start mt-3" id="error-telephone">
                                 <p>Veuillez remplir ce champs</p>
                             </div>
@@ -52,7 +52,7 @@
                     <div class="row mb-3">
                         <label for="email" class="col-12 col-md-3 fw-bold text-start">Email :</label>
                         <div class="col-12 col-md-9">
-                            <input type="email" id="email" name="email" class="form-input col-12" placeholder='Ex : olivier123@gmail.com' data-type="mail">
+                            <input type="email" id="email" name="email" class="form-input input-email col-12" placeholder='Ex : olivier123@gmail.com' data-type="mail">
                             <div class="col-12 error-container d-none text-start mt-3" id="error-email">
                                 <p>Veuillez mettre un email valide</p>
                             </div>

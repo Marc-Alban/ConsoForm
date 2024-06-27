@@ -107,23 +107,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-  const dateNaissanceInput = document.getElementById('dateNaissance');
-
-  dateNaissanceInput.addEventListener('input', function(e) {
-    let input = e.target.value;
-    input = input.replace(/\D/g, ''); 
-    if (input.length <= 2) {
-      e.target.value = input;
-    } else if (input.length <= 4) {
-      e.target.value = `${input.slice(0, 2)}/${input.slice(2)}`;
-    } else {
-      e.target.value = `${input.slice(0, 2)}/${input.slice(2, 4)}/${input.slice(4, 8)}`;
-    }
-  });
-});
-
-</script>

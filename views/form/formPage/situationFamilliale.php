@@ -43,7 +43,7 @@
       <label for="nbEnfant" class="col-12 col-md-4 fw-bold text-start mt-4">Enfant(s) à charge :</label>
       <div class="select2-selection--single col-12 col-md-8 mt-4">
         <div class="input-group">
-          <input class="numberstyle form-input text-center" id="nbEnfant" type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="100" step="1" value="0" name="nbEnfant" data-type="integer">
+          <input class="numberstyle form-input text-center" id="nbEnfant" type="text" inputmode="numeric" pattern="[0-9]*" min="0" max="100" step="1" value="0" name="nbEnfant" data-type="integer">
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-nbEnfant">
           <p>Ce champ doit être supérieur à zéro</p>

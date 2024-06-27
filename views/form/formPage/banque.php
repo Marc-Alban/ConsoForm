@@ -34,7 +34,7 @@
       <!-- Année d'ouverture -->
       <label for="anneeOuverture" class="col-12 col-md-4 fw-bold text-start mt-4">Année d'ouverture :</label>
       <div class="select2-selection--single col-12 col-md-6 mt-4">
-        <input type="number" id="anneeOuverture" name="anneeOuverture" class="input-number form-control form-input col-12" placeholder="Ex : 2020" >
+        <input type="text" id="anneeOuverture" name="anneeOuverture" class="input-number form-control form-input col-12" placeholder="Ex : 2020" >
         <div class="col-12 error-container d-none text-start mt-3" id="error-anneeOuverture">
           <p>Veuillez remplir ce champ</p>
         </div>

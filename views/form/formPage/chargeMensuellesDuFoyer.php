@@ -11,7 +11,7 @@
       <label for="mensualitesConso" class="col-12 col-md-6 fw-bold text-start">Montant total des mensualités de mes crédits conso en cours :</label>
       <div class="select2-selection--single col-12 col-md-6">
         <div class="input-group">
-          <input type="number" inputmode="numeric" pattern="[0-9]*" id="mensualitesConso" name="mensualitesConso" class="form-control input-number form-input col-12" placeholder='Ex : 500' data-type="integer">
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="mensualitesConso" name="mensualitesConso" class="form-control input-number form-input col-12" placeholder='Ex : 500' data-type="integer">
           <span class="input-group-text">€/mois</span>
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-mensualitesConso">
@@ -23,7 +23,7 @@
       <label for="restantConso" class="col-12 col-md-6 fw-bold text-start mt-4">Montant total restant à rembourser de mes crédits conso en cours :</label>
       <div class="select2-selection--single col-12 col-md-6 mt-4">
         <div class="input-group">
-          <input type="number" inputmode="numeric" pattern="[0-9]*" id="restantConso" name="restantConso" class="form-control  input-number form-input col-12" placeholder='Ex : 5000' data-type="integer">
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="restantConso" name="restantConso" class="form-control  input-number form-input col-12" placeholder='Ex : 5000' data-type="integer">
           <span class="input-group-text">€</span>
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-restantConso">
@@ -35,7 +35,7 @@
       <label for="mensualitesImmo" class="col-12 col-md-6 fw-bold text-start mt-4">Montant total des mensualités de mes prêts immo en cours :</label>
       <div class="select2-selection--single col-12 col-md-6 mt-4">
         <div class="input-group">
-          <input type="number" inputmode="numeric" pattern="[0-9]*" id="mensualitesImmo" name="mensualitesImmo" class="form-control input-number form-input col-12" placeholder='Ex : 1000' data-type="integer">
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="mensualitesImmo" name="mensualitesImmo" class="form-control input-number form-input col-12" placeholder='Ex : 1000' data-type="integer">
           <span class="input-group-text">€/mois</span>
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-mensualitesImmo">
@@ -47,7 +47,7 @@
       <label for="restantImmo" class="col-12 col-md-6 fw-bold text-start mt-4">Montant total restant à rembourser de mes prêts immo en cours :</label>
       <div class="select2-selection--single col-12 col-md-6 mt-4">
         <div class="input-group">
-          <input type="number" inputmode="numeric" pattern="[0-9]*" id="restantImmo" name="restantImmo" class="form-control input-number form-input col-12" placeholder='Ex : 100000' data-type="integer">
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="restantImmo" name="restantImmo" class="form-control input-number form-input col-12" placeholder='Ex : 100000' data-type="integer">
           <span class="input-group-text">€</span>
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-restantImmo">

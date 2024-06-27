@@ -25,7 +25,7 @@
                     <div class="row mb-3">
                         <label for="codePostal" class="col-12 col-md-3 fw-bold text-start">Code postal :</label>
                         <div class="col-12 col-md-3">
-                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="codePostal" name="codePostal" class="form-input col-12" placeholder='Ex : 75001' data-type="integer">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" id="codePostal" name="codePostal" class="form-input col-12" placeholder='Ex : 75001' data-type="integer">
                             <div class="col-12 error-container d-none text-start mt-3" id="error-codePostal">
                                 <p>Veuillez remplir ce champs</p>
                             </div>

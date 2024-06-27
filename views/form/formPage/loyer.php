@@ -16,7 +16,7 @@
             </label>
             <div class="col-12 col-md-8">
               <div class="input-group">
-                <input type="number" inputmode="numeric" pattern="[0-9]*" id="loyerMensuel" name="loyerMensuel" class="form-control input-number form-input col-11 mask" placeholder='Ex : 1000' data-type="integer">
+                <input type="text" inputmode="numeric" pattern="[0-9]*" id="loyerMensuel" name="loyerMensuel" class="form-control input-number form-input col-11 mask" placeholder='Ex : 1000' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
               <div class="col-12 error-container d-none text-start mt-3" id="error-loyerMensuel">

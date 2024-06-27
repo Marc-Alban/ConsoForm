@@ -12,49 +12,49 @@ $(document).ready(function() {
         $numberInput.val(rawValue);
     }
 
-    // // Ajout des champs de texte virtuels
-    // $('.input-number').each(function() {
-    //     var $numberInput = $(this);
-    //     var $textInput = $('<input>', {
-    //         type: 'text',
-    //         class: $numberInput.attr('class'),
-    //         placeholder: $numberInput.attr('placeholder'),
-    //         'data-hidden-input': $numberInput.attr('id')
-    //     });
+    // Ajout des champs de texte virtuels
+    $('.input-number').each(function() {
+        var $numberInput = $(this);
+        var $textInput = $('<input>', {
+            type: 'text',
+            class: $numberInput.attr('class'),
+            placeholder: $numberInput.attr('placeholder'),
+            'data-hidden-input': $numberInput.attr('id')
+        });
 
-    //     $numberInput.after($textInput);
-    //     $numberInput.hide();
+        $numberInput.after($textInput);
+        $numberInput.hide();
 
-    //     // Synchronisation initiale des valeurs
-    //     synchronizeValues($textInput, $numberInput);
+        // Synchronisation initiale des valeurs
+        synchronizeValues($textInput, $numberInput);
 
-    //     // Événement de saisie sur le champ de texte virtuel
-    //     $textInput.on('input', function() {
-    //         var input = $textInput.val().replace(/[^\d]/g, ''); // Supprimer tous les caractères non numériques
-    //         var formatted = formatNumberWithSpaces(input);
+        // Événement de saisie sur le champ de texte virtuel
+        $textInput.on('input', function() {
+            var input = $textInput.val().replace(/[^\d]/g, ''); // Supprimer tous les caractères non numériques
+            var formatted = formatNumberWithSpaces(input);
 
-    //         // Mettre à jour le champ de texte virtuel avec la valeur formatée
-    //         $textInput.val(formatted);
+            // Mettre à jour le champ de texte virtuel avec la valeur formatée
+            $textInput.val(formatted);
 
-    //         // Mettre à jour le champ caché avec la valeur brute
-    //         $numberInput.val(input);
+            // Mettre à jour le champ caché avec la valeur brute
+            $numberInput.val(input);
 
-    //         // Validation
-    //         var valid = /^\d+( \d{3})*$/.test(formatted); // Vérifier si l'entrée contient uniquement des chiffres et des espaces au format correct
+            // Validation
+            var valid = /^\d+( \d{3})*$/.test(formatted); // Vérifier si l'entrée contient uniquement des chiffres et des espaces au format correct
 
-    //         var errorId = '#error-' + $numberInput.attr('name');
-    //         var $inputGroupText = $textInput.siblings('.input-group-text');
-    //         if (valid) {
-    //             $(errorId).addClass('d-none');
-    //             $textInput.removeClass('error-input');
-    //             $inputGroupText.removeClass('input-group-text-error');
-    //         } else {
-    //             $(errorId).removeClass('d-none');
-    //             $textInput.addClass('error-input');
-    //             $inputGroupText.addClass('input-group-text-error');
-    //         }
-    //     });
-    // });
+            var errorId = '#error-' + $numberInput.attr('name');
+            var $inputGroupText = $textInput.siblings('.input-group-text');
+            if (valid) {
+                $(errorId).addClass('d-none');
+                $textInput.removeClass('error-input');
+                $inputGroupText.removeClass('input-group-text-error');
+            } else {
+                $(errorId).removeClass('d-none');
+                $textInput.addClass('error-input');
+                $inputGroupText.addClass('input-group-text-error');
+            }
+        });
+    });
 
     // Telephone input validation
     $('.input-tel').on('input', function(e) {

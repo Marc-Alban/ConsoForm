@@ -15,7 +15,7 @@
             <label for="revenusLocatifs" class="col-12 col-md-4 fw-bold text-start labelSalaire">Revenus locatifs mensuels du foyer :</label>
             <div class="col-12 col-md-8">
               <div class="input-group">
-                <input type="number" inputmode="numeric" pattern="[0-9]*" id="revenusLocatifs" name="revenusLocatifs" class="form-control input-number form-input col-11 mask" placeholder='Ex : 800' data-type="integer">
+                <input type="text" inputmode="numeric" pattern="[0-9]*" id="revenusLocatifs" name="revenusLocatifs" class="form-control input-number form-input col-11 mask" placeholder='Ex : 800' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
               <div class="col-12 error-container d-none text-start mt-3" id="error-revenusLocatifs">
@@ -34,7 +34,7 @@
             </label>
             <div class="col-12 col-md-8">
               <div class="input-group">
-                <input type="number" inputmode="numeric" pattern="[0-9]*" id="autresRevenusFoyer" name="autresRevenusFoyer" class="form-control input-number form-input col-11 mask" placeholder='Ex : 100' data-type="integer">
+                <input type="text" inputmode="numeric" pattern="[0-9]*" id="autresRevenusFoyer" name="autresRevenusFoyer" class="form-control input-number form-input col-11 mask" placeholder='Ex : 100' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
               <div class="col-12 error-container d-none text-start mt-3" id="error-autresRevenusFoyer">
@@ -53,7 +53,7 @@
             </label>
             <div class="col-12 col-md-8">
               <div class="input-group">
-                <input type="number" inputmode="numeric" pattern="[0-9]*" id="allocationsFoyer" name="allocationsFoyer" class="form-control input-number form-input col-11 mask" placeholder='Ex : 100' data-type="integer">
+                <input type="text" inputmode="numeric" pattern="[0-9]*" id="allocationsFoyer" name="allocationsFoyer" class="form-control input-number form-input col-11 mask" placeholder='Ex : 100' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
               <div class="col-12 error-container d-none text-start mt-3" id="error-allocationsFoyer">

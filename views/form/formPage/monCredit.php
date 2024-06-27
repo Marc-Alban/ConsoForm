@@ -11,7 +11,7 @@
             <label for="montantSouhaite" class="col-12 col-md-4 fw-bold text-start">Montant souhaité : <br> <small class="smallLabel">(À partir de 200€)</small> </label>
             <div class="select2-selection--single col-12 col-md-8">
                 <div class="input-group">
-                    <input type="number" inputmode="numeric" pattern="[0-9]*" id="montantSouhaite" name="montantSouhaite" class="form-control input-number form-input col-12" placeholder="Ex : 12 000" data-type="integer">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" id="montantSouhaite" name="montantSouhaite" class="form-control input-number form-input col-12" placeholder="Ex : 12 000" data-type="integer">
                     <span class="input-group-text">€</span>
                 </div>
                 <div class="col-12 error-container d-none text-start mt-3" id="error-montantSouhaite">
@@ -23,7 +23,7 @@
             <label for="dureeRemboursement" class="col-12 col-md-4 fw-bold text-start mt-4">Durée de remboursement souhaitée <br> <small class="smallLabel">(jusqu'à 12 ans)</small> :</label>
             <div class="select2-selection--single col-12 col-md-8 mt-4">
                 <div class="input-group">
-                    <input type="number" inputmode="numeric" pattern="[0-9]*" id="dureeRemboursement" name="dureeRemboursement" class="form-control  input-number form-input col-12" placeholder="Ex : 8" data-type="dateTwo">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" id="dureeRemboursement" name="dureeRemboursement" class="form-control  input-number form-input col-12" placeholder="Ex : 8" data-type="dateTwo">
                     <span class="input-group-text">ans</span>
                 </div>
                 <div class="col-12 error-container d-none text-start mt-3" id="error-dureeRemboursement">

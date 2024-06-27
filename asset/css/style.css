@@ -201,7 +201,7 @@ label {
 }
 
 
-input[type="number"].form-input {
+input[type="text"].form-input {
   text-align: end;
 }
 

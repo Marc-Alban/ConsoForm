@@ -21,7 +21,7 @@
           <option value="union">Union libre</option>
           <option value="instance-divorce" data-type="instance">En instance de divorce</option>
         </select>
-        <div class="col-12 error-container d-none text-start mt-3 error-situationFamiliale">
+        <div class="col-12 error-container d-none text-start mt-3" id="error-situationFamiliale">
           <p>Veuillez choisir parmi les champs proposés</p>
         </div>
 
@@ -35,7 +35,7 @@
           <span class="input-group-text"><i class="fa fa-calendar"></i></span>
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-dateDivorce">
-          <p>Veuillez remplir ce champ</p>
+          <p>Veuillez mettre une date</p>
         </div>
       </div>
 
@@ -58,3 +58,33 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // Récupérer les éléments nécessaires
+  const situationFamilialeSelect = document.getElementById('situationFamiliale');
+  const dateDivorceLabel = document.getElementById('dateDivorceLabel');
+  const dateDivorceContainer = document.getElementById('dateDivorceContainer');
+
+  // Fonction pour gérer l'affichage du champ date de divorce
+  function handleSituationFamilialeChange() {
+    const selectedValue = situationFamilialeSelect.value;
+    
+    if (selectedValue === 'divorce') {
+      dateDivorceLabel.classList.remove('d-none');
+      dateDivorceContainer.classList.remove('d-none');
+    } else {
+      dateDivorceLabel.classList.add('d-none');
+      dateDivorceContainer.classList.add('d-none');
+    }
+  }
+
+  // Ajouter l'événement change sur le select
+  situationFamilialeSelect.addEventListener('change', handleSituationFamilialeChange);
+
+  // Appeler la fonction au chargement pour gérer l'état initial
+  handleSituationFamilialeChange();
+});
+
+</script>

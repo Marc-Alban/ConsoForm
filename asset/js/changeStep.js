@@ -16,15 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 2. Fonctions Utilitaires
 
-    // Affiche une modale d'avertissement
-    function showModal() {
-        const modal = document.getElementById('warning-modal');
-        if (modal) {
-            const myModal = new bootstrap.Modal(modal);
-            myModal.show();
-        }
-    }
-
     // Cache toutes les étapes
     function hideAllSteps() {
         steps.forEach(step => step.style.display = 'none');
@@ -44,20 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return formValidator.validateStep(window.currentStep);
     }
 
-    function hideAllErrors(steps) {
-        steps.forEach((step) => {
-            const fields = step.querySelectorAll("input, select, textarea");
-            fields.forEach((field) => {
-                formValidator.hideError(field); // Utiliser l'instance formValidator pour appeler hideError
-            });
-        });
-    }
-    
-
-    // Navigation vers une étape spécifique
     function goToStep(stepDelta) {
         if (!validateVisibleFields()) {
-            showModal();
             return;
         }
     
@@ -83,21 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
         if (window.currentStep !== potentialNextStep) {
             window.currentStep = potentialNextStep;
-            hideAllErrors(stepsArray); // Passez stepsArray à hideAllErrors
             showCurrentStep();
         }
     }
-    
-    
-    function showCurrentStep() {
-        hideAllSteps();
-        if (stepsArray[window.currentStep]) {
-            stepsArray[window.currentStep].style.display = 'block';
-        }
-        updateCoBorrowerSteps();
-    }
-    
-    
 
     // Définir une étape spécifique
     function setStep(index) {
@@ -123,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
 
     // Met à jour le scénario de co-emprunteur
     function updateActiveStep() {
@@ -260,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             const stepDelta = this.classList.contains('btnNext') ? 1 : -1;
-            window.goToStep(stepDelta); // Utilisez window.goToStep ici
+            goToStep(stepDelta); // Utilisez goToStep ici
         });
     });
 
@@ -366,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 errorContainerProjet.classList.add('d-none');
                 btnNextProjet.style.borderColor = '';
-                window.goToStep(1); // Utilisez window.goToStep ici
+                goToStep(1);
             }
         });
     }
@@ -380,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 errorContainerNature.classList.add('d-none');
                 btnNextNature.style.borderColor = '';
-                window.goToStep(1); // Utilisez window.goToStep ici
+                goToStep(1);
             }
         });
     }
@@ -407,5 +373,4 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCoBorrowerSteps();
         });
     }
-    
 });

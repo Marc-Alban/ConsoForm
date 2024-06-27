@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                console.log(currentCategory)
+                //console.log(currentCategory)
               
 
 
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const jsonData = JSON.stringify(dataToSave);
-        console.log('Données à sauvegarder:', jsonData);
+       // console.log('Données à sauvegarder:', jsonData);
 
         const baseUrl = `${window.location.protocol}//${window.location.host}`;
         const apiPath = '/rac/index.php?action=saveFormData';

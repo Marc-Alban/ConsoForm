@@ -58,6 +58,7 @@ class FormValidator {
   }
 
   setupEventListeners() {
+    // Configurer les écouteurs d'événements pour l'emprunteur principal
     document.getElementById('secteurActivite').addEventListener('change', (event) => {
       this.changeSelect(event.target.value, document.getElementById('statut'));
       this.updateOptions();
@@ -67,6 +68,19 @@ class FormValidator {
     document.getElementById('statut').addEventListener('change', (event) => {
       this.contractType(event);
       this.updateContractOptions();
+      this.hideError(event.target);
+    });
+
+    // Configurer les écouteurs d'événements pour le co-emprunteur
+    document.getElementById('secteurActiviteCo').addEventListener('change', (event) => {
+      this.changeSelectCo(event.target.value, document.getElementById('statutCo'));
+      this.updateOptionsCo();
+      this.hideError(event.target);
+    });
+
+    document.getElementById('statutCo').addEventListener('change', (event) => {
+      this.contractTypeCo(event);
+      this.updateContractOptionsCo();
       this.hideError(event.target);
     });
 
@@ -140,7 +154,50 @@ class FormValidator {
     event.currentTarget.options[event.currentTarget.options.selectedIndex].setAttribute("selected", "selected");
   }
 
+  contractTypeCo(event) {
+    for (let i = 0; i < event.currentTarget.options.length; i++) {
+      event.currentTarget.options[i].removeAttribute("selected");
+    }
+    event.currentTarget.options[event.currentTarget.options.selectedIndex].setAttribute("selected", "selected");
+  }
+
   changeSelect(type, select) {
+    const choix1 = ['cadre supérieur', 'ingénieur', 'cadre moyen', 'technicien', 'contremaître - agent de maîtrise', 'agent de sécurité', 'Employé de commerce', 'Assistante maternelle - Employé de maison', 'Employé de garage - apporteurs', 'Employé de bureau', 'Vendeur - caissier de magasin', 'Ouvrier', 'Représentant salarié', 'Chauffeur et livreur', 'dirigeant de société'];
+    const key1 = ['privateseniorexecutive', 'engineer', 'middlemanagerintheprivatesector', 'technician', 'privatesectorsupervisorskilledworker', 'securityagent', 'salespersonstorecashier', 'childminderdomesticemployee', 'garageemployeeproviders', 'officeemployee', 'salesrepresentativewithoutafixedlocation', 'workerConso', 'salariedrepresentative', 'driveranddeliveryperson', 'companydirector'];
+    const choix2 = ['cadre supérieur et professeur', 'cadre moyen', 'instituteur / infirmière et profession paramédicales', 'Employé et agent administratif', 'Agent de service', 'Ouvrier d\'Etat', 'Agent public ', 'Aide soignant hospitalier'];
+    const key2 = ['publicseniorexecutiveandprofessor', 'publicmiddlemanagerteacher', 'nurseandparamedicalprofession', 'administrativeemployeeandagent', 'publicserviceagent', 'publicsectoremployee', 'stateemployee', 'hospitalnursingassistant'];
+    const choix3 = ['salarié agricole', 'propriétaire agricole'];
+    const key3 = ['farmworker', 'farmowner'];
+    const choix4 = ['artisan / commerçant'];
+    const key4 = ['artisan'];
+    const choix5 = ['profession libérale', 'VRP sans fixe', 'Infirmière - cadre moyen secteur médical', 'Profession libérale médicale et paramédicale'];
+    const key5 = ['liberalprofession', 'salesrepresentativewithoutafixedlocation', 'middlemedicalmanager', 'medicalandparamedicalliberalprofession'];
+    const choix6 = ['Etudiant', 'retraité du secteur privé', 'retraité du secteur public', 'Demandeur d\'emploi', 'Invalide et pensionné', 'Sans profession - sans emploi', 'Divers'];
+    const key6 = ['student', 'privatesectorretiree', 'publicsectorretiree', 'jobseeker', 'disabledpensioner', 'inactivewithoutprofessionunemployed', 'miscellaneous'];
+
+    switch (type) {
+      case 'prive':
+        this.selectContart(choix1, key1, select);
+        break;
+      case 'public':
+        this.selectContart(choix2, key2, select);
+        break;
+      case 'agricole':
+        this.selectContart(choix3, key3, select);
+        break;
+      case 'artisans':
+        this.selectContart(choix4, key4, select);
+        break;
+      case 'liberales':
+        this.selectContart(choix5, key5, select);
+        break;
+      case 'retraites':
+        this.selectContart(choix6, key6, select);
+        break;
+    }
+  }
+
+  changeSelectCo(type, select) {
     const choix1 = ['cadre supérieur', 'ingénieur', 'cadre moyen', 'technicien', 'contremaître - agent de maîtrise', 'agent de sécurité', 'Employé de commerce', 'Assistante maternelle - Employé de maison', 'Employé de garage - apporteurs', 'Employé de bureau', 'Vendeur - caissier de magasin', 'Ouvrier', 'Représentant salarié', 'Chauffeur et livreur', 'dirigeant de société'];
     const key1 = ['privateseniorexecutive', 'engineer', 'middlemanagerintheprivatesector', 'technician', 'privatesectorsupervisorskilledworker', 'securityagent', 'salespersonstorecashier', 'childminderdomesticemployee', 'garageemployeeproviders', 'officeemployee', 'salesrepresentativewithoutafixedlocation', 'workerConso', 'salariedrepresentative', 'driveranddeliveryperson', 'companydirector'];
     const choix2 = ['cadre supérieur et professeur', 'cadre moyen', 'instituteur / infirmière et profession paramédicales', 'Employé et agent administratif', 'Agent de service', 'Ouvrier d\'Etat', 'Agent public ', 'Aide soignant hospitalier'];
@@ -200,10 +257,68 @@ class FormValidator {
     this.changeSelect(secteurActivite, statutSelect);
   }
 
+  updateOptionsCo(prefix = '') {
+    const secteurActiviteElement = document.getElementById(`${prefix}secteurActiviteCo`);
+    const statutElement = document.getElementById(`${prefix}statutContainerCo`);
+    const professionElement = document.getElementById(`${prefix}professionContainerCo`);
+    const typeContratElement = document.getElementById(`${prefix}typeContratContainerCo`);
+    const dateDebutElement = document.getElementById(`${prefix}dateDebutContainerCo`);
+
+    const secteurActivite = secteurActiviteElement.value;
+
+    if (!options[secteurActivite]) {
+      console.error(`Options not found for secteurActivite: ${secteurActivite}`);
+      return;
+    }
+
+    const secteurOptions = options[secteurActivite];
+    statutElement.classList.toggle('d-none', !secteurOptions.statut.show);
+    professionElement.classList.toggle('d-none', !secteurOptions.profession.show);
+    typeContratElement.classList.toggle('d-none', !secteurOptions.typeContrat.show);
+    dateDebutElement.classList.toggle('d-none', !secteurOptions.dateDebut.show);
+
+    const statutSelect = document.getElementById(`${prefix}statutCo`);
+    this.changeSelectCo(secteurActivite, statutSelect);
+  }
+
   updateContractOptions(prefix = '') {
     const secteurActiviteElement = document.getElementById(`${prefix}secteurActivite`);
     const statutElement = document.getElementById(`${prefix}statut`);
     const typeContratSelect = document.getElementById(`${prefix}typeContrat`);
+
+    const secteurActivite = secteurActiviteElement.value;
+
+    if (secteurActivite === 'agricole' && statutElement.value === 'salarie_agricole') {
+      typeContratSelect.innerHTML = '';
+      contrats['agricole'].forEach(contrat => {
+        const option = document.createElement('option');
+        option.value = contrat;
+        option.text = contrat;
+        typeContratSelect.appendChild(option);
+      });
+      typeContratSelect.parentElement.classList.remove('d-none');
+    } else if (secteurActivite === 'agricole' && statutElement.value === 'proprietaire_agricole') {
+      typeContratSelect.innerHTML = '';
+      typeContratSelect.parentElement.classList.add('d-none');
+    } else if (contrats[secteurActivite]) {
+      typeContratSelect.innerHTML = '';
+      contrats[secteurActivite].forEach(contrat => {
+        const option = document.createElement('option');
+        option.value = contrat;
+        option.text = contrat;
+        typeContratSelect.appendChild(option);
+      });
+      typeContratSelect.parentElement.classList.remove('d-none');
+    } else {
+      typeContratSelect.innerHTML = '';
+      typeContratSelect.parentElement.classList.add('d-none');
+    }
+  }
+
+  updateContractOptionsCo(prefix = '') {
+    const secteurActiviteElement = document.getElementById(`${prefix}secteurActiviteCo`);
+    const statutElement = document.getElementById(`${prefix}statutCo`);
+    const typeContratSelect = document.getElementById(`${prefix}typeContratCo`);
 
     const secteurActivite = secteurActiviteElement.value;
 

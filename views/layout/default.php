@@ -185,8 +185,10 @@ if (session_status() == PHP_SESSION_NONE) {
         window.currentStep = 0;
     </script>
     <script src="asset/js/sidebar.js"></script>
-    <script src="asset/js/changeStep.js"></script>
     <script src="asset/js/btnMoreAndLess.js"></script>
+    <script src="asset/js/numberFormat.js"></script>
+    <script src="asset/js/dateFormat.js"></script>
+    <script src="asset/js/changeStep.js"></script>
     <!--<script src="asset/js/saveForm.js"></script>-->
     <script src="asset/js/formValidator.js" defer></script>
     </body>

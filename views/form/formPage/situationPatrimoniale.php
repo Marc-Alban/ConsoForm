@@ -55,20 +55,18 @@
 document.addEventListener("DOMContentLoaded", () => {
   const occupationField = document.getElementById("occupationField");
   const selectedLogement = document.querySelector('input[name="logement"]:checked');
-  console.log("Initial occupationField:", occupationField);
-  console.log("Initial selectedLogement:", selectedLogement);
 
   // Function to handle the display logic of the occupationField based on selected logement
   function handleLogementChange() {
     const selectedLogement = document.querySelector('input[name="logement"]:checked');
-    console.log("Updated selectedLogement:", selectedLogement);
+   
 
     if (selectedLogement && ["proprietaire", "locataire", "heberge"].includes(selectedLogement.value)) {
       occupationField.classList.remove("d-none");
-      console.log("occupationField is now visible");
+     
     } else {
       occupationField.classList.add("d-none");
-      console.log("occupationField is now hidden");
+     
     }
   }
 

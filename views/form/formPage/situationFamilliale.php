@@ -31,7 +31,7 @@
       <label for="dateDivorce" class="col-12 col-md-4 fw-bold text-start mt-4 d-none" id="dateDivorceLabel">Date de jugement du divorce : <br><small class="smallLabel">(JJ/MM/AAAA)</small> </label>
       <div class="select2-selection--single col-12 col-md-8 mt-4 d-none" id="dateDivorceContainer">
         <div class="input-group">
-          <input type="text" id="dateDivorce" name="dateDivorce" class="form-control form-input col-12" placeholder="JJ/MM/AAAA" data-type="dateFr">
+          <input type="text" id="dateDivorce" name="dateDivorce" class="form-control date-input form-input col-12" placeholder="JJ/MM/AAAA" data-type="dateFr">
           <span class="input-group-text"><i class="fa fa-calendar"></i></span>
         </div>
         <div class="col-12 error-container d-none text-start mt-3" id="error-dateDivorce">

@@ -37,7 +37,6 @@
               <div class="select2-selection--single col-12 col-md-8">
                 <select id="statutCo" name="statutCo" class="form-select situationStatut form-input col-12" data-type="select">
                   <option value="">Sélectionner</option>
-                  <!-- Options seront ajoutées dynamiquement ici -->
                 </select>
                 <div class="col-12 error-container d-none text-start mt-3" id="error-statutCo">
                   <p>Veuillez choisir parmi les champs proposés</p>
@@ -51,12 +50,9 @@
             <div class="row">
               <label for="professionCo" class="col-12 col-md-4 fw-bold text-start">Sa profession :</label>
               <div class="select2-selection--single col-12 col-md-8">
-                <select id="professionCo" name="professionCo" class="form-select situationProfession form-input col-12" data-type="select">
-                  <option value="">Sélectionner</option>
-                  <!-- Options seront ajoutées dynamiquement ici -->
-                </select>
+                <input type="text" id="professionCo" name="professionCo" class="form-control form-input col-12" placeholder="Champs à remplir"  required>
                 <div class="col-12 error-container d-none text-start mt-3" id="error-professionCo">
-                  <p>Veuillez choisir parmi les champs proposés</p>
+                  <p>Veuillez remplir ce champ</p>
                 </div>
               </div>
             </div>
@@ -69,7 +65,6 @@
               <div class="select2-selection--single col-12 col-md-8">
                 <select id="typeContratCo" name="typeContratCo" class="form-select situationContrat form-input col-12" data-type="select">
                   <option value="">Sélectionner</option>
-                  <!-- Options seront ajoutées dynamiquement ici -->
                 </select>
                 <div class="col-12 error-container d-none text-start mt-3" id="error-typeContratCo">
                   <p>Veuillez choisir parmi les champs proposés</p>
@@ -83,7 +78,10 @@
             <div class="row">
               <label for="dateDebutCo" class="col-12 col-md-4 fw-bold text-start">Depuis (JJ/MM/AAAA) :</label>
               <div class="select2-selection--single col-12 col-md-8">
-                <input type="text" id="dateDebutCo" name="dateDebutCo" placeholder="JJ/MM/AAAA" class="form-input col-12" data-type="dateFr">
+                <div class="input-group">
+                  <input type="text" id="dateDebutCo" name="dateDebutCo" placeholder="JJ/MM/AAAA" class="form-control date-input form-input col-12" data-type="dateFr" required>
+                  <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                </div>
                 <div class="col-12 error-container d-none text-start mt-3" id="error-dateDebutCo">
                   <p>Veuillez remplir ce champ</p>
                 </div>
@@ -108,45 +106,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-  // Initialisation du validateur de formulaire
-  const formValidatorInstance = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
-
-  const selects = document.querySelectorAll('select');
-  selects.forEach(select => {
-    select.addEventListener('change', function () {
-      const selectOption = this.querySelector('option[value=""]');
-      if (selectOption) {
-        selectOption.disabled = true;
-      }
-    });
-  });
-
-  // Mise à jour des options en fonction des sélections
-  document.getElementById('secteurActivite').addEventListener('change', () => {
-    formValidatorInstance.updateOptions();
-    formValidatorInstance.validateField(document.getElementById('secteurActivite'));
-  });
-
-  document.getElementById('statut').addEventListener('change', () => {
-    formValidatorInstance.updateContractOptions();
-    formValidatorInstance.validateField(document.getElementById('statut'));
-  });
-
-  // Mise à jour des options pour le co-emprunteur
-  document.getElementById('secteurActiviteCo').addEventListener('change', () => {
-    formValidatorInstance.updateOptionsCo();
-    formValidatorInstance.validateField(document.getElementById('secteurActiviteCo'));
-  });
-
-  document.getElementById('statutCo').addEventListener('change', () => {
-    formValidatorInstance.validateField(document.getElementById('statutCo'));
-  });
-
-  // Afficher l'étape actuelle au chargement
-  formValidatorInstance.showCurrentStep();
-});
-</script>

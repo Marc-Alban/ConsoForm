@@ -47,14 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 else if(currentCategory == "Coordonnées"){
                     index_categorie_actuelle = 7;
                 }
-
-
-                //console.log(currentCategory)
-              
-
-
-                
-
+ 
         const dataToSave = {
             emailSave: emailInput.value,
             uuid: uuid,

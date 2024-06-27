@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.form-sidebar .sidebar .step').forEach(function (stepElement) {
             stepElement.addEventListener('click', function () {
                 if (this.classList.contains('non-clickable')) {
-                  //  console.log("Cette catégorie est non cliquable.");
                     return;
                 }
 

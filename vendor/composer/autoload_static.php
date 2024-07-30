@@ -64,7 +64,7 @@ class ComposerStaticInit91cbbcb29f25998248ffff0353570a8a
         ),
         'Models\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/models',
+            0 => __DIR__ . '/../..' . '/src/models',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -76,7 +76,7 @@ class ComposerStaticInit91cbbcb29f25998248ffff0353570a8a
         ),
         'Controllers\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/controllers',
+            0 => __DIR__ . '/../..' . '/src/controllers',
         ),
         'App\\' => 
         array (

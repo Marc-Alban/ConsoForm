@@ -25,8 +25,13 @@ abstract class Controller
         ob_start();
 
         $folder = $customFolder ?? strtolower(get_class($this));
+        $viewPath = ROOT . 'src/views/' . $folder . '/' . $fichier . '.php';
 
-        require_once(ROOT . 'views/' . $folder . '/' . $fichier . '.php');
+        if (!file_exists($viewPath)) {
+            throw new \Exception("View file not found: " . $viewPath);
+        }
+
+        require_once($viewPath);
 
         $content = ob_get_clean();
 
@@ -35,7 +40,7 @@ abstract class Controller
             $content = mb_convert_encoding($content, 'UTF-8', $encoding);
         }
 
-        require_once(ROOT . 'views/layout/default.php');
+        require_once(ROOT . 'src/views/layout/default.php');
     }
 
     public function loadModel(string $model)

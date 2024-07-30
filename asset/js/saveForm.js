@@ -1,53 +1,79 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector('#save').addEventListener('click', function (event) {
-        event.preventDefault();
+    const saveButton = document.querySelector('#save');
+    const uuid = new URLSearchParams(window.location.search).get('uuid');
 
+    if (uuid) {
+        fetchFormData(uuid);
+    } else if (window.savedFormData) {
+        fillForm(window.savedFormData);
+    }
+
+    function fetchFormData(uuid) {
+        const baseUrl = `${window.location.protocol}//${window.location.host}`;
+        const apiPath = `/index.php?action=loadFormData&uuid=${uuid}`;
+        const url = baseUrl + apiPath;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.success) {
+                    console.log('Données récupérées:', data.formData); // Vérifiez que les données sont correctes
+                    fillForm(data.formData);
+                } else {
+                    console.error('Erreur lors du chargement des données:', data.message);
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
+
+    function fillForm(formData) {
+        for (const key in formData) {
+            if (formData.hasOwnProperty(key)) {
+                const element = document.querySelector(`[name="${key}"]`);
+                if (element) {
+                    if (element.type === 'radio' || element.type === 'checkbox') {
+                        if (element.value === formData[key]) {
+                            element.checked = true;
+                        }
+                    } else {
+                        element.value = formData[key];
+                    }
+                }
+            }
+        }
+    }
+
+    function collectFormData() {
         const emailInput = document.querySelector('#emailSave');
         if (!emailInput || !emailInput.value || !/\S+@\S+\.\S+/.test(emailInput.value)) {
-            return;
+            console.error('Invalid email input');
+            return null;
         }
 
         const uuid = localStorage.getItem('formUuid') || '';
-        var currentStep = window.currentStep;
+        const currentStep = window.currentStep;
         const container = document.getElementById(currentStep + '-content');
-     
+        let currentCategory = '';
 
-        var currentCategory = ''
+        if (container) {
+            const elementsWithDataCategory = container.querySelectorAll('[data-category]');
+            elementsWithDataCategory.forEach(element => {
+                currentCategory = element.getAttribute('data-category');
+            });
+        }
 
+        const categoryMapping = {
+            "Credit": 1,
+            "Situation patrimoniale": 2,
+            "Situation familiale": 3,
+            "Situation professionnelle": 4,
+            "Situation professionnelle du co-emprunteur": 5,
+            "Situation financière du foyer": 6,
+            "Coordonnées": 7
+        };
 
-                if (container) {
-                    const elementsWithDataCategory = container.querySelectorAll('[data-category]');
+        const index_categorie_actuelle = categoryMapping[currentCategory] || 0;
 
-                    elementsWithDataCategory.forEach(element => {
-                        currentCategory = element.getAttribute('data-category');                        
-                    });
-                }
-
-
-                var index_categorie_actuelle = 0;
-
-                if(currentCategory == "Credit"){
-                    index_categorie_actuelle = 1;
-                }
-                else if(currentCategory == "Situation patrimoniale"){
-                    index_categorie_actuelle = 2;
-                }
-                else if(currentCategory == "Situation familiale"){
-                    index_categorie_actuelle = 3;
-                }
-                else if(currentCategory == "Situation professionnelle"){
-                    index_categorie_actuelle = 4;
-                }
-                else if(currentCategory == "Situation professionnelle du co-emprunteur"){
-                    index_categorie_actuelle = 5;
-                }
-                else if(currentCategory == "Situation financière du foyer"){
-                    index_categorie_actuelle = 6;
-                }
-                else if(currentCategory == "Coordonnées"){
-                    index_categorie_actuelle = 7;
-                }
- 
         const dataToSave = {
             emailSave: emailInput.value,
             uuid: uuid,
@@ -70,13 +96,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        return JSON.stringify(dataToSave);
+    }
 
-
-        const jsonData = JSON.stringify(dataToSave);
-       // console.log('Données à sauvegarder:', jsonData);
+    function saveFormData() {
+        const jsonData = collectFormData();
+        if (!jsonData) {
+            console.error('Invalid email input');
+            return;
+        }
 
         const baseUrl = `${window.location.protocol}//${window.location.host}`;
-        const apiPath = '/rac/index.php?action=saveFormData';
+        const apiPath = '/index.php?action=saveFormData';
         const url = baseUrl + apiPath;
 
         fetch(url, {
@@ -87,24 +118,26 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: jsonData
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.success) {
-                    localStorage.setItem('formUuid', data.uuid);
-                    // Ferme l'ancienne modale
-                    $('#ModalSave').modal('hide');
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response from server:', data);
+            if (data && data.success) {
+                localStorage.setItem('formUuid', data.uuid);
+                // Ferme l'ancienne modale
+                $('#ModalSave').modal('hide');
+                // Ouvre la modale de confirmation
+                $('#successModal').modal('show');
+                // Actualise la page
+                window.location.reload();
+            } else {
+                console.error('Erreur lors de la sauvegarde des données:', data.message);
+            }
+        })
+        .catch(error => console.error('Erreur:', error));
+    }
 
-                    // Ouvre la modale de confirmation
-                    $('#successModal').modal('show');
-                    
-                } else {
-                    console.error('Erreur lors de la sauvegarde des données:', data.message);
-                }
-            })
-            .catch(error => console.error('Erreur:', error));
+    saveButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        saveFormData();
     });
 });
-
-function isElementVisible(element) {
-    return element.offsetWidth > 0 && element.offsetHeight > 0;
-}

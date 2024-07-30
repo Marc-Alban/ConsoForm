@@ -10,9 +10,9 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
-    'Models\\' => array($baseDir . '/models'),
+    'Models\\' => array($baseDir . '/src/models'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
-    'Controllers\\' => array($baseDir . '/controllers'),
+    'Controllers\\' => array($baseDir . '/src/controllers'),
     'App\\' => array($baseDir . '/app'),
 );

@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Controllers;
 
-use App\Controller;
+use Models\Lead;
+use Models\SaveDatas;
 use Controllers\ApiClient;
+use App\Controller;
 
 class Form extends Controller
 {
@@ -15,8 +17,8 @@ class Form extends Controller
     public function __construct()
     {
         $this->initializeSession();
-        $this->_lead = $this->loadModel('Lead');
-        $this->_saveDatas = $this->loadModel('SaveDatas');
+        $this->_lead = new Lead();
+        $this->_saveDatas = new SaveDatas();
         $this->_apiClient = new ApiClient();
     }
 
@@ -46,25 +48,7 @@ class Form extends Controller
             'toastMessage' => $toastMessage
         ];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $postData = $this->sanitizeData($this->convertToUTF8($_POST));
-
-            if (!isset($_SESSION['insertion_completed'])) {
-                $insertionSuccess = $this->_lead->insert($postData, 'lead');
-                $_SESSION['insertion_completed'] = true;
-            } else {
-                $insertionSuccess = true;
-            }
-
-            if ($insertionSuccess) {
-                $this->handleApiSubmission($postData);
-            } else {
-                $data['errors'] = ['Une erreur est survenue lors de l\'insertion des données.'];
-                $this->renderFormView('index', $data);
-            }
-        } else {
-            $this->renderFormView('index', $data);
-        }
+        $this->renderFormView('index', $data);
     }
 
     private function handleApiSubmission(array $postData): void
@@ -122,34 +106,51 @@ class Form extends Controller
         return $cleanedData;
     }
 
-    public function saveFormData()
-    {
+    public function loadFormData() {
         header('Content-Type: application/json');
+        
+        $uuid = $_GET['uuid'] ?? null;
+        if (!$uuid) {
+            echo json_encode(['success' => false, 'message' => 'UUID manquant.']);
+            exit();
+        }
+    
+        $savedDataEntry = $this->_saveDatas->getLeadByUuid($uuid);
+        if (!$savedDataEntry) {
+            echo json_encode(['success' => false, 'message' => 'Données non trouvées.']);
+            exit();
+        }
+    
+        $savedData = json_decode($savedDataEntry['formData'], true);
+        echo json_encode(['success' => true, 'formData' => $savedData]);
+    }
 
+    public function saveFormData() {
+        header('Content-Type: application/json');
+    
         $rawData = file_get_contents('php://input');
         $data = json_decode($rawData, true);
-
+    
         if (empty($data['emailSave']) || !filter_var($data['emailSave'], FILTER_VALIDATE_EMAIL)) {
             echo json_encode(['success' => false, 'message' => 'Adresse email manquante ou invalide.']);
             exit();
         }
-
+    
         $uuid = !empty($data['uuid']) ? $data['uuid'] : $this->_saveDatas->generateUuid();
-
         $formDataJson = json_encode($data);
-
+    
         if ($this->_saveDatas->getLeadByUuid($uuid)) {
             $insertionSuccess = $this->_saveDatas->update($uuid, $formDataJson);
         } else {
             $insertionSuccess = $this->_saveDatas->insert($uuid, $formDataJson);
         }
-
+    
         if ($insertionSuccess) {
             $to = $data['emailSave'];
             $subject = "Votre lien personnalisé pour reprendre votre formulaire";
-            $message = "Merci de vous être enregistré. Veuillez cliquer sur le lien suivant pour reprendre le formulaire : <a href='https://devapp.solutis.fr/demande-rachat-credit.html?uuid={$uuid}'>cliquer ici</a>";
+            $message = "Merci de vous être enregistré. Veuillez cliquer sur le lien suivant pour reprendre le formulaire : <a href='http://localhost:8000/index.php?action=loadFormData&uuid={$uuid}'>cliquer ici</a>";
             $headers = "From: no-reply@solutis.fr\r\nContent-Type: text/html; charset=UTF-8\r\n";
-
+    
             if (mail($to, $subject, $message, $headers)) {
                 echo json_encode(['success' => true, 'message' => 'Données enregistrées avec succès. Email envoyé.', 'uuid' => $uuid]);
             } else {

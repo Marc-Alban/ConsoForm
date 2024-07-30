@@ -1,12 +1,12 @@
 <?php
-    declare(strict_types=1);
-    unset($_SESSION['page']);
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    $request_uri = trim($_SERVER['REQUEST_URI'], '/');
-    $segments = explode('/', $request_uri);
-    $code_origine = $segments[0] ?? '';
+declare(strict_types=1);
+unset($_SESSION['page']);
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$request_uri = trim($_SERVER['REQUEST_URI'], '/');
+$segments = explode('/', $request_uri);
+$code_origine = $segments[0] ?? '';
 ?>
 <style>
     .pre-selected {
@@ -69,3 +69,6 @@
 
 </div>
 
+<script>
+    window.savedFormData = <?= json_encode($savedData) ?>;
+</script>

@@ -1,7 +1,7 @@
 <div class="form-sidebar">
     <!-- Bloc du logo -->
     <div class="logo">
-        <a data-bs-toggle="modal" href="#ModalSave" role="button"><img src="asset/img/Logo_Solutis_blanc.svg" alt="Solutis logo" class="logo"></a>
+        <a data-bs-toggle="modal" href="#ModalSave" role="button"><img src="asset/img/Logo_Solutis_blanc.svg" alt="Solutis logo" class="logo" id="solutis-logo"></a>
     </div>
 
     <!-- Début de la barre latérale -->

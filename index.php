@@ -33,10 +33,7 @@ $requiredEnvVars = [
 foreach ($requiredEnvVars as $var) {
     if (!isset($_ENV[$var])) {
         throw new Exception("La variable d'environnement {$var} n'est pas définie.");
-    } 
-    // else {
-    //   //  echo "{$var} = " . var_export($_ENV[$var], true) . "<br>";
-    // }
+    }
 }
 
 // Démarrer la session si elle n'est pas déjà démarrée
@@ -55,9 +52,15 @@ $formController = new Form(new ApiClient());
 $action = $_GET['action'] ?? null;
 switch ($action) {
     case 'saveFormData':
+        error_log("Handling saveFormData action");
         $formController->saveFormData();
         break;
+    case 'loadFormData':
+        error_log("Handling loadFormData action");
+        $formController->loadFormData();
+        break;
     default:
+        error_log("Handling default action (index)");
         $formController->index();
         break;
 }

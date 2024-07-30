@@ -80,6 +80,8 @@
               <div class="col-12 error-container d-none text-start mt-3" id="error-villeNaissance">
                 <p>Veuillez remplir ce champ</p>
               </div>
+              <!-- Liste des résultats pour l'auto-complétion -->
+              <ul id="resultsListNaissanceCo"></ul>
             </div>
           </div>
           <!-- Pays de naissance -->
@@ -88,8 +90,7 @@
             <div class="col-12 col-md-8">
               <select id="paysNaissance" name="paysNaissance" class="form-select form-input col-11" data-type="select">
                 <option value="" disabled selected>France</option>
-                <option value="France">France</option>
-                <option value="Autre">Autre</option>
+                <!-- Les options seront ajoutées ici par JavaScript -->
               </select>
               <div class="col-12 error-container d-none text-start mt-3" id="error-paysNaissance">
                 <p>Veuillez choisir un pays</p>

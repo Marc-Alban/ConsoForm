@@ -36,8 +36,11 @@
                             <div class="col-12 error-container d-none text-start mt-3" id="error-ville">
                                 <p>Veuillez remplir ce champs</p>
                             </div>
+                            <!-- Liste des résultats pour l'auto-complétion -->
+                            <ul id="resultsList"></ul>
                         </div>
                     </div>
+
                     <!-- Téléphone -->
                     <div class="row mb-3">
                         <label for="telephone" class="col-12 col-md-3 fw-bold text-start">Téléphone :</label>
@@ -79,23 +82,23 @@
                         <div class="col-12 col-md-9 mt-4">
                             <div class="d-flex flex-wrap align-items-center justify-content-between align-content-center">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="energie" value="energie" >
+                                    <input class="form-check-input" type="checkbox" id="energie" value="energie">
                                     <label class="form-check-label label-check" for="energie">Énergie</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="assurance_auto" value="assurance_auto" >
+                                    <input class="form-check-input" type="checkbox" id="assurance_auto" value="assurance_auto">
                                     <label class="form-check-label label-check" for="assurance_auto">Assurance auto</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="assurance_habitation" value="assurance_habitation" >
+                                    <input class="form-check-input" type="checkbox" id="assurance_habitation" value="assurance_habitation">
                                     <label class="form-check-label label-check" for="assurance_habitation">Assurance habitation</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="internet" value="internet" >
+                                    <input class="form-check-input" type="checkbox" id="internet" value="internet">
                                     <label class="form-check-label label-check" for="internet">Internet et téléphone</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="mutuelle" value="mutuelle" >
+                                    <input class="form-check-input" type="checkbox" id="mutuelle" value="mutuelle">
                                     <label class="form-check-label label-check" for="mutuelle">Mutuelle</label>
                                 </div>
                             </div>
@@ -115,62 +118,80 @@
     </div>
 </div>
 <script>
-document.getElementById('submit-button').disabled = true;
+    document.getElementById('submit-button').disabled = true;
 
-const submitButton = document.getElementById('submit-button');
+    const submitButton = document.getElementById('submit-button');
 
-if (submitButton) {
-    submitButton.addEventListener('click', function(event) {
-        handleFormSubmission(event);
-    });
-}
-
-function handleFormSubmission(event) {
-    event.preventDefault();
-    if (validateAllSteps()) {
-        // Code pour soumettre le formulaire
-    } else {
-        submitButton.disabled = false;
+    if (submitButton) {
+        submitButton.addEventListener('click', function(event) {
+            handleFormSubmission(event);
+        });
     }
-}
 
-function validateAllSteps() {
-    let isValid = true;
-    const fieldsToCheck = [
-        { id: 'adresse1', errorId: 'error-adresse1' },
-        { id: 'codePostal', errorId: 'error-codePostal' },
-        { id: 'ville', errorId: 'error-ville' },
-        { id: 'telephone', errorId: 'error-telephone' },
-        { id: 'email', errorId: 'error-email' },
-        { id: 'cgv', errorId: 'error-cgv', isCheckbox: true }
-    ];
-
-    fieldsToCheck.forEach(field => {
-        const input = document.getElementById(field.id);
-        const errorDiv = document.getElementById(field.errorId);
-        if (field.isCheckbox) {
-            if (!input.checked) {
-                isValid = false;
-                errorDiv.classList.remove('d-none');
-            } else {
-                errorDiv.classList.add('d-none');
-            }
+    function handleFormSubmission(event) {
+        event.preventDefault();
+        if (validateAllSteps()) {
+            // Code pour soumettre le formulaire
         } else {
-            if (!input.value.trim()) {
-                isValid = false;
-                errorDiv.classList.remove('d-none');
-            } else {
-                errorDiv.classList.add('d-none');
-            }
+            submitButton.disabled = false;
         }
-    });
+    }
 
-    return isValid;
-}
+    function validateAllSteps() {
+        let isValid = true;
+        const fieldsToCheck = [{
+                id: 'adresse1',
+                errorId: 'error-adresse1'
+            },
+            {
+                id: 'codePostal',
+                errorId: 'error-codePostal'
+            },
+            {
+                id: 'ville',
+                errorId: 'error-ville'
+            },
+            {
+                id: 'telephone',
+                errorId: 'error-telephone'
+            },
+            {
+                id: 'email',
+                errorId: 'error-email'
+            },
+            {
+                id: 'cgv',
+                errorId: 'error-cgv',
+                isCheckbox: true
+            }
+        ];
 
-document.querySelectorAll('input, select, textarea').forEach(element => {
-    element.addEventListener('change', function() {
-        submitButton.disabled = !validateAllSteps();
+        fieldsToCheck.forEach(field => {
+            const input = document.getElementById(field.id);
+            const errorDiv = document.getElementById(field.errorId);
+            if (field.isCheckbox) {
+                if (!input.checked) {
+                    isValid = false;
+                    errorDiv.classList.remove('d-none');
+                } else {
+                    errorDiv.classList.add('d-none');
+                }
+            } else {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    errorDiv.classList.remove('d-none');
+                } else {
+                    errorDiv.classList.add('d-none');
+                }
+            }
+        });
+
+        return isValid;
+    }
+
+    document.querySelectorAll('input, select, textarea').forEach(element => {
+        element.addEventListener('change', function() {
+            submitButton.disabled = !validateAllSteps();
+        });
     });
-});
 </script>

@@ -55,6 +55,7 @@ class FormValidator {
     this.userInteracted = false;
     this.nextClicked = false;
     this.setupEventListeners();
+    this.setupFormattedNumberInputs();
   }
 
   setupEventListeners() {
@@ -134,6 +135,53 @@ class FormValidator {
       });
     });
   }
+
+  formatNumberWithSpaces(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
+  synchronizeValues(textInput, numberInput) {
+    const rawValue = numberInput.value.replace(/[^\d]/g, '');
+    const formattedValue = this.formatNumberWithSpaces(rawValue);
+    textInput.value = formattedValue;
+    numberInput.value = rawValue;
+
+    textInput.setAttribute('min', numberInput.getAttribute('data-min'));
+    textInput.setAttribute('max', numberInput.getAttribute('data-max'));
+
+    this.validateField(numberInput);
+  }
+
+  setupFormattedNumberInputs() {
+    document.querySelectorAll('.input-number').forEach(numberInput => {
+      if (!numberInput.nextElementSibling || numberInput.nextElementSibling.tagName !== 'INPUT') {
+        const textInput = document.createElement('input');
+        textInput.type = 'text';
+        textInput.className = numberInput.className.replace('input-number', '');
+        textInput.placeholder = numberInput.placeholder;
+        textInput.setAttribute('data-hidden-input', numberInput.id);
+        textInput.setAttribute('data-min', numberInput.getAttribute('data-min'));
+        textInput.setAttribute('data-max', numberInput.getAttribute('data-max'));
+  
+        numberInput.style.opacity = '0';
+        numberInput.style.position = 'absolute';
+  
+        numberInput.parentNode.insertBefore(textInput, numberInput.nextSibling);
+        this.synchronizeValues(textInput, numberInput);
+  
+        textInput.addEventListener('input', () => {
+          const input = textInput.value.replace(/[^\d]/g, '');
+          const formatted = this.formatNumberWithSpaces(input);
+          textInput.value = formatted;
+          numberInput.value = input;
+          this.validateField(numberInput);
+        });
+  
+        console.log(`Created text input for ${numberInput.id}`);
+      }
+    });
+  }
+  
 
   selectContart(choix, key, select2) {
     while (select2.options.length > 0) {
@@ -240,21 +288,21 @@ class FormValidator {
     const typeContratElement = document.getElementById(`${prefix}typeContratContainer`);
     const dateDebutElement = document.getElementById(`${prefix}dateDebutContainer`);
 
-    const secteurActivite = secteurActiviteElement.value;
+    const secteurActivite = secteurActiviteElement ? secteurActiviteElement.value : null;
 
-    if (!options[secteurActivite]) {
+    if (!secteurActivite || !options[secteurActivite]) {
       console.error(`Options not found for secteurActivite: ${secteurActivite}`);
       return;
     }
 
     const secteurOptions = options[secteurActivite];
-    statutElement.classList.toggle('d-none', !secteurOptions.statut.show);
-    professionElement.classList.toggle('d-none', !secteurOptions.profession.show);
-    typeContratElement.classList.toggle('d-none', !secteurOptions.typeContrat.show);
-    dateDebutElement.classList.toggle('d-none', !secteurOptions.dateDebut.show);
+    if (statutElement) statutElement.classList.toggle('d-none', !secteurOptions.statut.show);
+    if (professionElement) professionElement.classList.toggle('d-none', !secteurOptions.profession.show);
+    if (typeContratElement) typeContratElement.classList.toggle('d-none', !secteurOptions.typeContrat.show);
+    if (dateDebutElement) dateDebutElement.classList.toggle('d-none', !secteurOptions.dateDebut.show);
 
     const statutSelect = document.getElementById(`${prefix}statut`);
-    this.changeSelect(secteurActivite, statutSelect);
+    if (statutSelect) this.changeSelect(secteurActivite, statutSelect);
   }
 
   updateOptionsCo(prefix = '') {
@@ -264,21 +312,21 @@ class FormValidator {
     const typeContratElement = document.getElementById(`${prefix}typeContratContainerCo`);
     const dateDebutElement = document.getElementById(`${prefix}dateDebutContainerCo`);
 
-    const secteurActivite = secteurActiviteElement.value;
+    const secteurActivite = secteurActiviteElement ? secteurActiviteElement.value : null;
 
-    if (!options[secteurActivite]) {
+    if (!secteurActivite || !options[secteurActivite]) {
       console.error(`Options not found for secteurActivite: ${secteurActivite}`);
       return;
     }
 
     const secteurOptions = options[secteurActivite];
-    statutElement.classList.toggle('d-none', !secteurOptions.statut.show);
-    professionElement.classList.toggle('d-none', !secteurOptions.profession.show);
-    typeContratElement.classList.toggle('d-none', !secteurOptions.typeContrat.show);
-    dateDebutElement.classList.toggle('d-none', !secteurOptions.dateDebut.show);
+    if (statutElement) statutElement.classList.toggle('d-none', !secteurOptions.statut.show);
+    if (professionElement) professionElement.classList.toggle('d-none', !secteurOptions.profession.show);
+    if (typeContratElement) typeContratElement.classList.toggle('d-none', !secteurOptions.typeContrat.show);
+    if (dateDebutElement) dateDebutElement.classList.toggle('d-none', !secteurOptions.dateDebut.show);
 
     const statutSelect = document.getElementById(`${prefix}statutCo`);
-    this.changeSelectCo(secteurActivite, statutSelect);
+    if (statutSelect) this.changeSelectCo(secteurActivite, statutSelect);
   }
 
   updateContractOptions(prefix = '') {
@@ -372,63 +420,68 @@ class FormValidator {
   }
 
   validateField(field) {
+    // Vérifier si le champ est visible; s'il ne l'est pas, il est considéré comme valide par défaut.
     if (!this.isVisible(field)) {
       return true;
     }
 
-    let isValid = true;
+    let isValid = true;  // Présume que le champ est valide
+    const value = field.value.trim();  // Nettoie les espaces avant et après la valeur
 
-    if (field.hasAttribute("required") && field.value.trim() === "") {
-      isValid = false;
+    // Validation obligatoire
+    if (field.hasAttribute("required") && value === "") {
+      isValid = false;  // Marque le champ comme invalide si requis et vide
+    } else {
+      // Validation selon le type de données spécifié dans data-type
+      switch (field.dataset.type) {
+        case 'email':
+          isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+          break;
+        case 'tel':
+          isValid = /^\d{10}$/.test(value.replace(/\s/g, ""));
+          break;
+        case 'integer':
+          const numericValue = parseInt(value.replace(/\s/g, ''), 10);
+          const min = field.hasAttribute("min") ? parseInt(field.getAttribute("min"), 10) : undefined;
+          const max = field.hasAttribute("max") ? parseInt(field.getAttribute("max"), 10) : undefined;
+          isValid = !isNaN(numericValue) && (min === undefined || numericValue >= min) && (max === undefined || numericValue <= max);
+          break;
+        case 'duration':
+          const durationValue = parseInt(value, 10);
+          isValid = !isNaN(durationValue) && durationValue >= 1 && durationValue <= 12;
+          break;
+        case 'dateTwo':
+          const dateTwoValue = value.replace(/\s/g, '');
+          isValid = dateTwoValue !== "" && /^[0-9]{1,2}$/.test(dateTwoValue) && Number(dateTwoValue) >= 1 && Number(dateTwoValue) <= 31;
+          break;
+        case 'dateFour':
+          const dateFourValue = parseInt(value, 10);
+          isValid = !isNaN(dateFourValue) && dateFourValue >= 1900 && dateFourValue <= this.currentYear;
+          break;
+        case 'dateFr':
+          isValid = /^\d{2}\/\d{2}\/\d{4}$/.test(value) && this.isValidDate(value);
+          break;
+        case 'select':
+          isValid = value !== "";
+          break;
+        case 'checkbox':
+          isValid = field.checked;
+          break;
+        case 'radio':
+          isValid = Array.from(document.querySelectorAll(`input[name="${field.name}"]`)).some(radio => radio.checked);
+          break;
+        case 'string':
+          const stringMinLength = field.getAttribute("minlength") || 0;
+          const stringMaxLength = field.getAttribute("maxlength") || 255;
+          isValid = field.value.length >= stringMinLength && field.value.length <= stringMaxLength && /^[a-zA-Z\s]*$/.test(field.value);
+          break;
+        default:
+          // Pas de validation spécifique si le type n'est pas reconnu
+          break;
+      }
     }
 
-    switch (field.dataset.type) {
-      case 'email':
-        isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value);
-        break;
-      case 'tel':
-        isValid = /^\d{10}$/.test(field.value.replace(/\s/g, ""));
-        break;
-      case 'integer':
-        const intValue = field.value.trim().replace(/\s/g, '');
-        const intMin = field.hasAttribute("min") ? parseInt(field.getAttribute("min"), 10) : 200;
-        const intMax = field.hasAttribute("max") ? parseInt(field.getAttribute("max"), 10) : 1000000;
-        isValid = intValue !== "" && !isNaN(intValue) && Number(intValue) >= intMin && Number(intValue) <= intMax;
-        break;
-      case 'duration':
-        const durationValue = field.value.trim().replace(/\s/g, '');
-        isValid = durationValue !== "" && !isNaN(durationValue) && Number(durationValue) >= 1 && Number(durationValue) <= 12;
-        break;
-      case 'dateTwo':
-        const dateTwoValue = field.value.trim();
-        const dateTwoNumber = parseInt(dateTwoValue, 10);
-        isValid = !isNaN(dateTwoNumber) && dateTwoNumber >= 1 && dateTwoValue.length <= 2;
-        break;
-      case 'dateFour':
-        const dateFourValue = parseInt(field.value, 10);
-        isValid = !isNaN(dateFourValue) && dateFourValue >= 1900 && dateFourValue <= this.currentYear;
-        break;
-      case 'dateFr':
-        isValid = /^\d{2}\/\d{2}\/\d{4}$/.test(field.value) && this.isValidDate(field.value);
-        break;
-      case 'select':
-        isValid = field.value.trim() !== "";
-        break;
-      case 'checkbox':
-        isValid = field.checked;
-        break;
-      case 'radio':
-        isValid = Array.from(document.querySelectorAll(`input[name="${field.name}"]`)).some(radio => radio.checked);
-        break;
-      case 'string':
-        const stringMinLength = field.getAttribute("minlength") || 0;
-        const stringMaxLength = field.getAttribute("maxlength") || 255;
-        isValid = field.value.length >= stringMinLength && field.value.length <= stringMaxLength && /^[a-zA-Z\s]*$/.test(field.value);
-        break;
-      default:
-        break;
-    }
-
+    // Gérer l'affichage des erreurs selon que le bouton Suivant a été cliqué ou non
     if (this.nextClicked) {
       if (isValid) {
         this.hideError(field);
@@ -515,7 +568,7 @@ class FormValidator {
   }
 
   isVisible(element) {
-    return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+    return element.type !== "hidden" && (element.offsetWidth || element.offsetHeight || element.getClientRects().length);
   }
 
   goToStep(stepChange) {
@@ -529,6 +582,24 @@ class FormValidator {
   }
 }
 
+const fieldLimits = {
+  'montantSouhaite': { min: 200, max: 999999999 },
+  'dureeRemboursement': { min: 1, max: 12 },
+  // Ajoutez d'autres champs ici
+};
+
+
+function applyFieldLimits() {
+  for (const [fieldId, limits] of Object.entries(fieldLimits)) {
+    const field = document.getElementById(fieldId);
+    if (field) {
+      field.setAttribute('data-min', limits.min);
+      field.setAttribute('data-max', limits.max);
+    }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  applyFieldLimits();
   FormValidator.init();
 });

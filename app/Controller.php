@@ -5,6 +5,15 @@ namespace App;
 
 abstract class Controller
 {
+    protected function initializeSession()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            $sessionConfig = require_once(__DIR__ . '/../config/session.php');
+            session_start($sessionConfig);
+            session_regenerate_id(true);
+        }
+    }
+
     protected function renderFormView(string $viewName, array $data = [])
     {
         $this->render($viewName, $data, 'form');

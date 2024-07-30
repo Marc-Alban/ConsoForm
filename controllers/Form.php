@@ -10,29 +10,14 @@ class Form extends Controller
 {
     private $_lead;
     private $_saveDatas;
-    private $_apiClient;
+    private ApiClient $_apiClient;
 
     public function __construct()
     {
-        $this->initSession();
-
-        // $this->_lead = $this->loadModel('Lead');
-        // $this->_saveDatas = $this->loadModel('SaveDatas');
+        $this->initializeSession();
+        $this->_lead = $this->loadModel('Lead');
+        $this->_saveDatas = $this->loadModel('SaveDatas');
         $this->_apiClient = new ApiClient();
-    }
-
-    private function initSession()
-    {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start([
-                'lifetime' => 0,
-                'path' => '/',
-                'domain' => $_SERVER['HTTP_HOST'],
-                'secure' => true,
-                'httponly' => true,
-                'samesite' => 'None'
-            ]);
-        }
     }
 
     private function getUuidFromRequest()
@@ -47,7 +32,7 @@ class Form extends Controller
         $toastMessage = null;
 
         if ($uuid) {
-            // $savedDataEntry = $this->_saveDatas->getLeadByUuid($uuid);
+            $savedDataEntry = $this->_saveDatas->getLeadByUuid($uuid);
             $toastMessage = 'Ravi de vous revoir !';
             if ($savedDataEntry) {
                 $savedData = json_decode($savedDataEntry['formData'], true);
@@ -72,36 +57,41 @@ class Form extends Controller
             }
 
             if ($insertionSuccess) {
-                if (!isset($_SESSION['api_sent'])) {
-                    $lastId = $this->_lead->getLastId();
-                    $leadData = $this->_lead->getLeadById($lastId);
-                    $responseCode = $this->_apiClient->sendApi($leadData);
-                    $_SESSION['api_sent'] = true;
-                } else {
-                    $responseCode = 'ok';
-                }
-
-                $_SESSION['tracking_info'] = [
-                    'transaction_id' => $_SESSION['idContactClient'],
-                    'item_name' => 'devapp.solutis.fr',
-                    'item_category' => 'rachatdecredit'
-                ];
-
-                if ($responseCode === "ok") {
-                    $_SESSION['leadData'] = $postData;
-                    header('Location: /demande-rachat-credit,reussie.html');
-                    exit();
-                } else {
-                    $_SESSION['error'] = 'Une erreur est survenue lors du traitement de votre demande.';
-                    header('Location: /demande-credit,avis-defavorable.html');
-                    exit();
-                }
+                $this->handleApiSubmission($postData);
             } else {
+                $data['errors'] = ['Une erreur est survenue lors de l\'insertion des données.'];
                 $this->renderFormView('index', $data);
             }
         } else {
             $this->renderFormView('index', $data);
         }
+    }
+
+    private function handleApiSubmission(array $postData): void
+    {
+        if (!isset($_SESSION['api_sent'])) {
+            $lastId = $this->_lead->getLastId();
+            $leadData = $this->_lead->getLeadById($lastId);
+            $responseCode = $this->_apiClient->sendApi($leadData);
+            $_SESSION['api_sent'] = true;
+        } else {
+            $responseCode = 'ok';
+        }
+
+        $_SESSION['tracking_info'] = [
+            'transaction_id' => $_SESSION['idContactClient'],
+            'item_name' => 'devapp.solutis.fr',
+            'item_category' => 'rachatdecredit'
+        ];
+
+        if ($responseCode === "ok") {
+            $_SESSION['leadData'] = $postData;
+            header('Location: /demande-rachat-credit,reussie.html');
+        } else {
+            $_SESSION['error'] = 'Une erreur est survenue lors du traitement de votre demande.';
+            header('Location: /demande-credit,avis-defavorable.html');
+        }
+        exit();
     }
 
     private function convertToUTF8(array $data)
@@ -141,10 +131,10 @@ class Form extends Controller
 
         if (empty($data['emailSave']) || !filter_var($data['emailSave'], FILTER_VALIDATE_EMAIL)) {
             echo json_encode(['success' => false, 'message' => 'Adresse email manquante ou invalide.']);
-            exit;
+            exit();
         }
 
-        // $uuid = !empty($data['uuid']) ? $data['uuid'] : $this->_saveDatas->generateUuid();
+        $uuid = !empty($data['uuid']) ? $data['uuid'] : $this->_saveDatas->generateUuid();
 
         $formDataJson = json_encode($data);
 

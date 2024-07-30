@@ -7,15 +7,26 @@ use Models\Lead;
 
 class XmlConverter
 {
-    // public function array_to_xml($datas, Lead $lead)
-    // {
-    //     $data = $this->prepareXmlDataArray($datas, $lead);
-    //     if (empty($data)) {
-    //         return "<Lead>No data available</Lead>";
-    //     }
-    //     $xml = $this->generateXmlFromData($data);
-    //     return trim($xml);
-    // }
+    public function array_to_xml($datas, Lead $lead)
+    {
+        $data = $this->prepareXmlDataArray($datas, $lead);
+        if (empty($data)) {
+            return "<Lead>No data available</Lead>";
+        }
+        $xml = $this->generateXmlFromData($data);
+        return trim($xml);
+    }
+
+    public function convertArrayToXml(array $data): string
+    {
+        $xml = new \SimpleXMLElement('<Lead/>');
+
+        foreach ($data as $key => $value) {
+            $xml->addChild($key, htmlspecialchars((string) $value, ENT_XML1, 'UTF-8'));
+        }
+
+        return $xml->asXML();
+    }
 
     private function getCspValue($professionName)
     {

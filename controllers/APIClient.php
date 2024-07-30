@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Controllers;
 
 use App\Controller;
+use Controllers\XmlConverter;
 
 class ApiClient extends Controller
 {
@@ -16,20 +17,17 @@ class ApiClient extends Controller
         $this->_xmlConverter = new XmlConverter();
     }
 
-
-    private function mapIpAddress(array $data): array
+    public function sendApi(array $leadData): string
     {
-        $ipAddress = $_SESSION['Adresse_Ip'] ?? '';
-        $data['Adresse_Ip'] = $ipAddress;
-
-        return $data;
+        $xmlString = $this->_xmlConverter->convertArrayToXml($leadData);
+        return $this->sendRequestToWebService($xmlString);
     }
 
     private function sendRequestToWebService(string $xmlString): string
     {
         $address = $this->httpResponse(self::PRIMARY_ADDRESS) ? self::PRIMARY_ADDRESS : self::FALLBACK_ADDRESS;
         $client = new \SoapClient($address);
-        
+
         try {
             $res = $client->Leadv2([
                 'Login' => 'app.solutis.fr',
@@ -37,9 +35,9 @@ class ApiClient extends Controller
                 'Version' => 'TEST',
                 'Flux' => $xmlString
             ]);
-            
+
             $_SESSION['result'] = $res->Leadv2Result;
-            
+
             if (strpos($res->Leadv2Result, 'OK') !== false) {
                 return "ok";
             } elseif (strpos($res->Leadv2Result, 'KO-D') !== false) {
@@ -63,13 +61,13 @@ class ApiClient extends Controller
         curl_setopt($resURL, CURLOPT_TIMEOUT_MS, 200);
         curl_exec($resURL);
         $intReturnCode = curl_getinfo($resURL, CURLINFO_HTTP_CODE);
-    
+
         if (curl_errno($resURL)) {
             error_log('Curl error: ' . curl_error($resURL));
         }
-    
+
         curl_close($resURL);
-    
+
         return in_array($intReturnCode, [200, 301, 302, 304]);
     }
 }

@@ -5,54 +5,59 @@ namespace App;
 
 abstract class Model
 {
-    private $host;
-    private $db_name;
-    private $username;
-    private $password;
-
     protected $pdo;
 
     public function __construct()
     {
-        $this->setConnectionParams();
-        $this->getConnection();
+        $this->initializeDatabaseConnection();
     }
 
-    private function setConnectionParams(): void
+    private function initializeDatabaseConnection(): void
+    {
+        $config = require(__DIR__ . '/../config/database.php');
+       // var_dump($config); // Debug: Affiche la configuration chargée
+        $environment = $this->getEnvironment();
+      //  var_dump($environment); // Debug: Affiche l'environnement actuel
+
+        if (!isset($config[$environment])) {
+            throw new \Exception("Configuration for environment '{$environment}' not found.");
+        }
+
+        $this->connect($config[$environment]);
+    }
+
+    private function getEnvironment(): string
     {
         $url = $_SERVER['HTTP_HOST'];
-        
         if ($url === 'devapp.solutis.fr') {
-            $this->host = $_ENV['DB_DEV_HOST'];
-            $this->db_name = $_ENV['DB_DEV_NAME'];
-            $this->username = $_ENV['DB_DEV_USER'];
-            $this->password = $_ENV['DB_DEV_PASS'];
+            return 'dev';
         } elseif ($url === 'app.solutis.fr') {
-            $this->host = $_ENV['DB_PROD_HOST'];
-            $this->db_name = $_ENV['DB_PROD_NAME'];
-            $this->username = $_ENV['DB_PROD_USER'];
-            $this->password = $_ENV['DB_PROD_PASS'];
+            return 'prod';
         } else {
-            $this->host = $_ENV['DB_LOCAL_HOST'];
-            $this->db_name = $_ENV['DB_LOCAL_NAME'];
-            $this->username = $_ENV['DB_LOCAL_USER'];
-            $this->password = $_ENV['DB_LOCAL_PASS'];
+            return 'local';
         }
     }
 
-    private function getConnection(): void
+    private function connect(array $dbConfig): void
     {
+        if (empty($dbConfig['host']) || empty($dbConfig['dbname']) || empty($dbConfig['username'])) {
+            throw new \Exception("Database configuration is missing required fields.");
+        }
+
+        // Debug output to check the values
+        // var_dump($dbConfig);
+
+        $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']};charset=utf8";
+        $options = [
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+        ];
+
         try {
-            $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8";
-            $options = [
-                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-            ];
-            $this->pdo = new \PDO($dsn, $this->username, $this->password, $options);
+            $this->pdo = new \PDO($dsn, $dbConfig['username'], $dbConfig['password'], $options);
         } catch (\PDOException $exception) {
             error_log($exception->getMessage());
-            echo "Une erreur est survenue lors de la connexion à la base de données. Veuillez réessayer plus tard.";
-            exit;
+            throw new \Exception("Database connection error: " . $exception->getMessage());
         }
     }
 

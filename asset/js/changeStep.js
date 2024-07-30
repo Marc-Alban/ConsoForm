@@ -1,348 +1,284 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const steps = document.querySelectorAll('.form-container .step');
-    const stepsArray = Array.from(steps);
-    const btnOui = document.getElementById('oui');
-    const btnNon = document.getElementById('non');
-    const modal = new bootstrap.Modal(document.getElementById('propositionModal'));
-    const btnOkModal = document.getElementById('btn-ok-modal');
-    const formValidator = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
-    const situationFamilialeElement = document.getElementById('situationFamiliale');
-  
-    let hasCoBorrower = false;
-    let hasSelectedNon = false;
-    let currentStepOnNonSelection = null;
-  
-    function hideAllSteps() {
-      steps.forEach(step => step.style.display = 'none');
+  // Sélection des éléments du formulaire
+  const steps = document.querySelectorAll('.form-container .step');
+  const stepsArray = Array.from(steps);
+  const btnOui = document.getElementById('oui');
+  const btnNon = document.getElementById('non');
+  const modal = new bootstrap.Modal(document.getElementById('propositionModal'));
+  const btnOkModal = document.getElementById('btn-ok-modal');
+  const formValidator = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
+  const situationFamilialeElement = document.getElementById('situationFamiliale');
+
+  // Tableaux des étapes
+  const stepsWithoutCoBorrower = [
+    '0-content', '1-content', '2-content', '3-content', '4-content', 
+    '5-content', '6-content', '8-content', '10-content', 
+    '11-content', '12-content', '13-content', '14-content'
+  ];
+
+  const stepsWithCoBorrower = [
+    '0-content', '1-content', '2-content', '3-content', '4-content', 
+    '5-content', '6-content', '7-content', '8-content', '9-content', 
+    '10-content', '11-content', '12-content', '13-content', '14-content', 
+    '16-content', '15-content'
+  ];
+
+  // Variables pour gérer l'état du formulaire
+  let hasCoBorrower = false;
+  let hasSelectedNon = false;
+  let currentStepOnNonSelection = null;
+
+  // Fonction pour masquer toutes les étapes du formulaire
+  function hideAllSteps() {
+    steps.forEach(step => step.style.display = 'none');
+  }
+
+  // Fonction pour afficher l'étape courante du formulaire
+  function showCurrentStep() {
+    hideAllSteps();
+    const currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
+    if (stepsArray[window.currentStep]) {
+      document.getElementById(currentStepsArray[window.currentStep]).style.display = 'block';
     }
-  
-    function showCurrentStep() {
-      hideAllSteps();
-      if (stepsArray[window.currentStep]) {
-        stepsArray[window.currentStep].style.display = 'block';
-      }
-      updateCoBorrowerSteps();
+    updateActiveStep();
+  }
+
+  // Fonction pour valider les champs visibles de l'étape courante
+  function validateVisibleFields() {
+    return formValidator.validateStep(window.currentStep);
+  }
+
+  // Fonction pour naviguer entre les étapes
+  function goToStep(stepDelta) {
+    if (!validateVisibleFields()) {
+      return;
     }
-  
-    function validateVisibleFields() {
-      return formValidator.validateStep(window.currentStep);
+
+    let currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
+    let potentialNextStep = window.currentStep + stepDelta;
+    const maxStepIndex = currentStepsArray.length - 1;
+
+    if (potentialNextStep < 0) potentialNextStep = 0;
+    if (potentialNextStep > maxStepIndex) potentialNextStep = maxStepIndex;
+
+    if (window.currentStep !== potentialNextStep) {
+      window.currentStep = potentialNextStep;
+      showCurrentStep();
     }
-  
-    function goToStep(stepDelta) {
-      if (!validateVisibleFields()) {
+  }
+
+  // Fonction pour définir une étape spécifique comme étape courante
+  function setStep(index) {
+    let currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
+    if (index < 0 || index >= currentStepsArray.length) return;
+    hideAllSteps();
+    document.getElementById(currentStepsArray[index]).style.display = 'block';
+    window.currentStep = index;
+    showCurrentStep();
+  }
+
+  // Mise à jour de l'indicateur d'étape actif selon la catégorie
+  function updateActiveStep() {
+    const isMobile = window.innerWidth <= 991;
+    const currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
+    const currentFormStep = document.getElementById(currentStepsArray[window.currentStep]);
+    const currentCategory = currentFormStep ? currentFormStep.querySelector('[data-category]')?.getAttribute('data-category') : null;
+    const progressSteps = document.querySelectorAll('.form-sidebar .sidebar .step');
+
+    progressSteps.forEach(function(step) {
+      const bar = step.nextElementSibling;
+      const stepContent = step.querySelector('.step-content');
+      if (!stepContent) {
+        console.error("Élément '.step-content' introuvable dans l'étape.");
         return;
       }
-  
-      let potentialNextStep = window.currentStep + stepDelta;
-      const maxStepIndex = stepsArray.length - 1;
-  
-      if (stepDelta > 0 && !hasCoBorrower) {
-        while (potentialNextStep <= maxStepIndex && stepsArray[potentialNextStep].classList.contains('subStepCoBorrower')) {
-          potentialNextStep++;
-        }
-      }
-  
-      if (stepDelta < 0 && !hasCoBorrower) {
-        while (potentialNextStep >= 0 && stepsArray[potentialNextStep].classList.contains('subStepCoBorrower')) {
-          potentialNextStep--;
-        }
-      }
-  
-      if (potentialNextStep < 0) potentialNextStep = 0;
-      if (potentialNextStep > maxStepIndex) potentialNextStep = maxStepIndex;
-  
-      if (window.currentStep !== potentialNextStep) {
-        window.currentStep = potentialNextStep;
-        showCurrentStep();
-      }
-    }
-  
-    function setStep(index) {
-      if (index < 0 || index >= stepsArray.length) return;
-      hideAllSteps();
-      stepsArray[index].style.display = 'block';
-      window.currentStep = index;
-      updateCoBorrowerSteps();
-    }
-  
-    function updateCoBorrowerSteps() {
-      const currentStepId = stepsArray[window.currentStep]?.id;
-  
-      stepsArray.forEach(step => {
-        if (step.classList.contains('subStepCoBorrower')) {
-          if (hasCoBorrower && step.id === currentStepId) {
-            step.style.display = 'block';
-          } else {
-            step.style.display = 'none';
+
+      if (!isMobile) {
+        stepContent.style.display = 'block';
+        if (step.getAttribute('data-category') === currentCategory) {
+          step.classList.add('active');
+          if (bar) {
+            bar.style.backgroundColor = '#bff574';
           }
         }
-      });
-    }
-  
-    function updateActiveStep() {
-      const isMobile = window.innerWidth <= 991;
-      const currentFormStep = Array.from(document.querySelectorAll('.container.text-center.tab.step')).find(el => {
-        return el.style.display !== 'none' && getComputedStyle(el).display !== 'none';
-      });
-      const currentCategory = currentFormStep ? currentFormStep.querySelector('[data-category]')?.getAttribute('data-category') : null;
-      const progressSteps = document.querySelectorAll('.form-sidebar .sidebar .step');
-  
-      progressSteps.forEach(function(step) {
-        const bar = step.nextElementSibling;
-        const stepContent = step.querySelector('.step-content');
-        if (!stepContent) {
-          console.error("Élément '.step-content' introuvable dans la étape.");
-          return;
-        }
-  
-        if (!isMobile) {
+      } else {
+        if (step.getAttribute('data-category') === currentCategory) {
+          step.classList.add('active');
           stepContent.style.display = 'block';
-          if (step.getAttribute('data-category') === currentCategory) {
-            step.classList.add('active');
-            if (bar) {
-              bar.style.backgroundColor = '#bff574';
-            }
+          if (bar) {
+            bar.style.backgroundColor = '#bff574';
+          }
+          const stepContentP = stepContent.querySelector('p');
+          if (stepContentP) {
+            stepContentP.style.display = 'block';
           }
         } else {
-          if (step.getAttribute('data-category') === currentCategory) {
-            step.classList.add('active');
-            stepContent.style.display = 'block';
-            if (bar) {
-              bar.style.backgroundColor = '#bff574';
-            }
-            const stepContentP = stepContent.querySelector('p');
-            if (stepContentP) {
-              stepContentP.style.display = 'block';
-            }
-          } else {
-            stepContent.style.display = 'none';
-            const stepContentP = stepContent.querySelector('p');
-            if (stepContentP) {
-              stepContentP.style.display = 'none';
-            }
+          stepContent.style.display = 'none';
+          const stepContentP = stepContent.querySelector('p');
+          if (stepContentP) {
+            stepContentP.style.display = 'none';
           }
         }
-      });
-    }
-  
-    function goToStepByClick() {
-      document.querySelectorAll('.form-sidebar .sidebar .step').forEach(function(stepElement) {
-        stepElement.addEventListener('click', function() {
-          if (this.classList.contains('non-clickable')) {
-            console.error("Cette catégorie est non cliquable.");
-            return;
-          }
-  
-          const category = stepElement.getAttribute('data-category');
-          const targetIndex = findStepIndexByCategory(category);
-  
-          if (stepElement.classList.contains('active') || targetIndex <= window.currentStep) {
-            navigateToCategory(category);
-          } else {
-            console.warn("Vous ne pouvez pas naviguer vers cette étape avant de compléter les étapes précédentes.");
-          }
-        });
-      });
-    }
-  
-    function findStepIndexByCategory(category) {
-      const allSteps = document.querySelectorAll('.container.text-center.tab.step');
-      for (let i = 0; i < allSteps.length; i++) {
-        const categoryDiv = allSteps[i].querySelector('[data-category]');
-        if (categoryDiv && categoryDiv.getAttribute('data-category') === category) {
-          return i;
-        }
       }
-      return -1;
-    }
-  
-    function navigateToCategory(category) {
-      const allSteps = document.querySelectorAll('.container.text-center.tab.step');
-      let found = false;
-      const currentStepCategory = allSteps[window.currentStep]?.querySelector('[data-category]')?.getAttribute('data-category');
-  
-      if (category === currentStepCategory) {
-        return;
-      }
-  
-      for (let step of allSteps) {
-        const categoryDiv = step.querySelector('[data-category]');
-        if (categoryDiv && categoryDiv.getAttribute('data-category') === category) {
-          if (!found) {
-            step.style.display = 'block';
-            window.currentStep = Array.from(allSteps).indexOf(step);
-            found = true;
-          } else {
-            step.style.display = 'none';
-          }
-        } else {
-          step.style.display = 'none';
-        }
-      }
-  
-      if (!found) {
-        console.error("Catégorie non trouvée:", category);
-      }
-  
-      updateActiveStep();
-    }
-  
-    if (btnNon) {
-      btnNon.addEventListener('change', function() {
-        if (btnNon.checked) {
-          hasSelectedNon = true;
-          currentStepOnNonSelection = window.currentStep;
-          window.setStep(13);
-        }
-      });
-    }
-  
-    if (btnOui) {
-      btnOui.addEventListener('change', function() {
-        if (btnOui.checked) {
-          hasSelectedNon = false;
-          currentStepOnNonSelection = window.currentStep;
-          window.setStep(12);
-        }
-      });
-    }
-  
-    document.querySelectorAll('.btnPrev, .btnNext').forEach(function(button) {
-      button.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        const stepDelta = this.classList.contains('btnNext') ? 1 : -1;
-        goToStep(stepDelta);
-      });
     });
-  
-    showCurrentStep();
-  
-    window.setStep = setStep;
-  
-    const btnOk = document.getElementById('btn-ok');
-    if (btnOk) {
-      btnOk.addEventListener('click', function() {
-        $('#warning-modal').modal('hide');
-        $('.modal-backdrop').remove();
-        $('body').css('overflow', '');
-      });
-    }
-  
-    if (btnOkModal) {
-      btnOkModal.addEventListener('click', function() {
-        modal.hide();
-      });
-    }
-  
-    const radioButtons = document.querySelectorAll('.hidden-input');
-    const labelsProjet = document.querySelectorAll('.projet-label');
-    const labelsNature = document.querySelectorAll('.nature-label');
-    const btnNextProjet = document.querySelector('#btnNextProjet');
-    const btnNextNature = document.querySelector('#btnNextNature');
-    const btnPrev = document.querySelector('#btnPrev');
-    const errorContainerProjet = document.getElementById('error-projet');
-    const errorContainerNature = document.getElementById('error-travaux');
-  
-    function checkSelectionProjet() {
-      const isActiveProjet = Array.from(labelsProjet).some(l => l.classList.contains('active'));
-      if (btnNextProjet) btnNextProjet.disabled = !isActiveProjet;
-    }
-  
-    function checkSelectionNature() {
-      const isActiveNature = Array.from(labelsNature).some(l => l.classList.contains('active'));
-      if (btnNextNature) btnNextNature.disabled = !isActiveNature;
-    }
-  
-    function resetSelections() {
-      radioButtons.forEach(radio => {
-        radio.checked = false;
-      });
-  
-      labelsProjet.forEach(label => {
-        label.classList.remove('active');
-        label.style.borderColor = '';
-      });
-  
-      labelsNature.forEach(label => {
-        label.classList.remove('active');
-        label.style.borderColor = '';
-      });
-    }
-  
-    radioButtons.forEach(radio => {
-      radio.addEventListener('change', function() {
-        resetSelections();
-  
-        labelsProjet.forEach(label => {
-          if (label.getAttribute('for') === this.id) {
-            label.classList.add('active');
-            label.style.borderColor = 'red';
-          }
-        });
-  
-        labelsNature.forEach(label => {
-          if (label.getAttribute('for') === this.id) {
-            label.classList.add('active');
-            label.style.borderColor = 'red';
-          }
-        });
-  
-        checkSelectionProjet();
-        checkSelectionNature();
-  
-        goToStep(1);
-      });
+  }
+
+  // Gestion des événements de sélection pour les boutons 'Oui' et 'Non'
+  if (btnNon) {
+    btnNon.addEventListener('change', function() {
+      if (btnNon.checked) {
+        hasSelectedNon = true;
+        currentStepOnNonSelection = window.currentStep;
+        setStep(13);  // Change vers une étape spécifique si 'Non' est sélectionné
+      }
     });
-  
-    if (btnNextProjet) btnNextProjet.disabled = true;
-    if (btnNextNature) btnNextNature.disabled = true;
-  
-    if (btnNextProjet) {
-      btnNextProjet.addEventListener('click', function(e) {
-        const isActive = Array.from(labelsProjet).some(l => l.classList.contains('active'));
-        if (!isActive) {
-          e.preventDefault();
-          errorContainerProjet.classList.remove('d-none');
-        } else {
-          errorContainerProjet.classList.add('d-none');
-          btnNextProjet.style.borderColor = '';
-          goToStep(1);
-        }
-      });
-    }
-  
-    if (btnNextNature) {
-      btnNextNature.addEventListener('click', function(e) {
-        const isActive = Array.from(labelsNature).some(l => l.classList.contains('active'));
-        if (!isActive) {
-          e.preventDefault();
-          errorContainerNature.classList.remove('d-none');
-        } else {
-          errorContainerNature.classList.add('d-none');
-          btnNextNature.style.borderColor = '';
-          goToStep(1);
-        }
-      });
-    }
-  
-    if (btnPrev) {
-      btnPrev.addEventListener('click', function() {
-        resetSelections();
-        goToStep(-1);
-      });
-    }
-  
-    window.currentStep = 0;
-    showCurrentStep();
-  
-    window.goToStep = goToStep;
-  
-    if (situationFamilialeElement) {
-      situationFamilialeElement.addEventListener('change', function() {
-        const selectedValue = this.value;
-        hasCoBorrower = selectedValue === 'marie' || selectedValue === 'pacse' || selectedValue === 'union';
-        updateCoBorrowerSteps();
-      });
-    }
+  }
+
+  if (btnOui) {
+    btnOui.addEventListener('change', function() {
+      if (btnOui.checked) {
+        hasSelectedNon = false;
+        currentStepOnNonSelection = window.currentStep;
+        setStep(12);  // Change vers une autre étape si 'Oui' est sélectionné
+      }
+    });
+  }
+
+  // Boutons pour naviguer précédemment ou suivant et mise à jour de l'étape
+  document.querySelectorAll('.btnPrev, .btnNext').forEach(function(button) {
+    button.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const stepDelta = this.classList.contains('btnNext') ? 1 : -1;
+      goToStep(stepDelta);
+    });
   });
-  
+
+  // Montre l'étape initiale au chargement
+  window.currentStep = 0;
+  showCurrentStep();
+
+  // Fonctions globales pour définir une étape ou naviguer vers une étape
+  window.setStep = setStep;
+  window.goToStep = goToStep;
+
+  // Gestion du bouton OK dans le modal
+  if (btnOkModal) {
+    btnOkModal.addEventListener('click', function() {
+      modal.hide();
+    });
+  }
+
+  // Divers éléments interactifs et gestion des sélections dans le formulaire
+  const radioButtons = document.querySelectorAll('.hidden-input');
+  const labelsProjet = document.querySelectorAll('.projet-label');
+  const labelsNature = document.querySelectorAll('.nature-label');
+  const btnNextProjet = document.querySelector('#btnNextProjet');
+  const btnNextNature = document.querySelector('#btnNextNature');
+  const btnPrev = document.querySelector('#btnPrev');
+  const errorContainerProjet = document.getElementById('error-projet');
+  const errorContainerNature = document.getElementById('error-travaux');
+
+  // Vérification de la sélection pour activer le bouton suivant
+  function checkSelectionProjet() {
+    const isActiveProjet = Array.from(labelsProjet).some(l => l.classList.contains('active'));
+    if (btnNextProjet) btnNextProjet.disabled = !isActiveProjet;
+  }
+
+  function checkSelectionNature() {
+    const isActiveNature = Array.from(labelsNature).some(l => l.classList.contains('active'));
+    if (btnNextNature) btnNextNature.disabled = !isActiveNature;
+  }
+
+  // Réinitialisation des sélections lors de la navigation arrière
+  function resetSelections() {
+    radioButtons.forEach(radio => {
+      radio.checked = false;
+    });
+
+    labelsProjet.forEach(label => {
+      label.classList.remove('active');
+      label.style.borderColor = '';
+    });
+
+    labelsNature.forEach(label => {
+      label.classList.remove('active');
+      label.style.borderColor = '';
+    });
+  }
+
+  // Gestion des événements de changement pour les boutons radio
+  radioButtons.forEach(radio => {
+    radio.addEventListener('change', function() {
+      resetSelections();
+
+      labelsProjet.forEach(label => {
+        if (label.getAttribute('for') === this.id) {
+          label.classList.add('active');
+          label.style.borderColor = 'red';
+        }
+      });
+
+      labelsNature.forEach(label => {
+        if (label.getAttribute('for') === this.id) {
+          label.classList.add('active');
+          label.style.borderColor = 'red';
+        }
+      });
+
+      checkSelectionProjet();
+      checkSelectionNature();
+
+      goToStep(1);  // Navigue à l'étape suivante après la sélection
+    });
+  });
+
+  // Gestion des boutons suivants et précédents, avec vérification de l'activité pour naviguer
+  if (btnNextProjet) {
+    btnNextProjet.addEventListener('click', function(e) {
+      const isActive = Array.from(labelsProjet).some(l => l.classList.contains('active'));
+      if (!isActive) {
+        e.preventDefault();
+        errorContainerProjet.classList.remove('d-none');
+      } else {
+        errorContainerProjet.classList.add('d-none');
+        btnNextProjet.style.borderColor = '';
+        goToStep(1);
+      }
+    });
+  }
+
+  if (btnNextNature) {
+    btnNextNature.addEventListener('click', function(e) {
+      const isActive = Array.from(labelsNature).some(l => l.classList.contains('active'));
+      if (!isActive) {
+        e.preventDefault();
+        errorContainerNature.classList.remove('d-none');
+      } else {
+        errorContainerNature.classList.add('d-none');
+        btnNextNature.style.borderColor = '';
+        goToStep(1);
+      }
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', function() {
+      resetSelections();
+      goToStep(-1);
+    });
+  }
+
+  // Gestion de l'élément de situation familiale pour déterminer la présence d'un co-emprunteur
+  if (situationFamilialeElement) {
+    situationFamilialeElement.addEventListener('change', function() {
+      const selectedValue = this.value;
+      hasCoBorrower = selectedValue === 'marie' || selectedValue === 'pacse' || selectedValue === 'union';
+      window.currentStep = 0;  // Reinitialiser l'étape courante lors du changement de la situation familiale
+      showCurrentStep();
+    });
+  }
+
+  // Initialise l'étape courante et montre l'étape correspondante
+  window.currentStep = 0;
+  showCurrentStep();
+});

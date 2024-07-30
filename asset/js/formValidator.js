@@ -1,3 +1,27 @@
+$(document).ready(function() {
+  $('.input-number').on('input', function(e) {
+      var input = $(this).val().replace(/[^\d]/g, ''); // Remove all non-numeric characters
+      var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // Add space as thousand separator
+  
+      $(this).val(formatted);
+  
+      var valid = /^\d+( \d{3})*$/.test(formatted); // Check if input contains only digits and spaces in correct format
+      var isZero = (input === '0'); // Check if the input value is 0
+      var name = $(this).attr('name'); // Get the name attribute of the input
+  
+      var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); // Remove brackets from the name
+      var errorId = '#error-' + nameWithoutBrackets;
+      var $inputGroupText = $(this).siblings('.input-group-text');
+
+    
+  });
+});
+
+
+
+
+
+
 const options = {
   'prive': {
     statut: { show: true },
@@ -55,7 +79,7 @@ class FormValidator {
     this.userInteracted = false;
     this.nextClicked = false;
     this.setupEventListeners();
-    this.setupFormattedNumberInputs();
+    // this.setupFormattedNumberInputs();
   }
 
   setupEventListeners() {
@@ -91,6 +115,7 @@ class FormValidator {
         if (field) {
           this.userInteracted = true;
           if (this.nextClicked) {
+            console.log('next')
             this.validateField(field);
           }
         }
@@ -117,6 +142,7 @@ class FormValidator {
       button.addEventListener('click', (event) => {
         this.nextClicked = true;
         const stepIsValid = this.validateStep(this.currentStepIndex);
+        console.log(currentStepIndex)
         if (!stepIsValid) {
           event.preventDefault();
           this.showErrorsForCurrentStep();
@@ -162,9 +188,13 @@ class FormValidator {
         textInput.setAttribute('data-hidden-input', numberInput.id);
         textInput.setAttribute('data-min', numberInput.getAttribute('data-min'));
         textInput.setAttribute('data-max', numberInput.getAttribute('data-max'));
+
+
   
         numberInput.style.opacity = '0';
         numberInput.style.position = 'absolute';
+
+        textInput.setAttribute('id','clone-'+numberInput.name)
   
         numberInput.parentNode.insertBefore(textInput, numberInput.nextSibling);
         this.synchronizeValues(textInput, numberInput);
@@ -402,6 +432,13 @@ class FormValidator {
     const errorContainerId = `error-${field.name}`;
     const errorContainer = document.getElementById(errorContainerId);
 
+    if(field.classList.contains('input-number')){
+      let name = $(field).attr('name');
+      $('#clone-' + name).addClass('error-form'); // Hide the error message
+      console.log($('#clone-' + name))
+    }
+
+    
     if (errorContainer) {
       errorContainer.classList.remove("d-none");
     } else {
@@ -420,6 +457,7 @@ class FormValidator {
   }
 
   validateField(field) {
+    
     // Vérifier si le champ est visible; s'il ne l'est pas, il est considéré comme valide par défaut.
     if (!this.isVisible(field)) {
       return true;
@@ -492,6 +530,8 @@ class FormValidator {
       this.hideError(field);
     }
 
+    console.log(isValid)
+
     return isValid;
   }
 
@@ -503,13 +543,22 @@ class FormValidator {
 
   showErrorsForCurrentStep() {
     const step = this.steps[this.currentStepIndex];
+    console.log('step',step)
     if (!step) {
       console.error("Current step not found:", this.currentStepIndex);
       return;
     }
+
+
     const fields = step.querySelectorAll("input, select, textarea");
+    
+
+
+
     fields.forEach((field) => {
+      console.log(fields)
       if (!this.validateField(field)) {
+        
         this.showError(field);
       } else {
         this.hideError(field);
@@ -528,6 +577,7 @@ class FormValidator {
   }
 
   validateStep(stepIndex) {
+    console.log('next laaaa')
     const step = this.steps[stepIndex];
     if (!step) {
       console.error("Step not found");
@@ -535,6 +585,9 @@ class FormValidator {
     }
     let isValid = true;
     const fields = step.querySelectorAll("input, select, textarea");
+
+    console.log('fields',fields)
+
     fields.forEach((field) => {
       if (this.isVisible(field) && !this.validateField(field)) {
         isValid = false;
@@ -572,6 +625,7 @@ class FormValidator {
   }
 
   goToStep(stepChange) {
+    console.log('ohohooh')
     this.currentStepIndex += stepChange;
     this.showCurrentStep();
   }

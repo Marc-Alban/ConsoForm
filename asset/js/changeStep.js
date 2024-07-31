@@ -1,39 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Sélection des éléments du formulaire
-  const steps = document.querySelectorAll('.form-container .step');
-  const stepsArray = Array.from(steps);
-  const btnOui = document.getElementById('oui');
-  const btnNon = document.getElementById('non');
-  const modal = new bootstrap.Modal(document.getElementById('propositionModal'));
-  const btnOkModal = document.getElementById('btn-ok-modal');
-  const formValidator = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
-  const situationFamilialeElement = document.getElementById('situationFamiliale');
+   // Initialisation des éléments du formulaire et des variables
+   const steps = document.querySelectorAll('.form-container .step');
+   const stepsArray = Array.from(steps);
+   const btnOui = document.getElementById('oui');
+   const btnNon = document.getElementById('non');
+   const modal = new bootstrap.Modal(document.getElementById('propositionModal'));
+   const btnOkModal = document.getElementById('btn-ok-modal');
+   const formValidator = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
+   const situationFamilialeElement = document.getElementById('situationFamiliale');
+ 
+   // Correction de l'ordre des étapes pour le co-emprunteur
+   const stepsWithCoBorrower = [
+     '0-content', '1-content', '2-content', '3-content', '4-content', 
+     '5-content', '6-content', '7-content', '8-content', '9-content', 
+     '10-content', '11-content', '12-content', '13-content', '14-content', 
+     '15-content', '16-content'
+   ];
+ 
+   // Tableau des étapes sans co-emprunteur
+   const stepsWithoutCoBorrower = [
+     '0-content', '1-content', '2-content', '3-content', '4-content', 
+     '5-content', '6-content', '8-content', '10-content', 
+     '11-content', '12-content', '13-content', '14-content'
+   ];
+ 
 
-  // Tableaux des étapes
-  const stepsWithoutCoBorrower = [
-    '0-content', '1-content', '2-content', '3-content', '4-content', 
-    '5-content', '6-content', '8-content', '10-content', 
-    '11-content', '12-content', '13-content', '14-content'
-  ];
+   // Variables pour gérer l'état du formulaire
+   let hasCoBorrower = false;
+   let hasSelectedNon = false;
+   let currentStepOnNonSelection = null;
+ 
+   // Fonction pour initialiser le formulaire
+   function initForm() {
+     window.currentStep = 0; // Réinitialiser à l'étape zéro
+     showCurrentStep();
+   }
 
-  const stepsWithCoBorrower = [
-    '0-content', '1-content', '2-content', '3-content', '4-content', 
-    '5-content', '6-content', '7-content', '8-content', '9-content', 
-    '10-content', '11-content', '12-content', '13-content', '14-content', 
-    '16-content', '15-content'
-  ];
-
-  // Variables pour gérer l'état du formulaire
-  let hasCoBorrower = false;
-  let hasSelectedNon = false;
-  let currentStepOnNonSelection = null;
-
-  // Fonction pour masquer toutes les étapes du formulaire
+  // Fonctions de gestion du formulaire
   function hideAllSteps() {
     steps.forEach(step => step.style.display = 'none');
   }
 
-  // Fonction pour afficher l'étape courante du formulaire
   function showCurrentStep() {
     hideAllSteps();
     const currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
@@ -45,22 +53,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Fonction pour valider les champs visibles de l'étape courante
   function validateVisibleFields() {
-    return formValidator.validateStep(window.currentStep);
+    const isValid = formValidator.validateStep(window.currentStep);
+    if (!isValid) {
+      alert('Veuillez corriger les erreurs avant de continuer.');
+    }
+    return isValid;
   }
 
-  // Fonction pour naviguer entre les étapes
   function goToStep(stepDelta) {
-    if (!validateVisibleFields()) {
-      return;
-    }
-
+    if (!validateVisibleFields()) return;
     let currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
     let potentialNextStep = window.currentStep + stepDelta;
     const maxStepIndex = currentStepsArray.length - 1;
-
-    if (potentialNextStep < 0) potentialNextStep = 0;
-    if (potentialNextStep > maxStepIndex) potentialNextStep = maxStepIndex;
-
+    potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
     if (window.currentStep !== potentialNextStep) {
       window.currentStep = potentialNextStep;
       showCurrentStep();
@@ -123,31 +128,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Gestion des événements de sélection pour les boutons 'Oui' et 'Non'
+  // Event Listeners pour les boutons et autres éléments interactifs
   if (btnNon) {
     btnNon.addEventListener('change', function() {
-      if (btnNon.checked) {
-        hasSelectedNon = true;
-        currentStepOnNonSelection = window.currentStep;
-        setStep(13);  // Change vers une étape spécifique si 'Non' est sélectionné
-      }
+      hasSelectedNon = btnNon.checked;
+      currentStepOnNonSelection = window.currentStep;
+      setStep(13); // Spécifique pour 'Non'
     });
   }
 
   if (btnOui) {
     btnOui.addEventListener('change', function() {
-      if (btnOui.checked) {
-        hasSelectedNon = false;
-        currentStepOnNonSelection = window.currentStep;
-        setStep(12);  // Change vers une autre étape si 'Oui' est sélectionné
-      }
+      hasSelectedNon = false;
+      currentStepOnNonSelection = window.currentStep;
+      setStep(12); // Spécifique pour 'Oui'
     });
   }
 
   // Boutons pour naviguer précédemment ou suivant et mise à jour de l'étape
   document.querySelectorAll('.btnPrev, .btnNext').forEach(function(button) {
     button.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       const stepDelta = this.classList.contains('btnNext') ? 1 : -1;
       goToStep(stepDelta);
     });
@@ -158,9 +158,10 @@ document.addEventListener('DOMContentLoaded', function() {
   showCurrentStep();
 
   // Fonctions globales pour définir une étape ou naviguer vers une étape
+  initForm();
   window.setStep = setStep;
   window.goToStep = goToStep;
-
+  
   // Gestion du bouton OK dans le modal
   if (btnOkModal) {
     btnOkModal.addEventListener('click', function() {

@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     const saveButton = document.querySelector('#save');
-    const uuid = new URLSearchParams(window.location.search).get('uuid');
+    if (saveButton) {
+        saveButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            saveFormData();
+        });
+    }
 
+    const uuid = new URLSearchParams(window.location.search).get('uuid');
     if (uuid) {
         fetchFormData(uuid);
-    } else if (window.savedFormData) {
-        fillForm(window.savedFormData);
     }
 
     function fetchFormData(uuid) {
@@ -14,32 +18,51 @@ document.addEventListener("DOMContentLoaded", function () {
         const url = baseUrl + apiPath;
 
         fetch(url)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok. Status: ' + response.status);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data && data.success) {
-                    console.log('Données récupérées:', data.formData); // Vérifiez que les données sont correctes
-                    fillForm(data.formData);
+                    fillForm(data.savedData);
+                    navigateToSavedStep(data.savedData);
                 } else {
                     console.error('Erreur lors du chargement des données:', data.message);
                 }
             })
-            .catch(error => console.error('Erreur:', error));
+            .catch(error => {
+                console.error('Erreur lors de la récupération des données:', error);
+            });
     }
 
     function fillForm(formData) {
         for (const key in formData) {
             if (formData.hasOwnProperty(key)) {
-                const element = document.querySelector(`[name="${key}"]`);
-                if (element) {
+                const elements = document.querySelectorAll(`[name="${key}"]`);
+                elements.forEach(element => {
                     if (element.type === 'radio' || element.type === 'checkbox') {
                         if (element.value === formData[key]) {
                             element.checked = true;
                         }
+                    } else if (element.tagName === 'SELECT') {
+                        const option = element.querySelector(`option[value="${formData[key]}"]`);
+                        if (option) {
+                            option.selected = true;
+                        }
                     } else {
                         element.value = formData[key];
                     }
-                }
+                });
             }
+        }
+    }
+
+    function navigateToSavedStep(formData) {
+        if (formData.currentStep !== undefined) {
+            window.currentStep = formData.currentStep;
+            showCurrentStep();
         }
     }
 
@@ -52,37 +75,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const uuid = localStorage.getItem('formUuid') || '';
         const currentStep = window.currentStep;
-        const container = document.getElementById(currentStep + '-content');
-        let currentCategory = '';
-
-        if (container) {
-            const elementsWithDataCategory = container.querySelectorAll('[data-category]');
-            elementsWithDataCategory.forEach(element => {
-                currentCategory = element.getAttribute('data-category');
-            });
-        }
-
-        const categoryMapping = {
-            "Credit": 1,
-            "Situation patrimoniale": 2,
-            "Situation familiale": 3,
-            "Situation professionnelle": 4,
-            "Situation professionnelle du co-emprunteur": 5,
-            "Situation financière du foyer": 6,
-            "Coordonnées": 7
-        };
-
-        const index_categorie_actuelle = categoryMapping[currentCategory] || 0;
-
         const dataToSave = {
             emailSave: emailInput.value,
             uuid: uuid,
-            currentStep: currentStep,
-            currentCategory: currentCategory,
-            currentCategoryIndex: index_categorie_actuelle
+            currentStep: currentStep
         };
 
-        document.querySelectorAll('#myForm input, #myForm select, #myForm textarea, #myForm [type="radio"], #myForm [type="checkbox"]').forEach(element => {
+        document.querySelectorAll('#myForm input, #myForm select, #myForm textarea').forEach(element => {
             if (element.name) {
                 if (element.type === 'radio' || element.type === 'checkbox') {
                     if (element.checked) {
@@ -120,15 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Response from server:', data);
             if (data && data.success) {
                 localStorage.setItem('formUuid', data.uuid);
-                // Ferme l'ancienne modale
-                $('#ModalSave').modal('hide');
-                // Ouvre la modale de confirmation
-                $('#successModal').modal('show');
-                // Actualise la page
-                window.location.reload();
+                alert('Données sauvegardées avec succès.');
             } else {
                 console.error('Erreur lors de la sauvegarde des données:', data.message);
             }
@@ -136,8 +129,76 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error('Erreur:', error));
     }
 
-    saveButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        saveFormData();
+    // Fonction pour masquer toutes les étapes du formulaire
+    function hideAllSteps() {
+        document.querySelectorAll('.form-container .step').forEach(step => step.style.display = 'none');
+    }
+
+    // Fonction pour afficher l'étape courante du formulaire
+    function showCurrentStep() {
+        hideAllSteps();
+        const steps = document.querySelectorAll('.form-container .step');
+        if (steps[window.currentStep]) {
+            steps[window.currentStep].style.display = 'block';
+        }
+        updateActiveStep();
+    }
+
+    // Initialisation de l'étape courante
+    window.currentStep = 0;
+    showCurrentStep();
+
+    // Fonctions pour naviguer entre les étapes
+    document.querySelectorAll('.btnPrev, .btnNext').forEach(button => {
+        button.addEventListener('click', function() {
+            const stepDelta = this.classList.contains('btnNext') ? 1 : -1;
+            window.currentStep += stepDelta;
+            showCurrentStep();
+        });
     });
+
+    function updateActiveStep() {
+        const isMobile = window.innerWidth <= 991;
+        const currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
+        const currentFormStep = document.getElementById(currentStepsArray[window.currentStep]);
+        const currentCategory = currentFormStep ? currentFormStep.querySelector('[data-category]')?.getAttribute('data-category') : null;
+        const progressSteps = document.querySelectorAll('.form-sidebar .sidebar .step');
+
+        progressSteps.forEach(function(step) {
+            const bar = step.nextElementSibling;
+            const stepContent = step.querySelector('.step-content');
+            if (!stepContent) {
+                console.error("Élément '.step-content' introuvable dans l'étape.");
+                return;
+            }
+
+            if (!isMobile) {
+                stepContent.style.display = 'block';
+                if (step.getAttribute('data-category') === currentCategory) {
+                    step.classList.add('active');
+                    if (bar) {
+                        bar.style.backgroundColor = '#bff574';
+                    }
+                }
+            } else {
+                if (step.getAttribute('data-category') === currentCategory) {
+                    step.classList.add('active');
+                    stepContent.style.display = 'block';
+                    if (bar) {
+                        bar.style.backgroundColor = '#bff574';
+                    }
+                    const stepContentP = stepContent.querySelector('p');
+                    if (stepContentP) {
+                        stepContentP.style.display = 'block';
+                    }
+                } else {
+                    stepContent.style.display = 'none';
+                    const stepContentP = stepContent.querySelector('p');
+                    if (stepContentP) {
+                        stepContentP.style.display = 'none';
+                    }
+                }
+            }
+        });
+    }
 });

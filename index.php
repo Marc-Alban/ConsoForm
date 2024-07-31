@@ -46,7 +46,7 @@ $isLocalhost = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']);
 $_SESSION['Adresse_Ip'] = $isLocalhost ? '' : $_SERVER['REMOTE_ADDR'];
 
 // Création d'une instance de contrôleur Form
-$formController = new Form(new ApiClient());
+$formController = new Form();
 
 // Gestion des actions
 $action = $_GET['action'] ?? null;
@@ -64,4 +64,5 @@ switch ($action) {
         $formController->index();
         break;
 }
+
 ?>

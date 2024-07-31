@@ -51,6 +51,27 @@ class Form extends Controller
         $this->renderFormView('index', $data);
     }
 
+    public function loadFormData() {
+        $uuid = $this->getUuidFromRequest();
+        if (!$uuid) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'UUID manquant.']);
+            exit();
+        }
+
+        $savedDataEntry = $this->_saveDatas->getLeadByUuid($uuid);
+        if (!$savedDataEntry) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'Données non trouvées.']);
+            exit();
+        }
+
+        $savedData = json_decode($savedDataEntry['formData'], true);
+
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true, 'savedData' => $savedData]);
+    }
+
     private function handleApiSubmission(array $postData): void
     {
         if (!isset($_SESSION['api_sent'])) {
@@ -106,51 +127,33 @@ class Form extends Controller
         return $cleanedData;
     }
 
-    public function loadFormData() {
+    public function saveFormData()
+    {
         header('Content-Type: application/json');
-        
-        $uuid = $_GET['uuid'] ?? null;
-        if (!$uuid) {
-            echo json_encode(['success' => false, 'message' => 'UUID manquant.']);
-            exit();
-        }
-    
-        $savedDataEntry = $this->_saveDatas->getLeadByUuid($uuid);
-        if (!$savedDataEntry) {
-            echo json_encode(['success' => false, 'message' => 'Données non trouvées.']);
-            exit();
-        }
-    
-        $savedData = json_decode($savedDataEntry['formData'], true);
-        echo json_encode(['success' => true, 'formData' => $savedData]);
-    }
 
-    public function saveFormData() {
-        header('Content-Type: application/json');
-    
         $rawData = file_get_contents('php://input');
         $data = json_decode($rawData, true);
-    
+
         if (empty($data['emailSave']) || !filter_var($data['emailSave'], FILTER_VALIDATE_EMAIL)) {
             echo json_encode(['success' => false, 'message' => 'Adresse email manquante ou invalide.']);
             exit();
         }
-    
+
         $uuid = !empty($data['uuid']) ? $data['uuid'] : $this->_saveDatas->generateUuid();
         $formDataJson = json_encode($data);
-    
+
         if ($this->_saveDatas->getLeadByUuid($uuid)) {
             $insertionSuccess = $this->_saveDatas->update($uuid, $formDataJson);
         } else {
             $insertionSuccess = $this->_saveDatas->insert($uuid, $formDataJson);
         }
-    
+
         if ($insertionSuccess) {
             $to = $data['emailSave'];
             $subject = "Votre lien personnalisé pour reprendre votre formulaire";
-            $message = "Merci de vous être enregistré. Veuillez cliquer sur le lien suivant pour reprendre le formulaire : <a href='http://localhost:8000/index.php?action=loadFormData&uuid={$uuid}'>cliquer ici</a>";
+            $message = "Merci de vous être enregistré. Veuillez cliquer sur le lien suivant pour reprendre le formulaire : <a href='http://localhost:8000/index.php?uuid={$uuid}'>cliquer ici</a>";
             $headers = "From: no-reply@solutis.fr\r\nContent-Type: text/html; charset=UTF-8\r\n";
-    
+
             if (mail($to, $subject, $message, $headers)) {
                 echo json_encode(['success' => true, 'message' => 'Données enregistrées avec succès. Email envoyé.', 'uuid' => $uuid]);
             } else {
@@ -159,5 +162,10 @@ class Form extends Controller
         } else {
             echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'enregistrement des données.']);
         }
+    }
+
+    protected function renderFormView(string $viewName, array $data = [])
+    {
+        parent::renderFormView($viewName, $data);
     }
 }

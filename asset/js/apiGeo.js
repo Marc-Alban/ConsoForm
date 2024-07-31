@@ -10,9 +10,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    const zipCodeInput = document.getElementById('codePostal');
-    const cityInput = document.getElementById('ville');
-    const resultsList = document.getElementById('resultsList');
+    const zipCodeInput = document.getElementById('codePostal') ?? '';
+    const cityInput = document.getElementById('ville') ?? '';
+    const resultsList = document.getElementById('resultsList') ?? '';
 
     //------------------------------------------------------------------------//
     // 2. Fonction de récupération des données d'adresse depuis l'API
@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = this.value.trim();
         fetchAddressData(query);
     });
+
 
     //------------------------------------------------------------------------//
     // 5. Gestion des clics en dehors de la liste des résultats

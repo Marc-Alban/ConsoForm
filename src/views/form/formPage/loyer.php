@@ -19,7 +19,7 @@
                 <input type="text" inputmode="numeric" pattern="[0-9]*" id="loyerMensuel" name="loyerMensuel" class="form-control input-number form-input col-11 mask" placeholder='Ex : 1000' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-loyerMensuel">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-loyerMensuel">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>

@@ -147,7 +147,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-travaux">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-travaux">
             <p>Veuillez choisir un de ces champs</p>
         </div>
     </div>

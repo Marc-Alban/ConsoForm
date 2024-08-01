@@ -21,7 +21,7 @@
               <option value="liberales">Professions libérales</option>
               <option value="retraites">Retraités ou autres</option>
             </select>
-            <div class="col-12 error-container d-none text-start mt-3" id="error-secteurActivite">
+            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-secteurActivite">
               <p>Veuillez choisir parmi les champs proposés</p>
             </div>
           </div>
@@ -34,7 +34,7 @@
             <select id="statut" name="statut" class="form-select form-input col-12" data-type="select" required>
               <option value="">Sélectionner</option>
             </select>
-            <div class="col-12 error-container d-none text-start mt-3" id="error-statut">
+            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-statut">
               <p>Veuillez choisir parmi les champs proposés</p>
             </div>
           </div>
@@ -45,7 +45,7 @@
           <label for="profession" class="col-md-4 fw-bold text-start mt-4">Ma profession :</label>
           <div class="select2-selection--single col-md-8 mt-4">
             <input type="text" id="profession" name="profession" class="form-control form-input col-12" placeholder="Champs à remplir" required>
-            <div class="col-12 error-container d-none text-start mt-3" id="error-profession">
+            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-profession">
               <p>Veuillez remplir ce champ</p>
             </div>
           </div>
@@ -58,7 +58,7 @@
             <select id="typeContrat" name="typeContrat" class="form-select form-input col-12" data-type="select">
               <option value="">Sélectionner</option>
             </select>
-            <div class="col-12 error-container d-none text-start mt-3" id="error-typeContrat">
+            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-typeContrat">
               <p>Veuillez choisir parmi les champs proposés</p>
             </div>
           </div>
@@ -72,7 +72,7 @@
               <input type="text" id="dateDebut" name="dateDebut" placeholder="JJ/MM/AAAA" class="form-control date-input form-input col-12" data-type="dateFr" required>
               <span class="input-group-text"><i class="fa fa-calendar"></i></span>
             </div>
-            <div class="col-12 error-container d-none text-start mt-3" id="error-dateDebut">
+            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateDebut">
               <p>Veuillez remplir ce champ</p>
             </div>
           </div>

@@ -66,7 +66,6 @@ const contrats = {
   'public': ['CDI', 'CDI (période d\'essai non terminée)', 'CDD', 'Stage', 'Intérim', 'Autres'],
   'agricole': ['CDI', 'CDI (période d\'essai non terminée)', 'CDD', 'Stage', 'Intérim', 'Autres']
 };
-
 class FormValidator {
   constructor(stepsSelector, nextButtonSelector, prevButtonSelector, summarySelector) {
     this.steps = document.querySelectorAll(stepsSelector);
@@ -79,7 +78,6 @@ class FormValidator {
     this.userInteracted = false;
     this.nextClicked = false;
     this.setupEventListeners();
-    // this.setupFormattedNumberInputs();
   }
 
   setupEventListeners() {
@@ -115,7 +113,6 @@ class FormValidator {
         if (field) {
           this.userInteracted = true;
           if (this.nextClicked) {
-            console.log('next')
             this.validateField(field);
           }
         }
@@ -142,14 +139,14 @@ class FormValidator {
       button.addEventListener('click', (event) => {
         this.nextClicked = true;
         const stepIsValid = this.validateStep(this.currentStepIndex);
-        console.log(currentStepIndex)
         if (!stepIsValid) {
           event.preventDefault();
           this.showErrorsForCurrentStep();
         } else {
           this.nextClicked = false;
           this.saveStepData(this.currentStepIndex);
-          this.goToStep(1);
+          this.currentStepIndex++;
+          this.showCurrentStep();
         }
       });
     });
@@ -157,7 +154,10 @@ class FormValidator {
     this.prevButtons.forEach(button => {
       button.addEventListener('click', (event) => {
         this.nextClicked = false;
-        this.goToStep(-1);
+        if (this.currentStepIndex > 0) {
+          this.currentStepIndex--;
+          this.showCurrentStep();
+        }
       });
     });
   }
@@ -189,16 +189,14 @@ class FormValidator {
         textInput.setAttribute('data-min', numberInput.getAttribute('data-min'));
         textInput.setAttribute('data-max', numberInput.getAttribute('data-max'));
 
-
-  
         numberInput.style.opacity = '0';
         numberInput.style.position = 'absolute';
 
         textInput.setAttribute('id','clone-'+numberInput.name)
-  
+
         numberInput.parentNode.insertBefore(textInput, numberInput.nextSibling);
         this.synchronizeValues(textInput, numberInput);
-  
+
         textInput.addEventListener('input', () => {
           const input = textInput.value.replace(/[^\d]/g, '');
           const formatted = this.formatNumberWithSpaces(input);
@@ -206,12 +204,9 @@ class FormValidator {
           numberInput.value = input;
           this.validateField(numberInput);
         });
-  
-        console.log(`Created text input for ${numberInput.id}`);
       }
     });
   }
-  
 
   selectContart(choix, key, select2) {
     while (select2.options.length > 0) {
@@ -435,10 +430,8 @@ class FormValidator {
     if(field.classList.contains('input-number')){
       let name = $(field).attr('name');
       $('#clone-' + name).addClass('error-form'); // Hide the error message
-      console.log($('#clone-' + name))
     }
 
-    
     if (errorContainer) {
       errorContainer.classList.remove("d-none");
     } else {
@@ -543,22 +536,15 @@ class FormValidator {
 
   showErrorsForCurrentStep() {
     const step = this.steps[this.currentStepIndex];
-    console.log('step',step)
     if (!step) {
       console.error("Current step not found:", this.currentStepIndex);
       return;
     }
 
-
     const fields = step.querySelectorAll("input, select, textarea");
-    
-
-
 
     fields.forEach((field) => {
-      console.log(fields)
       if (!this.validateField(field)) {
-        
         this.showError(field);
       } else {
         this.hideError(field);
@@ -566,18 +552,7 @@ class FormValidator {
     });
   }
 
-  showCurrentStep() {
-    this.steps.forEach((step, index) => {
-      if (index === this.currentStepIndex) {
-        step.style.display = 'block';
-      } else {
-        step.style.display = 'none';
-      }
-    });
-  }
-
   validateStep(stepIndex) {
-    console.log('next laaaa')
     const step = this.steps[stepIndex];
     if (!step) {
       console.error("Step not found");
@@ -585,9 +560,7 @@ class FormValidator {
     }
     let isValid = true;
     const fields = step.querySelectorAll("input, select, textarea");
-
-    console.log('fields',fields)
-
+    console.log(fields);
     fields.forEach((field) => {
       if (this.isVisible(field) && !this.validateField(field)) {
         isValid = false;
@@ -624,10 +597,10 @@ class FormValidator {
     return element.type !== "hidden" && (element.offsetWidth || element.offsetHeight || element.getClientRects().length);
   }
 
-  goToStep(stepChange) {
-    console.log('ohohooh')
-    this.currentStepIndex += stepChange;
-    this.showCurrentStep();
+  showCurrentStep() {
+    this.steps.forEach((step, index) => {
+      step.style.display = index === this.currentStepIndex ? 'block' : 'none';
+    });
   }
 
   static init() {
@@ -639,9 +612,7 @@ class FormValidator {
 const fieldLimits = {
   'montantSouhaite': { min: 200, max: 999999999 },
   'dureeRemboursement': { min: 1, max: 12 },
-  // Ajoutez d'autres champs ici
 };
-
 
 function applyFieldLimits() {
   for (const [fieldId, limits] of Object.entries(fieldLimits)) {

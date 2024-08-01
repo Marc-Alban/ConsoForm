@@ -28,7 +28,7 @@
 
 
 .hidden {
-    display: none !important;
+    display: none;
 }
 
 .nbClass input[type="text"]::-webkit-inner-spin-button,

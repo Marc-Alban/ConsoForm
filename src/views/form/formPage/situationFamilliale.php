@@ -21,7 +21,7 @@
           <option value="union">Union libre</option>
           <option value="instance-divorce" data-type="instance">En instance de divorce</option>
         </select>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-situationFamiliale">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-situationFamiliale">
           <p>Veuillez choisir parmi les champs proposés</p>
         </div>
 
@@ -34,7 +34,7 @@
           <input type="text" id="dateDivorce" name="dateDivorce" class="form-control date-input form-input col-12" placeholder="JJ/MM/AAAA" data-type="dateFr">
           <span class="input-group-text"><i class="fa fa-calendar"></i></span>
         </div>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-dateDivorce">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateDivorce">
           <p>Veuillez mettre une date</p>
         </div>
       </div>
@@ -45,7 +45,7 @@
         <div class="input-group">
           <input class="numberstyle form-input text-center" id="nbEnfant" type="text" inputmode="numeric" pattern="[0-9]*" min="0" max="100" step="1" value="0" name="nbEnfant" data-type="integer">
         </div>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-nbEnfant">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-nbEnfant">
           <p>Ce champ doit être supérieur à zéro</p>
         </div>
       </div>

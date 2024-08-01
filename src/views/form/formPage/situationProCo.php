@@ -23,7 +23,7 @@
                   <option value="liberales">Professions libérales</option>
                   <option value="retraites">Retraités ou autres</option>
                 </select>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-secteurActiviteCo">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-secteurActiviteCo">
                   <p>Veuillez choisir parmi les champs proposés</p>
                 </div>
               </div>
@@ -38,7 +38,7 @@
                 <select id="statutCo" name="statutCo" class="form-select situationStatut form-input col-12" data-type="select">
                   <option value="">Sélectionner</option>
                 </select>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-statutCo">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-statutCo">
                   <p>Veuillez choisir parmi les champs proposés</p>
                 </div>
               </div>
@@ -51,7 +51,7 @@
               <label for="professionCo" class="col-12 col-md-4 fw-bold text-start">Sa profession :</label>
               <div class="select2-selection--single col-12 col-md-8">
                 <input type="text" id="professionCo" name="professionCo" class="form-control form-input col-12" placeholder="Champs à remplir"  required>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-professionCo">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-professionCo">
                   <p>Veuillez remplir ce champ</p>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                 <select id="typeContratCo" name="typeContratCo" class="form-select situationContrat form-input col-12" data-type="select">
                   <option value="">Sélectionner</option>
                 </select>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-typeContratCo">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-typeContratCo">
                   <p>Veuillez choisir parmi les champs proposés</p>
                 </div>
               </div>
@@ -82,7 +82,7 @@
                   <input type="text" id="dateDebutCo" name="dateDebutCo" placeholder="JJ/MM/AAAA" class="form-control date-input form-input col-12" data-type="dateFr" required>
                   <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                 </div>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-dateDebutCo">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateDebutCo">
                   <p>Veuillez remplir ce champ</p>
                 </div>
               </div>

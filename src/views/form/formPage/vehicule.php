@@ -18,7 +18,7 @@
                     <option value="moto">Moto</option>
                     <option value="autre">Autre</option>
                 </select>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-typeVehicule">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-typeVehicule">
                     <p>Veuillez choisir parmi les champs proposés</p>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <option value="occasion_moins_2_ans">Occasion de moins de 2 ans</option>
                     <option value="occasion_plus_2_ans">Occasion de plus de 2 ans</option>
                 </select>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-etatVehicule">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-etatVehicule">
                     <p>Veuillez choisir parmi les champs proposés</p>
                 </div>
             </div>

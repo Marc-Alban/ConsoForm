@@ -18,7 +18,7 @@
         <span class="btn btn-form" data-category="Non">NON</span>
       </label>
     </div>
-    <div class="col-12 error-container d-none text-start mt-3" id="error-credits">
+    <div class="col-12 error-container text-start mt-3" style="display:none" id="error-credits">
       <p>Veuillez choisir un de ces champs</p>
     </div>
   </div>

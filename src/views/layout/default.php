@@ -206,7 +206,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <script src="asset/js/btnMoreAndLess.js"></script>
     <script src="asset/js/dateFormat.js"></script>
     <script src="asset/js/changeStep.js"></script>
-    <!--<script src="asset/js/saveForm.js"></script>-->
+    <script src="asset/js/saveForm.js"></script>
     <script src="asset/js/formValidator.js" defer></script>
 
     <!-- Script pour auto-complétion des adresses -->
@@ -314,39 +314,56 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    zipCodeInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        fetchAddressData(query, updateResultsList, resultsList);
-    });
+    if (zipCodeInput) {
+        zipCodeInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            fetchAddressData(query, updateResultsList, resultsList);
+        });
+    }
 
-    cityInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        fetchAddressData(query, updateResultsList, resultsList);
-    });
+    if (cityInput) {
+        cityInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            fetchAddressData(query, updateResultsList, resultsList);
+        });
+    }
 
-    cityNaissanceInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        fetchAddressData(query, updateResultsList, resultsListNaissance);
-    });
+    if (cityNaissanceInput) {
+        cityNaissanceInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            fetchAddressData(query, updateResultsList, resultsListNaissance);
+        });
+    }
 
-    cityNaissanceCoInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        fetchAddressData(query, updateResultsList, resultsListNaissanceCo);
-    });
+    if (cityNaissanceCoInput) {
+        cityNaissanceCoInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            fetchAddressData(query, updateResultsList, resultsListNaissanceCo);
+        });
+    }
 
     document.addEventListener('click', function(e) {
-        if (!resultsList.contains(e.target) && !cityInput.contains(e.target) && !zipCodeInput.contains(e.target) &&
-            !resultsListNaissance.contains(e.target) && !cityNaissanceInput.contains(e.target) &&
-            !resultsListNaissanceCo.contains(e.target) && !cityNaissanceCoInput.contains(e.target)) {
-            resultsList.innerHTML = '';
-            resultsList.style.display = 'none';
-            resultsListNaissance.innerHTML = '';
-            resultsListNaissance.style.display = 'none';
-            resultsListNaissanceCo.innerHTML = '';
-            resultsListNaissanceCo.style.display = 'none';
+        if (resultsList && !resultsList.contains(e.target) && cityInput && !cityInput.contains(e.target) && zipCodeInput && !zipCodeInput.contains(e.target) &&
+            resultsListNaissance && !resultsListNaissance.contains(e.target) && cityNaissanceInput && !cityNaissanceInput.contains(e.target) &&
+            resultsListNaissanceCo && !resultsListNaissanceCo.contains(e.target) && cityNaissanceCoInput && !cityNaissanceCoInput.contains(e.target)) {
+            if (resultsList) {
+                resultsList.innerHTML = '';
+                resultsList.style.display = 'none';
+            }
+            if (resultsListNaissance) {
+                resultsListNaissance.innerHTML = '';
+                resultsListNaissance.style.display = 'none';
+            }
+            if (resultsListNaissanceCo) {
+                resultsListNaissanceCo.innerHTML = '';
+                resultsListNaissanceCo.style.display = 'none';
+            }
         }
     });
 });
+
+</script>
+
 </script>
 
 

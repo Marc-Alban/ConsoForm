@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="col-12 error-container d-none text-start mt-3" id="error-logement">
+            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-logement">
                 <p>Veuillez choisir un de ces champs</p>
             </div>
             <!-- Date d'occupation du logement -->
@@ -34,7 +34,7 @@
                 <label for="dateOccupation" class="col-12 col-md-4 fw-bold text-start">J'occupe mon logement depuis :</label>
                 <div class="col-12 col-md-4">
                     <input class="form-input text-center" type="text" inputmode="numeric" pattern="[0-9]*" min="1900" max="2100" step="1" placeholder="Ex : 2021" name="dateOccupation" id="dateOccupation" data-type="dateFour">
-                    <div class="col-12 error-container d-none text-start mt-3" id="error-dateOccupation">
+                    <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateOccupation">
                         <p>Veuillez renseigner l'année d'occupation (ex : 2021)</p>
                     </div>
                 </div>

@@ -18,7 +18,7 @@
                 <input type="text" inputmode="numeric" pattern="[0-9]*" id="revenusCo" name="revenusCo" class="form-control input-number form-input col-11 mask" placeholder='Ex : 3 000' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-revenusCo">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-revenusCo">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>

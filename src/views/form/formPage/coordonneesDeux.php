@@ -16,7 +16,7 @@
                         <label for="adresse1" class="col-12 col-md-3 fw-bold text-start">Adresse :</label>
                         <div class="col-12 col-md-9">
                             <input type="text" id="adresse1" name="adresse1" class="form-input col-12" placeholder='Ex : 5 rue de Victoire' data-type="string">
-                            <div class="col-12 error-container d-none text-start mt-3" id="error-adresse1">
+                            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-adresse1">
                                 <p>Veuillez remplir ce champs</p>
                             </div>
                         </div>
@@ -26,14 +26,14 @@
                         <label for="codePostal" class="col-12 col-md-3 fw-bold text-start">Code postal :</label>
                         <div class="col-12 col-md-3">
                             <input type="text" inputmode="numeric" pattern="[0-9]*" id="codePostal" name="codePostal" class="form-input col-12" placeholder='Ex : 75001' data-type="integer">
-                            <div class="col-12 error-container d-none text-start mt-3" id="error-codePostal">
+                            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-codePostal">
                                 <p>Veuillez remplir ce champs</p>
                             </div>
                         </div>
                         <label for="ville" class="col-12 col-md-2 fw-bold text-start">Ville :</label>
                         <div class="col-12 col-md-4">
                             <input type="text" id="ville" name="ville" class="form-input col-12" placeholder='Ex : Paris' data-type="string">
-                            <div class="col-12 error-container d-none text-start mt-3" id="error-ville">
+                            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-ville">
                                 <p>Veuillez remplir ce champs</p>
                             </div>
                             <!-- Liste des résultats pour l'auto-complétion -->
@@ -46,7 +46,7 @@
                         <label for="telephone" class="col-12 col-md-3 fw-bold text-start">Téléphone :</label>
                         <div class="col-12 col-md-9">
                             <input type="tel" id="telephone" name="telephone" class="form-input input-tel col-12" placeholder='Ex : 06 12 34 45 67' data-type="phone">
-                            <div class="col-12 error-container d-none text-start mt-3" id="error-telephone">
+                            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-telephone">
                                 <p>Veuillez remplir ce champs</p>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         <label for="email" class="col-12 col-md-3 fw-bold text-start">Email :</label>
                         <div class="col-12 col-md-9">
                             <input type="email" id="email" name="email" class="form-input input-email col-12" placeholder='Ex : olivier123@gmail.com' data-type="mail">
-                            <div class="col-12 error-container d-none text-start mt-3" id="error-email">
+                            <div class="col-12 error-container text-start mt-3" style="display:none" id="error-email">
                                 <p>Veuillez mettre un email valide</p>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                 <label class="form-check-label condtion-label col-11 cgv-text" for="cgv">
                                     J'accepte que les informations transmises soient utilisées par Solutis et ses partenaires dans le cadre d'une demande de financement et de la relation commerciale qui peut en découler *
                                 </label>
-                                <div class="col-12 error-container d-none text-start mt-3" id="error-cgv">
+                                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-cgv">
                                     <p>Veuillez cocher cette case</p>
                                 </div>
                             </div>

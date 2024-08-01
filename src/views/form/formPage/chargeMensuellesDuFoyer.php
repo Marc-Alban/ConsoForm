@@ -14,7 +14,7 @@
           <input type="text" inputmode="numeric" pattern="[0-9]*" id="mensualitesConso" name="mensualitesConso" class="form-control input-number form-input col-12" placeholder='Ex : 500' data-type="integer">
           <span class="input-group-text">€/mois</span>
         </div>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-mensualitesConso">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-mensualitesConso">
           <p>Veuillez remplir ce champ</p>
         </div>
       </div>
@@ -26,7 +26,7 @@
           <input type="text" inputmode="numeric" pattern="[0-9]*" id="restantConso" name="restantConso" class="form-control  input-number form-input col-12" placeholder='Ex : 5000' data-type="integer">
           <span class="input-group-text">€</span>
         </div>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-restantConso">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-restantConso">
           <p>Veuillez remplir ce champ</p>
         </div>
       </div>
@@ -38,7 +38,7 @@
           <input type="text" inputmode="numeric" pattern="[0-9]*" id="mensualitesImmo" name="mensualitesImmo" class="form-control input-number form-input col-12" placeholder='Ex : 1000' data-type="integer">
           <span class="input-group-text">€/mois</span>
         </div>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-mensualitesImmo">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-mensualitesImmo">
           <p>Veuillez remplir ce champ</p>
         </div>
       </div>
@@ -50,7 +50,7 @@
           <input type="text" inputmode="numeric" pattern="[0-9]*" id="restantImmo" name="restantImmo" class="form-control input-number form-input col-12" placeholder='Ex : 100000' data-type="integer">
           <span class="input-group-text">€</span>
         </div>
-        <div class="col-12 error-container d-none text-start mt-3" id="error-restantImmo">
+        <div class="col-12 error-container text-start mt-3" style="display:none" id="error-restantImmo">
           <p>Veuillez remplir ce champ</p>
         </div>
       </div>

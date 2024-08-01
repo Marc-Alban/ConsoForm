@@ -59,7 +59,5 @@
         </div>
     </div>
 </div>
-
-<script src="/asset/js/saveForm.js"></script>
 </body>
 </html>

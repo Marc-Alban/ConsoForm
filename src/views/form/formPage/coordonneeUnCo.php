@@ -24,7 +24,7 @@
                   <label for="civilite_mme" class="btn btn-form">Madame</label>
                 </div>
               </div>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-civilite">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-civilite">
                 <p>Veuillez choisir un de ces champs</p>
               </div>
             </div>
@@ -34,7 +34,7 @@
             <label for="nom" class="col-12 col-md-4 fw-bold text-start">Nom :</label>
             <div class="col-12 col-md-8">
               <input type="text" id="nom" name="nom" class="form-control form-input col-11" placeholder='Ex : Durant' data-type="string">
-              <div class="col-12 error-container d-none text-start mt-3" id="error-nom">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-nom">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>
@@ -44,7 +44,7 @@
             <label for="nomNaissance" class="col-12 col-md-4 fw-bold text-start">Nom de naissance :</label>
             <div class="col-12 col-md-8">
               <input type="text" id="nomNaissance" name="nomNaissance" class="form-control form-input col-11" placeholder='Facultatif' data-type="string">
-              <div class="col-12 error-container d-none text-start mt-3" id="error-nomNaissance">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-nomNaissance">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>
@@ -54,7 +54,7 @@
             <label for="prenom" class="col-12 col-md-4 fw-bold text-start">Prénom :</label>
             <div class="col-12 col-md-8">
               <input type="text" id="prenom" name="prenom" class="form-control form-input col-11" placeholder='Ex : Sophie' data-type="string">
-              <div class="col-12 error-container d-none text-start mt-3" id="error-prenom">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-prenom">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>
@@ -67,7 +67,7 @@
                 <input type="text" id="dateNaissance" name="dateNaissance" class="form-control form-input col-11 input-group2 date-input" placeholder="JJ/MM/AAAA" data-type="dateFr">
                 <span class="calendar-icon"><i class="fa-solid fa-calendar"></i></span>
               </div>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-dateNaissance">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateNaissance">
                 <p>Veuillez saisir une date valide</p>
               </div>
             </div>
@@ -77,7 +77,7 @@
             <label for="villeNaissance" class="col-12 col-md-4 fw-bold text-start">Ville de naissance :</label>
             <div class="col-12 col-md-8">
               <input type="text" id="villeNaissance" name="villeNaissance" class="form-control form-input col-11" placeholder='Ex : Paris' data-type="string">
-              <div class="col-12 error-container d-none text-start mt-3" id="error-villeNaissance">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-villeNaissance">
                 <p>Veuillez remplir ce champ</p>
               </div>
               <!-- Liste des résultats pour l'auto-complétion -->
@@ -92,7 +92,7 @@
                 <option value="" disabled selected>France</option>
                 <!-- Les options seront ajoutées ici par JavaScript -->
               </select>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-paysNaissance">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-paysNaissance">
                 <p>Veuillez choisir un pays</p>
               </div>
             </div>

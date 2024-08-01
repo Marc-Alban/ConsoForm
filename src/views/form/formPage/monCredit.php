@@ -14,7 +14,7 @@
                     <input type="text" inputmode="numeric" pattern="[0-9]*" id="montantSouhaite" name="montantSouhaite" class="form-control input-number form-input col-12" placeholder="Ex : 12 000" data-type="integer">
                     <span class="input-group-text">€</span>
                 </div>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-montantSouhaite">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-montantSouhaite">
                     <p>Veuillez mettre un chiffre entre 0 et 1 millions</p>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     <input type="text" inputmode="numeric" pattern="[0-9]*" id="dureeRemboursement" name="dureeRemboursement" class="form-control  input-number form-input col-12" placeholder="Ex : 8" data-type="dateTwo">
                     <span class="input-group-text">ans</span>
                 </div>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-dureeRemboursement">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dureeRemboursement">
                     <p>Veuillez mettre un nombre d'année entre 1 an et 12 ans</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <option value="delai_un_mois">Dans un délai d'un mois</option>
                     <option value="delai_superieur_un_mois">Dans un délai supérieur à un mois</option>
                 </select>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-obtenirFonds">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-obtenirFonds">
                     <p>Veuillez choisir parmi les champs proposés</p>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <option value="garanties_completes">Je souscris les garanties décès, invalidité, arrêt de travail et perte d'emploi</option>
                     <option value="refuse_assurance">Je refuse l'assurance proposée</option>
                 </select>
-                <div class="col-12 error-container d-none text-start mt-3" id="error-assurancePret">
+                <div class="col-12 error-container text-start mt-3" style="display:none" id="error-assurancePret">
                     <p>Veuillez choisir parmi les champs proposés</p>
                 </div>
             </div>

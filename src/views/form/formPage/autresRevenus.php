@@ -18,7 +18,7 @@
                 <input type="text" inputmode="numeric" pattern="[0-9]*" id="revenusLocatifs" name="revenusLocatifs" class="form-control input-number form-input col-11 mask" placeholder='Ex : 800' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-revenusLocatifs">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-revenusLocatifs">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>
@@ -37,7 +37,7 @@
                 <input type="text" inputmode="numeric" pattern="[0-9]*" id="autresRevenusFoyer" name="autresRevenusFoyer" class="form-control input-number form-input col-11 mask" placeholder='Ex : 100' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-autresRevenusFoyer">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-autresRevenusFoyer">
               <p>Veuillez remplir ce champ</p>
               </div>
             </div>
@@ -56,7 +56,7 @@
                 <input type="text" inputmode="numeric" pattern="[0-9]*" id="allocationsFoyer" name="allocationsFoyer" class="form-control input-number form-input col-11 mask" placeholder='Ex : 100' data-type="integer">
                 <span class="input-group-text">€/mois</span>
               </div>
-              <div class="col-12 error-container d-none text-start mt-3" id="error-allocationsFoyer">
+              <div class="col-12 error-container text-start mt-3" style="display:none" id="error-allocationsFoyer">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>

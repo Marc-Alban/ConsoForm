@@ -17,11 +17,6 @@ $(document).ready(function() {
   });
 });
 
-
-
-
-
-
 const options = {
   'prive': {
     statut: { show: true },
@@ -66,6 +61,7 @@ const contrats = {
   'public': ['CDI', 'CDI (période d\'essai non terminée)', 'CDD', 'Stage', 'Intérim', 'Autres'],
   'agricole': ['CDI', 'CDI (période d\'essai non terminée)', 'CDD', 'Stage', 'Intérim', 'Autres']
 };
+
 class FormValidator {
   constructor(stepsSelector, nextButtonSelector, prevButtonSelector, summarySelector) {
     this.steps = document.querySelectorAll(stepsSelector);
@@ -81,7 +77,6 @@ class FormValidator {
   }
 
   setupEventListeners() {
-    // Configurer les écouteurs d'événements pour l'emprunteur principal
     document.getElementById('secteurActivite').addEventListener('change', (event) => {
       this.changeSelect(event.target.value, document.getElementById('statut'));
       this.updateOptions();
@@ -94,7 +89,6 @@ class FormValidator {
       this.hideError(event.target);
     });
 
-    // Configurer les écouteurs d'événements pour le co-emprunteur
     document.getElementById('secteurActiviteCo').addEventListener('change', (event) => {
       this.changeSelectCo(event.target.value, document.getElementById('statutCo'));
       this.updateOptionsCo();
@@ -138,16 +132,25 @@ class FormValidator {
     this.nextButtons.forEach(button => {
       button.addEventListener('click', (event) => {
         this.nextClicked = true;
-        const stepIsValid = this.validateStep(this.currentStepIndex);
-        if (!stepIsValid) {
-          event.preventDefault();
-          this.showErrorsForCurrentStep();
+        if (this.currentStepIndex === 0) {
+          const isStepValid = this.validateFirstStep();
+          if (!isStepValid) {
+            event.preventDefault();
+            this.showErrorsForCurrentStep();
+            return;
+          }
         } else {
-          this.nextClicked = false;
-          this.saveStepData(this.currentStepIndex);
-          this.currentStepIndex++;
-          this.showCurrentStep();
+          const isStepValid = this.validateStep(this.currentStepIndex);
+          if (!isStepValid) {
+            event.preventDefault();
+            this.showErrorsForCurrentStep();
+            return;
+          }
         }
+        this.nextClicked = false;
+        this.saveStepData(this.currentStepIndex);
+        this.currentStepIndex++;
+        this.showCurrentStep();
       });
     });
 
@@ -160,6 +163,30 @@ class FormValidator {
         }
       });
     });
+
+    // Custom event listener for the first step radio buttons
+    const radioButtons = document.querySelectorAll('.hidden-input');
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', () => {
+        const errorContainerProjet = document.getElementById('error-projet');
+        if (radio.checked) {
+          errorContainerProjet.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  validateFirstStep() {
+    const radioButtons = document.querySelectorAll('.hidden-input');
+    const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
+    const errorContainerProjet = document.getElementById('error-projet');
+
+    if (!isAnyRadioChecked) {
+      errorContainerProjet.style.display = 'block';
+    } else {
+      errorContainerProjet.style.display = 'none';
+    }
+    return isAnyRadioChecked;
   }
 
   formatNumberWithSpaces(number) {
@@ -192,7 +219,7 @@ class FormValidator {
         numberInput.style.opacity = '0';
         numberInput.style.position = 'absolute';
 
-        textInput.setAttribute('id','clone-'+numberInput.name)
+        textInput.setAttribute('id', 'clone-' + numberInput.name);
 
         numberInput.parentNode.insertBefore(textInput, numberInput.nextSibling);
         this.synchronizeValues(textInput, numberInput);
@@ -450,20 +477,18 @@ class FormValidator {
   }
 
   validateField(field) {
-    
-    // Vérifier si le champ est visible; s'il ne l'est pas, il est considéré comme valide par défaut.
     if (!this.isVisible(field)) {
       return true;
     }
 
-    let isValid = true;  // Présume que le champ est valide
-    const value = field.value.trim();  // Nettoie les espaces avant et après la valeur
+    let isValid = true;  // Assume the field is valid
+    const value = field.value.trim();  // Trim whitespace from value
 
-    // Validation obligatoire
+    // Required field validation
     if (field.hasAttribute("required") && value === "") {
-      isValid = false;  // Marque le champ comme invalide si requis et vide
+      isValid = false;  // Mark the field as invalid if required and empty
     } else {
-      // Validation selon le type de données spécifié dans data-type
+      // Validation based on the data-type attribute
       switch (field.dataset.type) {
         case 'email':
           isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -507,12 +532,10 @@ class FormValidator {
           isValid = field.value.length >= stringMinLength && field.value.length <= stringMaxLength && /^[a-zA-Z\s]*$/.test(field.value);
           break;
         default:
-          // Pas de validation spécifique si le type n'est pas reconnu
           break;
       }
     }
 
-    // Gérer l'affichage des erreurs selon que le bouton Suivant a été cliqué ou non
     if (this.nextClicked) {
       if (isValid) {
         this.hideError(field);
@@ -522,8 +545,6 @@ class FormValidator {
     } else {
       this.hideError(field);
     }
-
-    console.log(isValid)
 
     return isValid;
   }
@@ -560,7 +581,6 @@ class FormValidator {
     }
     let isValid = true;
     const fields = step.querySelectorAll("input, select, textarea");
-    console.log(fields);
     fields.forEach((field) => {
       if (this.isVisible(field) && !this.validateField(field)) {
         isValid = false;
@@ -628,3 +648,5 @@ document.addEventListener("DOMContentLoaded", () => {
   applyFieldLimits();
   FormValidator.init();
 });
+
+

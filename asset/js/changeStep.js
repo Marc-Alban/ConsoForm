@@ -59,10 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     fields.forEach(field => {
       if (!formValidator.validateField(field)) {
-        field.classList.add('error-border'); // Add red border for error
+        field.classList.add('error-border'); 
         let errorContainer = document.getElementById(`error-${field.name}`);
         if (errorContainer && errorContainer.classList.contains('error-container')) {
-          errorContainer.style.display = 'block'; // Show error message
+          errorContainer.style.display = 'block'; 
         }
       }
     });
@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const fields = step.querySelectorAll("input, select, textarea");
 
     fields.forEach(field => {
-      field.classList.remove('error-border'); // Remove red border
+      field.classList.remove('error-border'); 
       const errorContainer = document.getElementById(`error-${field.name}`);
       if (errorContainer && errorContainer.classList.contains('error-container')) {
-        errorContainer.style.display = 'none'; // Hide error message
+        errorContainer.style.display = 'none'; 
       }
     });
   }
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
     let potentialNextStep = window.currentStep + stepDelta;
 
-    // Skip step 12-content if going back and the user has selected "Non"
+    
     if (stepDelta < 0 && window.currentStep === 13 && hasSelectedNon) {
         potentialNextStep -= 1;
     }

@@ -1,19 +1,19 @@
 $(document).ready(function() {
   $('.input-number').on('input', function(e) {
-    var input = $(this).val().replace(/[^\d]/g, ''); // Remove all non-numeric characters
-    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // Add space as thousand separator
+    var input = $(this).val().replace(/[^\d]/g, ''); 
+    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); 
 
     $(this).val(formatted);
 
-    var valid = /^\d+( \d{3})*$/.test(formatted); // Check if input contains only digits and spaces in correct format
-    var isZero = (input === '0'); // Check if the input value is 0
-    var name = $(this).attr('name'); // Get the name attribute of the input
+    var valid = /^\d+( \d{3})*$/.test(formatted); 
+    var isZero = (input === '0'); 
+    var name = $(this).attr('name'); 
 
-    var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); // Remove brackets from the name
+    var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); 
     var errorId = '#error-' + nameWithoutBrackets;
     var $inputGroupText = $(this).siblings('.input-group-text');
 
-    // Display error if the value is not valid
+    
     if (!valid || isZero) {
       $(errorId).show();
     } else {
@@ -169,7 +169,6 @@ class FormValidator {
       });
     });
 
-    // Custom event listener for the first step radio buttons
     const radioButtons = document.querySelectorAll('.hidden-input');
     radioButtons.forEach(radio => {
       radio.addEventListener('change', () => {
@@ -241,7 +240,6 @@ class FormValidator {
   }
 
   selectContart(choix, key, select2) {
-    // Ajouter l'option "Sélectionner" par défaut
     select2.innerHTML = '<option value="">Sélectionner</option>';
     for (let i = 0; i < choix.length; i++) {
       let opt = document.createElement('option');
@@ -460,7 +458,7 @@ class FormValidator {
 
     if(field.classList.contains('input-number')){
       let name = $(field).attr('name');
-      $('#clone-' + name).addClass('error-form'); // Hide the error message
+      $('#clone-' + name).addClass('error-form'); 
     }
 
     if (errorContainer) {
@@ -485,14 +483,12 @@ class FormValidator {
       return true;
     }
 
-    let isValid = true;  // Assume the field is valid
-    const value = field.value.trim();  // Trim whitespace from value
+    let isValid = true;  
+    const value = field.value.trim(); 
 
-    // Required field validation
     if (field.hasAttribute("required") && value === "") {
-      isValid = false;  // Mark the field as invalid if required and empty
+      isValid = false;  
     } else {
-      // Validation based on the data-type attribute
       switch (field.dataset.type) {
         case 'email':
           isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);

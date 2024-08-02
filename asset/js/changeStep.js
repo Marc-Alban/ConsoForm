@@ -43,8 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActiveStep();
   }
   
-  
-  
   function validateVisibleFields() {
     const isValid = formValidator.validateStep(window.currentStep);
     if (!isValid) {
@@ -58,38 +56,30 @@ document.addEventListener('DOMContentLoaded', function() {
   function displayErrorsForCurrentStep() {
     const step = steps[window.currentStep];
     const fields = step.querySelectorAll("input, select, textarea");
-  
+
     fields.forEach(field => {
       if (!formValidator.validateField(field)) {
-        field.classList.add('error-border'); // Ajouter une bordure rouge en cas d'erreur
+        field.classList.add('error-border'); // Add red border for error
         let errorContainer = document.getElementById(`error-${field.name}`);
         if (errorContainer && errorContainer.classList.contains('error-container')) {
-          errorContainer.style.display = 'block'; // Afficher le message d'erreur
+          errorContainer.style.display = 'block'; // Show error message
         }
       }
     });
   }
-  
-  
 
-function clearErrorsForCurrentStep() {
-  const step = steps[window.currentStep];
-  const fields = step.querySelectorAll("input, select, textarea");
+  function clearErrorsForCurrentStep() {
+    const step = steps[window.currentStep];
+    const fields = step.querySelectorAll("input, select, textarea");
 
-  fields.forEach(field => {
-    field.classList.remove('error-border'); // Retirer la bordure rouge en cas de correction
-    const errorContainer = document.getElementById(`error-${field.name}`);
-    if (errorContainer && errorContainer.classList.contains('error-container')) {
-      errorContainer.style.display = 'none'; // Masquer le message d'erreur
-    }
-  });
-}
-
-  
-  
-  
-  
-  
+    fields.forEach(field => {
+      field.classList.remove('error-border'); // Remove red border
+      const errorContainer = document.getElementById(`error-${field.name}`);
+      if (errorContainer && errorContainer.classList.contains('error-container')) {
+        errorContainer.style.display = 'none'; // Hide error message
+      }
+    });
+  }
 
   function goToStep(stepDelta) {
     if (!validateVisibleFields()) return;
@@ -292,8 +282,7 @@ function clearErrorsForCurrentStep() {
     situationFamilialeElement.addEventListener('change', function() {
       const selectedValue = this.value;
       hasCoBorrower = selectedValue === 'marie' || selectedValue === 'pacse' || selectedValue === 'union';
-      window.currentStep = hasCoBorrower ? 7 : window.currentStep; // assuming 7 is the correct step for co-borrower
-      showCurrentStep();
+      // Ne pas changer l'étape automatiquement
     });
   }
 

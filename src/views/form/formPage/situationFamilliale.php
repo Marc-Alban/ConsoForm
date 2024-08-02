@@ -39,6 +39,21 @@
         </div>
       </div>
 
+
+      <!-- Date de mariage -->
+    <label for="dateMariage" class="col-12 col-md-4 fw-bold text-start mt-4 d-none" id="dateMariageLabel">Date de mariage : <br><small class="smallLabel">(JJ/MM/AAAA)</small></label>
+    <div class="select2-selection--single col-12 col-md-8 mt-4 d-none" id="dateMariageContainer">
+      <div class="input-group">
+        <input type="text" id="dateMariage" name="dateMariage" class="form-control date-input form-input col-12" placeholder="JJ/MM/AAAA" data-type="dateFr">
+        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+      </div>
+      <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateMariage">
+        <p>Veuillez mettre une date</p>
+      </div>
+    </div>
+
+
+
       <!-- Enfants à charge -->
       <label for="nbEnfant" class="col-12 col-md-4 fw-bold text-start mt-4">Enfant(s) à charge :</label>
       <div class="select2-selection--single col-12 col-md-8 mt-4">
@@ -61,22 +76,33 @@
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Récupérer les éléments nécessaires
   const situationFamilialeSelect = document.getElementById('situationFamiliale');
   const dateDivorceLabel = document.getElementById('dateDivorceLabel');
   const dateDivorceContainer = document.getElementById('dateDivorceContainer');
+  const dateMariageLabel = document.getElementById('dateMariageLabel');
+  const dateMariageContainer = document.getElementById('dateMariageContainer');
 
-  // Fonction pour gérer l'affichage du champ date de divorce
+  // Fonction pour gérer l'affichage des champs en fonction de la situation familiale
   function handleSituationFamilialeChange() {
     const selectedValue = situationFamilialeSelect.value;
-    
+
     if (selectedValue === 'divorce') {
       dateDivorceLabel.classList.remove('d-none');
       dateDivorceContainer.classList.remove('d-none');
+      dateMariageLabel.classList.add('d-none');
+      dateMariageContainer.classList.add('d-none');
+    } else if (selectedValue === 'marie') {
+      dateMariageLabel.classList.remove('d-none');
+      dateMariageContainer.classList.remove('d-none');
+      dateDivorceLabel.classList.add('d-none');
+      dateDivorceContainer.classList.add('d-none');
     } else {
       dateDivorceLabel.classList.add('d-none');
       dateDivorceContainer.classList.add('d-none');
+      dateMariageLabel.classList.add('d-none');
+      dateMariageContainer.classList.add('d-none');
     }
   }
 

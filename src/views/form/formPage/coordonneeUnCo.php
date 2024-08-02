@@ -33,7 +33,7 @@
           <div class="row custom-margin">
             <label for="nom" class="col-12 col-md-4 fw-bold text-start">Nom :</label>
             <div class="col-12 col-md-8">
-              <input type="text" id="nom" name="nom" class="form-control form-input col-11" placeholder='Ex : Durant' data-type="string">
+              <input type="text" id="nom" name="nom" class="form-control form-input col-11" placeholder='Ex : Durant' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-nom">
                 <p>Veuillez remplir ce champ</p>
               </div>
@@ -43,7 +43,7 @@
           <div class="row custom-margin">
             <label for="nomNaissance" class="col-12 col-md-4 fw-bold text-start">Nom de naissance :</label>
             <div class="col-12 col-md-8">
-              <input type="text" id="nomNaissance" name="nomNaissance" class="form-control form-input col-11" placeholder='Facultatif' data-type="string">
+              <input type="text" id="nomNaissance" name="nomNaissance" class="form-control form-input col-11" placeholder='Facultatif' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-nomNaissance">
                 <p>Veuillez remplir ce champ</p>
               </div>
@@ -53,7 +53,7 @@
           <div class="row custom-margin">
             <label for="prenom" class="col-12 col-md-4 fw-bold text-start">Prénom :</label>
             <div class="col-12 col-md-8">
-              <input type="text" id="prenom" name="prenom" class="form-control form-input col-11" placeholder='Ex : Sophie' data-type="string">
+              <input type="text" id="prenom" name="prenom" class="form-control form-input col-11" placeholder='Ex : Sophie' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-prenom">
                 <p>Veuillez remplir ce champ</p>
               </div>
@@ -64,7 +64,7 @@
             <label for="dateNaissance" class="col-12 col-md-4 fw-bold text-start">Date de naissance (JJ/MM/AAAA) :</label>
             <div class="col-12 col-md-8">
               <div class="input-group">
-                <input type="text" id="dateNaissance" name="dateNaissance" class="form-control form-input col-11 input-group2 date-input" placeholder="JJ/MM/AAAA" data-type="dateFr">
+                <input type="text" id="dateNaissance" name="dateNaissance" class="form-control form-input col-11 input-group2 date-input" placeholder="JJ/MM/AAAA" data-type="dateFr" required>
                 <span class="calendar-icon"><i class="fa-solid fa-calendar"></i></span>
               </div>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateNaissance">
@@ -76,7 +76,7 @@
           <div class="row custom-margin">
             <label for="villeNaissance" class="col-12 col-md-4 fw-bold text-start">Ville de naissance :</label>
             <div class="col-12 col-md-8">
-              <input type="text" id="villeNaissance" name="villeNaissance" class="form-control form-input col-11" placeholder='Ex : Paris' data-type="string">
+              <input type="text" id="villeNaissance" name="villeNaissance" class="form-control form-input col-11" placeholder='Ex : Paris' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-villeNaissance">
                 <p>Veuillez remplir ce champ</p>
               </div>
@@ -88,7 +88,7 @@
           <div class="row custom-margin">
             <label for="paysNaissance" class="col-12 col-md-4 fw-bold text-start">Pays de naissance :</label>
             <div class="col-12 col-md-8">
-              <select id="paysNaissance" name="paysNaissance" class="form-select form-input col-11" data-type="select">
+              <select id="paysNaissance" name="paysNaissance" class="form-select form-input col-11" data-type="select" required>
                 <option value="" disabled selected>France</option>
                 <!-- Les options seront ajoutées ici par JavaScript -->
               </select>

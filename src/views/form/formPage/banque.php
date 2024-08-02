@@ -10,7 +10,7 @@
       <!-- Ma banque principale -->
       <label for="maBanque" class="col-12 col-md-4 fw-bold text-start">Ma banque principale :</label>
       <div class="select2-selection--single col-12 col-md-8">
-        <select id="maBanque" name="maBanque" class="form-select form-input col-12" data-type="select">
+        <select id="maBanque" name="maBanque" class="form-select form-input col-12" data-type="select" required>
           <option value="" disabled selected>Sélectionner</option>
           <option value="Banque populaire">Banque populaire</option>
           <option value="BNP Paribas">BNP Paribas</option>
@@ -34,7 +34,7 @@
       <!-- Année d'ouverture -->
       <label for="anneeOuverture" class="col-12 col-md-4 fw-bold text-start mt-4">Année d'ouverture :</label>
       <div class="select2-selection--single col-12 col-md-6 mt-4">
-        <input type="text" id="anneeOuverture" name="anneeOuverture" class="input-number form-control form-input col-12" placeholder="Ex : 2020" >
+        <input type="text" id="anneeOuverture" name="anneeOuverture" class="input-number form-control form-input col-12" placeholder="Ex : 2020" required >
         <div class="col-12 error-container text-start mt-3" style="display:none" id="error-anneeOuverture">
           <p>Veuillez remplir ce champ</p>
         </div>
@@ -43,7 +43,7 @@
       <!-- Mon niveau de connaissance dans le crédit -->
       <label for="niveauConnaissance" class="col-12 col-md-4 fw-bold text-start mt-4">Mon niveau de connaissance dans le crédit :</label>
       <div class="select2-selection--single col-12 col-md-8 mt-4">
-        <select id="niveauConnaissance" name="niveauConnaissance" class="form-select form-input col-12" data-type="select">
+        <select id="niveauConnaissance" name="niveauConnaissance" class="form-select form-input col-12" data-type="select" required>
           <option value="" disabled selected>Sélectionner</option>
           <option value="Débutant">Débutant</option>
           <option value="Intermédiaire">Intermédiaire</option>

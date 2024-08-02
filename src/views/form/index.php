@@ -34,10 +34,10 @@
                 <div class="form-wrapper">
                     <form id="myForm" method="POST" autocomplete="off" class="consumer_credit_steps" accept-charset="UTF-8">
                         <!-- Contenu du formulaire -->
-                        <?php include 'formPage/projet.php'; ?>
-                        <?php include 'formPage/vehicule.php'; ?>
-                        <?php include 'formPage/natureTravaux.php'; ?>
-                        <?php include 'formPage/monCredit.php'; ?>
+                        <?php include 'formPage/projet.php'; ?> <!-- etape projet -->
+                        <?php include 'formPage/vehicule.php'; ?> <!-- etape vehicule -->
+                        <?php include 'formPage/natureTravaux.php'; ?> <!-- etape travaux -->
+                        <?php include 'formPage/monCredit.php'; ?> <!-- etape credit -->
                         <?php include 'formPage/situationPatrimoniale.php'; ?>
                         <?php include 'formPage/situationFamilliale.php'; ?>
                         <?php include 'formPage/situationPro.php'; ?>

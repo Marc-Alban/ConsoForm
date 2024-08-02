@@ -1,19 +1,24 @@
 $(document).ready(function() {
   $('.input-number').on('input', function(e) {
-      var input = $(this).val().replace(/[^\d]/g, ''); // Remove all non-numeric characters
-      var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // Add space as thousand separator
-  
-      $(this).val(formatted);
-  
-      var valid = /^\d+( \d{3})*$/.test(formatted); // Check if input contains only digits and spaces in correct format
-      var isZero = (input === '0'); // Check if the input value is 0
-      var name = $(this).attr('name'); // Get the name attribute of the input
-  
-      var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); // Remove brackets from the name
-      var errorId = '#error-' + nameWithoutBrackets;
-      var $inputGroupText = $(this).siblings('.input-group-text');
+    var input = $(this).val().replace(/[^\d]/g, ''); // Remove all non-numeric characters
+    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // Add space as thousand separator
 
-    
+    $(this).val(formatted);
+
+    var valid = /^\d+( \d{3})*$/.test(formatted); // Check if input contains only digits and spaces in correct format
+    var isZero = (input === '0'); // Check if the input value is 0
+    var name = $(this).attr('name'); // Get the name attribute of the input
+
+    var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); // Remove brackets from the name
+    var errorId = '#error-' + nameWithoutBrackets;
+    var $inputGroupText = $(this).siblings('.input-group-text');
+
+    // Display error if the value is not valid
+    if (!valid || isZero) {
+      $(errorId).show();
+    } else {
+      $(errorId).hide();
+    }
   });
 });
 
@@ -236,9 +241,8 @@ class FormValidator {
   }
 
   selectContart(choix, key, select2) {
-    while (select2.options.length > 0) {
-      select2.remove(0);
-    }
+    // Ajouter l'option "Sélectionner" par défaut
+    select2.innerHTML = '<option value="">Sélectionner</option>';
     for (let i = 0; i < choix.length; i++) {
       let opt = document.createElement('option');
       opt.value = key[i];
@@ -648,5 +652,3 @@ document.addEventListener("DOMContentLoaded", () => {
   applyFieldLimits();
   FormValidator.init();
 });
-
-

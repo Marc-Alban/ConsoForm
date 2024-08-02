@@ -14,7 +14,7 @@
             <div class="row">
               <label for="secteurActiviteCo" class="col-12 col-md-4 fw-bold text-start">Secteur d'activité :</label>
               <div class="select2-selection--single col-12 col-md-8">
-                <select id="secteurActiviteCo" name="secteurActiviteCo" class="form-select situationProfession form-input col-12" data-type="select">
+                <select id="secteurActiviteCo" name="secteurActiviteCo" class="form-select situationProfession form-input col-12" data-type="select" required>
                   <option value="">Sélectionner</option>
                   <option value="public">Secteur public</option>
                   <option value="prive">Secteur privé</option>
@@ -35,7 +35,7 @@
             <div class="row">
               <label for="statutCo" class="col-12 col-md-4 fw-bold text-start">Son statut :</label>
               <div class="select2-selection--single col-12 col-md-8">
-                <select id="statutCo" name="statutCo" class="form-select situationStatut form-input col-12" data-type="select">
+                <select id="statutCo" name="statutCo" class="form-select situationStatut form-input col-12" data-type="select" required>
                   <option value="">Sélectionner</option>
                 </select>
                 <div class="col-12 error-container text-start mt-3" style="display:none" id="error-statutCo">
@@ -63,7 +63,7 @@
             <div class="row">
               <label for="typeContratCo" class="col-12 col-md-4 fw-bold text-start">Son contrat :</label>
               <div class="select2-selection--single col-12 col-md-8">
-                <select id="typeContratCo" name="typeContratCo" class="form-select situationContrat form-input col-12" data-type="select">
+                <select id="typeContratCo" name="typeContratCo" class="form-select situationContrat form-input col-12" data-type="select" required>
                   <option value="">Sélectionner</option>
                 </select>
                 <div class="col-12 error-container text-start mt-3" style="display:none" id="error-typeContratCo">

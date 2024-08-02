@@ -85,13 +85,19 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!validateVisibleFields()) return;
     let currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
     let potentialNextStep = window.currentStep + stepDelta;
+
+    // Skip step 12-content if going back and the user has selected "Non"
+    if (stepDelta < 0 && window.currentStep === 13 && hasSelectedNon) {
+        potentialNextStep -= 1;
+    }
+
     const maxStepIndex = currentStepsArray.length - 1;
     potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
     if (window.currentStep !== potentialNextStep) {
-      window.currentStep = potentialNextStep;
-      showCurrentStep();
+        window.currentStep = potentialNextStep;
+        showCurrentStep();
     }
-  }
+}
 
   function setStep(index) {
     let currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
@@ -282,7 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
     situationFamilialeElement.addEventListener('change', function() {
       const selectedValue = this.value;
       hasCoBorrower = selectedValue === 'marie' || selectedValue === 'pacse' || selectedValue === 'union';
-      // Ne pas changer l'étape automatiquement
     });
   }
 

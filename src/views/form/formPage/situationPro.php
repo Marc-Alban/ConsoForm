@@ -55,7 +55,7 @@
         <div id="typeContratContainer" class="col-12 row mb-3 d-none">
           <label for="typeContrat" class="col-md-4 fw-bold text-start mt-4">Mon contrat :</label>
           <div class="select2-selection--single col-md-8 mt-4">
-            <select id="typeContrat" name="typeContrat" class="form-select form-input col-12" data-type="select">
+            <select id="typeContrat" name="typeContrat" class="form-select form-input col-12" data-type="select" required>
               <option value="">Sélectionner</option>
             </select>
             <div class="col-12 error-container text-start mt-3" style="display:none" id="error-typeContrat">

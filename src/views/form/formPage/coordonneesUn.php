@@ -34,14 +34,14 @@
           <div class="row mb-3">
             <label for="nom" class="col-12 col-md-3 fw-bold text-start">Nom :</label>
             <div class="col-12 col-md-3">
-              <input type="text" id="nom" name="nom" class="form-input col-12" placeholder='Ex : DUPONT' data-type="string">
+              <input type="text" id="nom" name="nom" class="form-input col-12" placeholder='Ex : DUPONT' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-nom">
                 <p>Veuillez remplir ce champ</p>
               </div>
             </div>
-            <label for="nomNaissance" class="col-12 col-md-3 fw-bold text-start" style="">Nom de naissance : <br> <small class="smallLabel">Facultatif</small></label>
+            <label for="nomNaissance" class="col-12 col-md-3 fw-bold text-start">Nom de naissance : <br> <small class="smallLabel">Facultatif</small></label>
             <div class="col-12 col-md-3">
-              <input type="text" id="nomNaissance" name="nomNaissance" class="form-input col-12" placeholder='Ex : DUPONT' data-type="string">
+              <input type="text" id="nomNaissance" name="nomNaissance" class="form-input col-12" placeholder='Ex : DUPONT' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-nomNaissance">
                 <p>Veuillez remplir ce champ</p>
               </div>
@@ -51,7 +51,7 @@
           <div class="row mb-3">
             <label for="prenom" class="col-12 col-md-3 fw-bold text-start">Prénom :</label>
             <div class="col-12 col-md-8">
-              <input type="text" id="prenom" name="prenom" class="form-input col-12" placeholder='Ex : Olivier' data-type="string">
+              <input type="text" id="prenom" name="prenom" class="form-input col-12" placeholder='Ex : Olivier' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-prenom">
                 <p>Veuillez remplir ce champ</p>
               </div>
@@ -62,7 +62,7 @@
             <label for="dateNaissance" class="col-12 col-md-3 fw-bold text-start">Date de naissance: <br> <small class="smallLabel">(JJ/MM/AAAA)</small></label>
             <div class="col-12 col-md-8">
               <div class="input-group-date">
-                <input type="text" id="dateNaissance" name="dateNaissance" class="form-date-etat col-12 col-md-12 col-lg-11 date-input" placeholder="JJ/MM/AAAA" data-type="dateFr">
+                <input type="text" id="dateNaissance" name="dateNaissance" class="form-date-etat col-12 col-md-12 col-lg-11 date-input" placeholder="JJ/MM/AAAA" data-type="dateFr" required>
                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
               </div>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-dateNaissance">
@@ -74,7 +74,7 @@
           <div class="row mb-3">
             <label for="villeNaissance" class="col-12 col-md-3 fw-bold text-start">Ville de naissance :</label>
             <div class="col-12 col-md-3">
-              <input type="text" id="villeNaissance" name="villeNaissance" class="form-input col-12" placeholder='Ex : Paris' data-type="string">
+              <input type="text" id="villeNaissance" name="villeNaissance" class="form-input col-12" placeholder='Ex : Paris' data-type="string" required>
               <div class="col-12 error-container text-start mt-3" style="display:none" id="error-villeNaissance">
                 <p>Veuillez remplir ce champ</p>
               </div>
@@ -83,7 +83,7 @@
             </div>
             <label for="paysNaissance" class="col-12 col-md-3 fw-bold text-start" style="">Pays de naissance :</label>
             <div class="col-12 col-md-3">
-              <select id="paysNaissance" name="paysNaissance" class="form-select form-input" data-type="select"> 
+              <select id="paysNaissance" name="paysNaissance" class="form-select form-input" data-type="select" required> 
                 <option value="" disabled selected>Sélectionner</option>
                 <!-- Les options seront ajoutées ici par JavaScript -->
               </select>

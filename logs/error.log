@@ -198,3 +198,19 @@ Stack trace:
 [02-Aug-2024 14:49:02 Europe/Berlin] Handling default action (index)
 [02-Aug-2024 14:49:19 Europe/Berlin] Handling default action (index)
 [02-Aug-2024 15:29:06 Europe/Berlin] Handling default action (index)
+[02-Aug-2024 15:46:31 Europe/Berlin] Handling default action (index)
+[05-Aug-2024 08:26:12 Europe/Berlin] SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+[05-Aug-2024 08:26:12 Europe/Berlin] PHP Fatal error:  Uncaught Exception: Database connection error: SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\project\consoForm\app\Model.php:60
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\app\Model.php(26): App\Model->connect(Array)
+#1 C:\xampp\htdocs\project\consoForm\app\Model.php(12): App\Model->initializeDatabaseConnection()
+#2 C:\xampp\htdocs\project\consoForm\src\models\Lead.php(15): App\Model->__construct()
+#3 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(20): Models\Lead->__construct()
+#4 C:\xampp\htdocs\project\consoForm\index.php(49): Controllers\Form->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Model.php on line 60
+[05-Aug-2024 08:26:28 Europe/Berlin] Handling default action (index)
+[05-Aug-2024 09:14:49 Europe/Berlin] Handling default action (index)
+[05-Aug-2024 09:17:03 Europe/Berlin] Handling saveFormData action
+[05-Aug-2024 09:17:04 Europe/Berlin] Handling default action (index)
+[05-Aug-2024 09:28:03 Europe/Berlin] Handling default action (index)

@@ -1,19 +1,18 @@
-$(document).ready(function() {
-  $('.input-number').on('input', function(e) {
-    var input = $(this).val().replace(/[^\d]/g, ''); 
-    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); 
+$(document).ready(function () {
+  $('.input-number').on('input', function (e) {
+    var input = $(this).val().replace(/[^\d]/g, '');
+    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
     $(this).val(formatted);
 
-    var valid = /^\d+( \d{3})*$/.test(formatted); 
-    var isZero = (input === '0'); 
-    var name = $(this).attr('name'); 
+    var valid = /^\d+( \d{3})*$/.test(formatted);
+    var isZero = (input === '0');
+    var name = $(this).attr('name');
 
-    var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); 
+    var nameWithoutBrackets = name.replace(/[()\[\]]/g, '');
     var errorId = '#error-' + nameWithoutBrackets;
     var $inputGroupText = $(this).siblings('.input-group-text');
 
-    
     if (!valid || isZero) {
       $(errorId).show();
     } else {
@@ -137,20 +136,11 @@ class FormValidator {
     this.nextButtons.forEach(button => {
       button.addEventListener('click', (event) => {
         this.nextClicked = true;
-        if (this.currentStepIndex === 0) {
-          const isStepValid = this.validateFirstStep();
-          if (!isStepValid) {
-            event.preventDefault();
-            this.showErrorsForCurrentStep();
-            return;
-          }
-        } else {
-          const isStepValid = this.validateStep(this.currentStepIndex);
-          if (!isStepValid) {
-            event.preventDefault();
-            this.showErrorsForCurrentStep();
-            return;
-          }
+        const stepIsValid = this.validateStep(this.currentStepIndex);
+        if (!stepIsValid) {
+          event.preventDefault();
+          this.showErrorsForCurrentStep();
+          return;
         }
         this.nextClicked = false;
         this.saveStepData(this.currentStepIndex);
@@ -178,19 +168,6 @@ class FormValidator {
         }
       });
     });
-  }
-
-  validateFirstStep() {
-    const radioButtons = document.querySelectorAll('.hidden-input');
-    const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
-    const errorContainerProjet = document.getElementById('error-projet');
-
-    if (!isAnyRadioChecked) {
-      errorContainerProjet.style.display = 'block';
-    } else {
-      errorContainerProjet.style.display = 'none';
-    }
-    return isAnyRadioChecked;
   }
 
   formatNumberWithSpaces(number) {
@@ -456,13 +433,13 @@ class FormValidator {
     const errorContainerId = `error-${field.name}`;
     const errorContainer = document.getElementById(errorContainerId);
 
-    if(field.classList.contains('input-number')){
+    if (field.classList.contains('input-number')) {
       let name = $(field).attr('name');
-      $('#clone-' + name).addClass('error-form'); 
+      $('#clone-' + name).addClass('error-form');
     }
 
     if (errorContainer) {
-      errorContainer.classList.remove("d-none");
+      errorContainer.style.display = 'block';
     } else {
       console.error(`Error container not found for ${field.name}`);
     }
@@ -474,7 +451,7 @@ class FormValidator {
     const errorContainer = document.getElementById(errorContainerId);
 
     if (errorContainer) {
-      errorContainer.classList.add("d-none");
+      errorContainer.style.display = 'none';
     }
   }
 
@@ -483,11 +460,11 @@ class FormValidator {
       return true;
     }
 
-    let isValid = true;  
-    const value = field.value.trim(); 
+    let isValid = true;
+    const value = field.value.trim();
 
     if (field.hasAttribute("required") && value === "") {
-      isValid = false;  
+      isValid = false;
     } else {
       switch (field.dataset.type) {
         case 'email':
@@ -648,3 +625,8 @@ document.addEventListener("DOMContentLoaded", () => {
   applyFieldLimits();
   FormValidator.init();
 });
+
+window.currentStep = 0;
+const hasCoBorrower = true; 
+const stepsWithCoBorrower = ["step1", "step2", "step3", "step4"];
+const stepsWithoutCoBorrower = ["step1", "step2", "step3"];

@@ -1,18 +1,19 @@
-$(document).ready(function () {
-  $('.input-number').on('input', function (e) {
-    var input = $(this).val().replace(/[^\d]/g, '');
-    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+$(document).ready(function() {
+  $('.input-number').on('input', function(e) {
+    var input = $(this).val().replace(/[^\d]/g, ''); 
+    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); 
 
     $(this).val(formatted);
 
-    var valid = /^\d+( \d{3})*$/.test(formatted);
-    var isZero = (input === '0');
-    var name = $(this).attr('name');
+    var valid = /^\d+( \d{3})*$/.test(formatted); 
+    var isZero = (input === '0'); 
+    var name = $(this).attr('name'); 
 
-    var nameWithoutBrackets = name.replace(/[()\[\]]/g, '');
+    var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); 
     var errorId = '#error-' + nameWithoutBrackets;
     var $inputGroupText = $(this).siblings('.input-group-text');
 
+    
     if (!valid || isZero) {
       $(errorId).show();
     } else {
@@ -136,11 +137,20 @@ class FormValidator {
     this.nextButtons.forEach(button => {
       button.addEventListener('click', (event) => {
         this.nextClicked = true;
-        const stepIsValid = this.validateStep(this.currentStepIndex);
-        if (!stepIsValid) {
-          event.preventDefault();
-          this.showErrorsForCurrentStep();
-          return;
+        if (this.currentStepIndex === 0) {
+          const isStepValid = this.validateFirstStep();
+          if (!isStepValid) {
+            event.preventDefault();
+            this.showErrorsForCurrentStep();
+            return;
+          }
+        } else {
+          const isStepValid = this.validateStep(this.currentStepIndex);
+          if (!isStepValid) {
+            event.preventDefault();
+            this.showErrorsForCurrentStep();
+            return;
+          }
         }
         this.nextClicked = false;
         this.saveStepData(this.currentStepIndex);
@@ -168,6 +178,19 @@ class FormValidator {
         }
       });
     });
+  }
+
+  validateFirstStep() {
+    const radioButtons = document.querySelectorAll('.hidden-input');
+    const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
+    const errorContainerProjet = document.getElementById('error-projet');
+
+    if (!isAnyRadioChecked) {
+      errorContainerProjet.style.display = 'block';
+    } else {
+      errorContainerProjet.style.display = 'none';
+    }
+    return isAnyRadioChecked;
   }
 
   formatNumberWithSpaces(number) {
@@ -433,13 +456,13 @@ class FormValidator {
     const errorContainerId = `error-${field.name}`;
     const errorContainer = document.getElementById(errorContainerId);
 
-    if (field.classList.contains('input-number')) {
+    if(field.classList.contains('input-number')){
       let name = $(field).attr('name');
-      $('#clone-' + name).addClass('error-form');
+      $('#clone-' + name).addClass('error-form'); 
     }
 
     if (errorContainer) {
-      errorContainer.style.display = 'block';
+      errorContainer.classList.remove("d-none");
     } else {
       console.error(`Error container not found for ${field.name}`);
     }
@@ -451,80 +474,85 @@ class FormValidator {
     const errorContainer = document.getElementById(errorContainerId);
 
     if (errorContainer) {
-      errorContainer.style.display = 'none';
+      errorContainer.classList.add("d-none");
     }
   }
 
   validateField(field) {
+    // Vérifier si le champ est visible
     if (!this.isVisible(field)) {
-      return true;
+      return true; // Si le champ n'est pas visible, considérer qu'il est valide
     }
-
-    let isValid = true;
-    const value = field.value.trim();
-
+  
+    let isValid = true;  // Assumer que le champ est valide
+    const value = field.value.trim();  // Supprimer les espaces en début et fin de la valeur du champ
+  
+    // Validation des champs obligatoires
     if (field.hasAttribute("required") && value === "") {
-      isValid = false;
+      isValid = false;  // Marquer le champ comme invalide s'il est requis et vide
     } else {
+      // Validation en fonction du type de données
       switch (field.dataset.type) {
         case 'email':
-          isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+          isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Validation des emails
           break;
         case 'tel':
-          isValid = /^\d{10}$/.test(value.replace(/\s/g, ""));
+          isValid = /^\d{10}$/.test(value.replace(/\s/g, "")); // Validation des numéros de téléphone
           break;
         case 'integer':
           const numericValue = parseInt(value.replace(/\s/g, ''), 10);
           const min = field.hasAttribute("min") ? parseInt(field.getAttribute("min"), 10) : undefined;
           const max = field.hasAttribute("max") ? parseInt(field.getAttribute("max"), 10) : undefined;
-          isValid = !isNaN(numericValue) && (min === undefined || numericValue >= min) && (max === undefined || numericValue <= max);
+          isValid = !isNaN(numericValue) && (min === undefined || numericValue >= min) && (max === undefined || numericValue <= max); // Validation des entiers avec bornes min et max
           break;
         case 'duration':
           const durationValue = parseInt(value, 10);
-          isValid = !isNaN(durationValue) && durationValue >= 1 && durationValue <= 12;
+          isValid = !isNaN(durationValue) && durationValue >= 1 && durationValue <= 12; // Validation de la durée
           break;
         case 'dateTwo':
           const dateTwoValue = value.replace(/\s/g, '');
-          isValid = dateTwoValue !== "" && /^[0-9]{1,2}$/.test(dateTwoValue) && Number(dateTwoValue) >= 1 && Number(dateTwoValue) <= 31;
+          isValid = dateTwoValue !== "" && /^[0-9]{1,2}$/.test(dateTwoValue) && Number(dateTwoValue) >= 1 && Number(dateTwoValue) <= 31; // Validation des dates (jours)
           break;
         case 'dateFour':
           const dateFourValue = parseInt(value, 10);
-          isValid = !isNaN(dateFourValue) && dateFourValue >= 1900 && dateFourValue <= this.currentYear;
+          isValid = !isNaN(dateFourValue) && dateFourValue >= 1900 && dateFourValue <= this.currentYear; // Validation des dates (années)
           break;
         case 'dateFr':
-          isValid = /^\d{2}\/\d{2}\/\d{4}$/.test(value) && this.isValidDate(value);
+          isValid = /^\d{2}\/\d{2}\/\d{4}$/.test(value) && this.isValidDate(value); // Validation des dates au format français
           break;
         case 'select':
-          isValid = value !== "";
+          isValid = value !== ""; // Validation des champs de sélection
           break;
         case 'checkbox':
-          isValid = field.checked;
+          isValid = field.checked; // Validation des cases à cocher
           break;
         case 'radio':
-          isValid = Array.from(document.querySelectorAll(`input[name="${field.name}"]`)).some(radio => radio.checked);
+          isValid = Array.from(document.querySelectorAll(`input[name="${field.name}"]`)).some(radio => radio.checked); // Validation des boutons radio
           break;
         case 'string':
           const stringMinLength = field.getAttribute("minlength") || 0;
           const stringMaxLength = field.getAttribute("maxlength") || 255;
-          isValid = field.value.length >= stringMinLength && field.value.length <= stringMaxLength && /^[a-zA-Z\s]*$/.test(field.value);
+          isValid = field.value.length >= stringMinLength && field.value.length <= stringMaxLength && /^[a-zA-Z\s]*$/.test(field.value); // Validation des chaînes de caractères
           break;
         default:
           break;
       }
     }
-
+  
+    // Affichage des erreurs si l'utilisateur a cliqué sur "Suivant"
     if (this.nextClicked) {
       if (isValid) {
-        this.hideError(field);
+        this.hideError(field); // Cacher l'erreur si le champ est valide
       } else {
-        this.showError(field);
+        this.showError(field); // Afficher l'erreur si le champ est invalide
       }
     } else {
-      this.hideError(field);
+      this.hideError(field); // Toujours cacher l'erreur si "Suivant" n'a pas été cliqué
     }
-
-    return isValid;
+  
+    return isValid; // Retourner l'état de validité du champ
   }
+  
 
   isValidDate(dateString) {
     const [day, month, year] = dateString.split('/').map(Number);
@@ -625,8 +653,3 @@ document.addEventListener("DOMContentLoaded", () => {
   applyFieldLimits();
   FormValidator.init();
 });
-
-window.currentStep = 0;
-const hasCoBorrower = true; 
-const stepsWithCoBorrower = ["step1", "step2", "step3", "step4"];
-const stepsWithoutCoBorrower = ["step1", "step2", "step3"];

@@ -205,9 +205,10 @@ if (session_status() == PHP_SESSION_NONE) {
     <script src="asset/js/sidebar.js"></script>
     <script src="asset/js/btnMoreAndLess.js"></script>
     <script src="asset/js/dateFormat.js"></script>
-    <script src="asset/js/changeStep.js"></script>
     <script src="asset/js/saveForm.js"></script>
+    <script src="asset/js/changeStep.js"></script>
     <script src="asset/js/formValidator.js" defer></script>
+
 
     <!-- Script pour auto-complétion des adresses -->
     <script>

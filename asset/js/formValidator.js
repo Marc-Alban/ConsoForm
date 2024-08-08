@@ -1,72 +1,3 @@
-$(document).ready(function() {
-  $('.input-number').on('input', function(e) {
-    var input = $(this).val().replace(/[^\d]/g, ''); 
-    var formatted = input.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); 
-
-    $(this).val(formatted);
-
-    var valid = /^\d+( \d{3})*$/.test(formatted); 
-    var isZero = (input === '0'); 
-    var name = $(this).attr('name'); 
-
-    var nameWithoutBrackets = name.replace(/[()\[\]]/g, ''); 
-    var errorId = '#error-' + nameWithoutBrackets;
-    var $inputGroupText = $(this).siblings('.input-group-text');
-
-    
-    if (!valid || isZero) {
-      $(errorId).show();
-    } else {
-      $(errorId).hide();
-    }
-  });
-});
-
-const options = {
-  'prive': {
-    statut: { show: true },
-    profession: { show: true },
-    typeContrat: { show: true },
-    dateDebut: { show: true }
-  },
-  'public': {
-    statut: { show: true },
-    profession: { show: true },
-    typeContrat: { show: true },
-    dateDebut: { show: true }
-  },
-  'agricole': {
-    statut: { show: true },
-    profession: { show: true },
-    typeContrat: { show: true },
-    dateDebut: { show: true }
-  },
-  'artisans': {
-    statut: { show: true },
-    profession: { show: true },
-    typeContrat: { show: false },
-    dateDebut: { show: true }
-  },
-  'liberales': {
-    statut: { show: true },
-    profession: { show: true },
-    typeContrat: { show: false },
-    dateDebut: { show: true }
-  },
-  'retraites': {
-    statut: { show: true },
-    profession: { show: true },
-    typeContrat: { show: false },
-    dateDebut: { show: false }
-  }
-};
-
-const contrats = {
-  'prive': ['CDI', 'CDI (période d\'essai non terminée)', 'CDD', 'Stage', 'Intérim', 'Autres'],
-  'public': ['CDI', 'CDI (période d\'essai non terminée)', 'CDD', 'Stage', 'Intérim', 'Autres'],
-  'agricole': ['CDI', 'CDI (période d\'essai non terminée)', 'CDD', 'Stage', 'Intérim', 'Autres']
-};
-
 class FormValidator {
   constructor(stepsSelector, nextButtonSelector, prevButtonSelector, summarySelector) {
     this.steps = document.querySelectorAll(stepsSelector);
@@ -80,7 +11,6 @@ class FormValidator {
     this.nextClicked = false;
     this.setupEventListeners();
   }
-
   setupEventListeners() {
     document.getElementById('secteurActivite').addEventListener('change', (event) => {
       this.changeSelect(event.target.value, document.getElementById('statut'));
@@ -155,7 +85,7 @@ class FormValidator {
         this.nextClicked = false;
         this.saveStepData(this.currentStepIndex);
         this.currentStepIndex++;
-        this.showCurrentStep();
+        this.showCurrentValidatorStep();
       });
     });
 
@@ -164,7 +94,7 @@ class FormValidator {
         this.nextClicked = false;
         if (this.currentStepIndex > 0) {
           this.currentStepIndex--;
-          this.showCurrentStep();
+          this.showCurrentValidatorStep();
         }
       });
     });
@@ -479,78 +409,74 @@ class FormValidator {
   }
 
   validateField(field) {
-    // Vérifier si le champ est visible
     if (!this.isVisible(field)) {
-      return true; // Si le champ n'est pas visible, considérer qu'il est valide
+      return true;
     }
   
-    let isValid = true;  // Assumer que le champ est valide
-    const value = field.value.trim();  // Supprimer les espaces en début et fin de la valeur du champ
+    let isValid = true;
+    const value = field.value.trim();
   
-    // Validation des champs obligatoires
     if (field.hasAttribute("required") && value === "") {
-      isValid = false;  // Marquer le champ comme invalide s'il est requis et vide
+      isValid = false;
     } else {
-      // Validation en fonction du type de données
       switch (field.dataset.type) {
         case 'email':
-          isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Validation des emails
+          isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
           break;
         case 'tel':
-          isValid = /^\d{10}$/.test(value.replace(/\s/g, "")); // Validation des numéros de téléphone
+          isValid = /^\d{10}$/.test(value.replace(/\s/g, ""));
           break;
         case 'integer':
           const numericValue = parseInt(value.replace(/\s/g, ''), 10);
           const min = field.hasAttribute("min") ? parseInt(field.getAttribute("min"), 10) : undefined;
           const max = field.hasAttribute("max") ? parseInt(field.getAttribute("max"), 10) : undefined;
-          isValid = !isNaN(numericValue) && (min === undefined || numericValue >= min) && (max === undefined || numericValue <= max); // Validation des entiers avec bornes min et max
+          isValid = !isNaN(numericValue) && (min === undefined || numericValue >= min) && (max === undefined || numericValue <= max);
           break;
         case 'duration':
           const durationValue = parseInt(value, 10);
-          isValid = !isNaN(durationValue) && durationValue >= 1 && durationValue <= 12; // Validation de la durée
+          isValid = !isNaN(durationValue) && durationValue >= 1 && durationValue <= 12;
           break;
         case 'dateTwo':
           const dateTwoValue = value.replace(/\s/g, '');
-          isValid = dateTwoValue !== "" && /^[0-9]{1,2}$/.test(dateTwoValue) && Number(dateTwoValue) >= 1 && Number(dateTwoValue) <= 31; // Validation des dates (jours)
+          isValid = dateTwoValue !== "" && /^[0-9]{1,2}$/.test(dateTwoValue) && Number(dateTwoValue) >= 1 && Number(dateTwoValue) <= 31;
           break;
         case 'dateFour':
           const dateFourValue = parseInt(value, 10);
-          isValid = !isNaN(dateFourValue) && dateFourValue >= 1900 && dateFourValue <= this.currentYear; // Validation des dates (années)
+          isValid = !isNaN(dateFourValue) && dateFourValue >= 1900 && dateFourValue <= this.currentYear;
           break;
         case 'dateFr':
-          isValid = /^\d{2}\/\d{2}\/\d{4}$/.test(value) && this.isValidDate(value); // Validation des dates au format français
+          isValid = /^\d{2}\/\d{2}\/\d{4}$/.test(value) && this.isValidDate(value);
           break;
         case 'select':
-          isValid = value !== ""; // Validation des champs de sélection
+          isValid = value !== "";
           break;
         case 'checkbox':
-          isValid = field.checked; // Validation des cases à cocher
+          isValid = field.checked;
           break;
         case 'radio':
-          isValid = Array.from(document.querySelectorAll(`input[name="${field.name}"]`)).some(radio => radio.checked); // Validation des boutons radio
+          isValid = Array.from(document.querySelectorAll(`input[name="${field.name}"]`)).some(radio => radio.checked);
           break;
         case 'string':
           const stringMinLength = field.getAttribute("minlength") || 0;
           const stringMaxLength = field.getAttribute("maxlength") || 255;
-          isValid = field.value.length >= stringMinLength && field.value.length <= stringMaxLength && /^[a-zA-Z\s]*$/.test(field.value); // Validation des chaînes de caractères
+          isValid = field.value.length >= stringMinLength && field.value.length <= stringMaxLength && /^[a-zA-Z\s]*$/.test(field.value);
           break;
         default:
           break;
       }
     }
   
-    // Affichage des erreurs si l'utilisateur a cliqué sur "Suivant"
     if (this.nextClicked) {
       if (isValid) {
-        this.hideError(field); // Cacher l'erreur si le champ est valide
+        this.hideError(field);
       } else {
-        this.showError(field); // Afficher l'erreur si le champ est invalide
+        this.showError(field);
       }
     } else {
-      this.hideError(field); // Toujours cacher l'erreur si "Suivant" n'a pas été cliqué
+      this.hideError(field);
     }
   
-    return isValid; // Retourner l'état de validité du champ
+    return isValid;
   }
   
 
@@ -579,20 +505,43 @@ class FormValidator {
   }
 
   validateStep(stepIndex) {
-    const step = this.steps[stepIndex];
+    console.log("hasCoBorrower:", window.hasCoBorrower);
+    console.log("stepsWithCoBorrower:", window.stepsWithCoBorrower);
+    console.log("stepsWithoutCoBorrower:", window.stepsWithoutCoBorrower);
+    
+    const currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
+    console.log("currentStepsArray:", currentStepsArray);
+    
+    if (!Array.isArray(currentStepsArray) || currentStepsArray.length === 0) {
+        console.error("currentStepsArray is undefined or empty");
+        return false;
+    }
+    if (stepIndex >= currentStepsArray.length) {
+        console.error("Step index out of range");
+        return false;
+    }
+    const stepId = currentStepsArray[stepIndex];
+    if (!stepId) {
+        console.error("Step not found");
+        return false;
+    }
+    const step = document.getElementById(stepId);
     if (!step) {
-      console.error("Step not found");
-      return false;
+        console.error("Step element not found");
+        return false;
     }
     let isValid = true;
     const fields = step.querySelectorAll("input, select, textarea");
     fields.forEach((field) => {
-      if (this.isVisible(field) && !this.validateField(field)) {
-        isValid = false;
-      }
+        if (this.isVisible(field) && !this.validateField(field)) {
+            isValid = false;
+        }
     });
     return isValid;
-  }
+}
+
+
+
 
   saveStepData(stepIndex) {
     const step = this.steps[stepIndex];
@@ -622,7 +571,7 @@ class FormValidator {
     return element.type !== "hidden" && (element.offsetWidth || element.offsetHeight || element.getClientRects().length);
   }
 
-  showCurrentStep() {
+  showCurrentValidatorStep() {
     this.steps.forEach((step, index) => {
       step.style.display = index === this.currentStepIndex ? 'block' : 'none';
     });
@@ -630,7 +579,7 @@ class FormValidator {
 
   static init() {
     const formValidatorInstance = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
-    formValidatorInstance.showCurrentStep();
+    formValidatorInstance.showCurrentValidatorStep();
   }
 }
 

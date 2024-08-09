@@ -46,7 +46,6 @@ const contrats = {
   'retraites': ['Retraité privé', 'Retraité public'],
 };
 
-
 class FormValidator {
   constructor(stepsSelector, nextButtonSelector, prevButtonSelector, summarySelector) {
     this.steps = document.querySelectorAll(stepsSelector);
@@ -58,8 +57,16 @@ class FormValidator {
     this.currentYear = new Date().getFullYear();
     this.userInteracted = false;
     this.nextClicked = false;
+    this.selection = this.getSelectionFromUrl(); // Récupérer le choix de l'utilisateur (projet, véhicule, etc.)
     this.setupEventListeners();
   }
+
+
+  getSelectionFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('selection'); // Exemple: 'vehicule', 'travaux', etc.
+  }
+
   setupEventListeners() {
     document.getElementById('secteurActivite').addEventListener('change', (event) => {
       this.changeSelect(event.target.value, document.getElementById('statut'));
@@ -70,18 +77,6 @@ class FormValidator {
     document.getElementById('statut').addEventListener('change', (event) => {
       this.contractType(event);
       this.updateContractOptions();
-      this.hideError(event.target);
-    });
-
-    document.getElementById('secteurActiviteCo').addEventListener('change', (event) => {
-      this.changeSelectCo(event.target.value, document.getElementById('statutCo'));
-      this.updateOptionsCo();
-      this.hideError(event.target);
-    });
-
-    document.getElementById('statutCo').addEventListener('change', (event) => {
-      this.contractTypeCo(event);
-      this.updateContractOptionsCo();
       this.hideError(event.target);
     });
 
@@ -116,21 +111,13 @@ class FormValidator {
     this.nextButtons.forEach(button => {
       button.addEventListener('click', (event) => {
         this.nextClicked = true;
-        if (this.currentStepIndex === 0) {
-          const isStepValid = this.validateFirstStep();
-          if (!isStepValid) {
-            event.preventDefault();
-            this.showErrorsForCurrentStep();
-            return;
-          }
-        } else {
-          const isStepValid = this.validateStep(this.currentStepIndex);
-          if (!isStepValid) {
-            event.preventDefault();
-            this.showErrorsForCurrentStep();
-            return;
-          }
+        const isStepValid = this.currentStepIndex === 0 ? this.validateFirstStep() : this.validateStep(this.currentStepIndex);
+        if (!isStepValid) {
+          event.preventDefault();
+          this.showErrorsForCurrentStep();
+          return;
         }
+
         this.nextClicked = false;
         this.saveStepData(this.currentStepIndex);
         this.currentStepIndex++;
@@ -147,29 +134,47 @@ class FormValidator {
         }
       });
     });
-
-    const radioButtons = document.querySelectorAll('.hidden-input');
-    radioButtons.forEach(radio => {
-      radio.addEventListener('change', () => {
-        const errorContainerProjet = document.getElementById('error-projet');
-        if (radio.checked) {
-          errorContainerProjet.style.display = 'none';
-        }
-      });
-    });
   }
 
   validateFirstStep() {
-    const radioButtons = document.querySelectorAll('.hidden-input');
-    const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
-    const errorContainerProjet = document.getElementById('error-projet');
+    const currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
+    const stepId = currentStepsArray[this.currentStepIndex];
+    console.log(window.currentStep, 'step 123456');
 
-    if (!isAnyRadioChecked) {
-      errorContainerProjet.style.display = 'block';
+    const step = document.getElementById(stepId);
+    console.log(step, 'step 123456');
+
+    
+    if (this.selection === 'projet') {
+      const radioButtons = document.querySelectorAll('.hidden-input');
+      const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
+      const errorContainerProjet = document.getElementById('error-projet');
+
+      if (!errorContainerProjet) {
+        console.error("Error container for project is missing.");
+        return false;
+      }
+
+      if (!isAnyRadioChecked) {
+        errorContainerProjet.style.display = 'block';
+      } else {
+        errorContainerProjet.style.display = 'none';
+      }
+      return isAnyRadioChecked;
     } else {
-      errorContainerProjet.style.display = 'none';
+      const fields = step.querySelectorAll("input, select, textarea");
+      const isValid = true;
+      
+      fields.forEach((field) => {
+        if (this.isVisible(field) && !this.validateField(field)) {
+          isValid = false;
+        }
+      });
+  
+      return isValid;
+      
+      // Si ce n'est pas le "projet", passez directement à l'étape suivante.
     }
-    return isAnyRadioChecked;
   }
 
   formatNumberWithSpaces(number) {
@@ -366,9 +371,9 @@ class FormValidator {
     const secteurActiviteElement = document.getElementById(`${prefix}secteurActivite`);
     const statutElement = document.getElementById(`${prefix}statut`);
     const typeContratSelect = document.getElementById(`${prefix}typeContrat`);
-  
+
     const secteurActivite = secteurActiviteElement.value;
-  
+
     if (secteurActivite === 'agricole' && statutElement.value === 'salarie_agricole') {
       typeContratSelect.innerHTML = '';
       contrats['agricole'].forEach(contrat => {
@@ -395,7 +400,6 @@ class FormValidator {
       typeContratSelect.parentElement.classList.add('d-none');
     }
   }
-  
 
   updateContractOptionsCo(prefix = '') {
     const secteurActiviteElement = document.getElementById(`${prefix}secteurActiviteCo`);
@@ -436,9 +440,9 @@ class FormValidator {
     const errorContainerId = `error-${field.name}`;
     const errorContainer = document.getElementById(errorContainerId);
 
-    if(field.classList.contains('input-number')){
-      let name = $(field).attr('name');
-      $('#clone-' + name).addClass('error-form'); 
+    if (field.classList.contains('input-number')) {
+      let name = field.getAttribute('name');
+      document.getElementById('clone-' + name).classList.add('error-form');
     }
 
     if (errorContainer) {
@@ -462,10 +466,10 @@ class FormValidator {
     if (!this.isVisible(field)) {
       return true;
     }
-  
+
     let isValid = true;
     const value = field.value.trim();
-  
+
     if (field.hasAttribute("required") && value === "") {
       isValid = false;
     } else {
@@ -515,7 +519,7 @@ class FormValidator {
           break;
       }
     }
-  
+
     if (this.nextClicked) {
       if (isValid) {
         this.hideError(field);
@@ -525,10 +529,9 @@ class FormValidator {
     } else {
       this.hideError(field);
     }
-  
+
     return isValid;
   }
-  
 
   isValidDate(dateString) {
     const [day, month, year] = dateString.split('/').map(Number);
@@ -555,43 +558,27 @@ class FormValidator {
   }
 
   validateStep(stepIndex) {
-    console.log("hasCoBorrower:", window.hasCoBorrower);
-    console.log("stepsWithCoBorrower:", window.stepsWithCoBorrower);
-    console.log("stepsWithoutCoBorrower:", window.stepsWithoutCoBorrower);
-    
     const currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
-    console.log("currentStepsArray:", currentStepsArray);
-    
-    if (!Array.isArray(currentStepsArray) || currentStepsArray.length === 0) {
-        console.error("currentStepsArray is undefined or empty");
-        return false;
-    }
-    if (stepIndex >= currentStepsArray.length) {
-        console.error("Step index out of range");
-        return false;
-    }
     const stepId = currentStepsArray[stepIndex];
-    if (!stepId) {
-        console.error("Step not found");
-        return false;
-    }
     const step = document.getElementById(stepId);
-    if (!step) {
-        console.error("Step element not found");
-        return false;
+
+    if (!step || !this.isVisible(step)) {
+      console.error("Step element not found or not visible:", stepId);
+      return false;
     }
+
     let isValid = true;
     const fields = step.querySelectorAll("input, select, textarea");
+    console.log(fields);
+    
     fields.forEach((field) => {
-        if (this.isVisible(field) && !this.validateField(field)) {
-            isValid = false;
-        }
+      if (this.isVisible(field) && !this.validateField(field)) {
+        isValid = false;
+      }
     });
+
     return isValid;
-}
-
-
-
+  }
 
   saveStepData(stepIndex) {
     const step = this.steps[stepIndex];
@@ -618,7 +605,7 @@ class FormValidator {
   }
 
   isVisible(element) {
-    return element.type !== "hidden" && (element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+    return element && element.offsetWidth > 0 && element.offsetHeight > 0;
   }
 
   showCurrentValidatorStep() {

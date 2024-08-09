@@ -103,18 +103,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function goToStep(stepDelta) {
         console.log("goToStep called with stepDelta:", stepDelta);
-        if (!validateVisibleFields()) return;
         let currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
         let potentialNextStep = window.currentStep + stepDelta;
-
+    
         const maxStepIndex = currentStepsArray.length - 1;
         potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
-        if (window.currentStep !== potentialNextStep) {
-            window.currentStep = potentialNextStep;
-            console.log("New currentStep:", window.currentStep);
-            showCurrentStep();
+    
+        while (!document.getElementById(currentStepsArray[potentialNextStep])) {
+            potentialNextStep += stepDelta;
+            if (potentialNextStep < 0 || potentialNextStep > maxStepIndex) {
+                return;
+            }
         }
+    
+        window.currentStep = potentialNextStep;
+        console.log("New currentStep:", window.currentStep);
+        showCurrentStep();
     }
+    
 
     function updateActiveStep() {
         const isMobile = window.innerWidth <= 991;

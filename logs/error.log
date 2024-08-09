@@ -1,518 +1,99 @@
-[31-Jul-2024 13:22:26 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:55:36 Europe/Berlin] SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
-[31-Jul-2024 13:55:36 Europe/Berlin] PHP Fatal error:  Uncaught Exception: Database connection error: SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\project\consoForm\app\Model.php:60
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\app\Model.php(26): App\Model->connect(Array)
-#1 C:\xampp\htdocs\project\consoForm\app\Model.php(12): App\Model->initializeDatabaseConnection()
-#2 C:\xampp\htdocs\project\consoForm\src\models\Lead.php(15): App\Model->__construct()
-#3 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(20): Models\Lead->__construct()
-#4 C:\xampp\htdocs\project\consoForm\index.php(49): Controllers\Form->__construct()
-#5 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Model.php on line 60
-[31-Jul-2024 13:55:46 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:57:04 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:57:17 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:57:22 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:59:08 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:59:26 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:59:28 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 13:59:59 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:00:12 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:00:27 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:05:17 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:05:34 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:12:57 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:20:51 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:21:03 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:21:10 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:21:21 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:21:31 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:21:42 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:30:30 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:30:34 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:30:42 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:42:58 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:43:03 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:43:53 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:43:56 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:45:39 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 14:45:42 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:41:51 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:45:48 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:46:07 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:46:29 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:47:10 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:47:15 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:47:46 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:49:23 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:49:38 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 15:53:50 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:01:44 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:07:28 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:08:51 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:24:11 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:24:44 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:25:15 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:25:28 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:28:24 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:29:12 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:31:23 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:33:32 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:39:11 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:39:13 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:49:30 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:49:33 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:51:44 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:53:37 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:53:38 Europe/Berlin] Handling default action (index)
-[31-Jul-2024 16:53:43 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 08:46:46 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 08:47:17 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 08:57:12 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 08:57:16 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:01:56 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:02:00 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:02:02 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:06:32 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:14:54 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:16:50 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:18:07 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:20:35 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:20:39 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:20:39 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:20:40 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:20:41 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:23:16 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:23:32 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:30:50 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:39:10 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:39:34 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:39:57 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:40:51 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:48:32 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:49:50 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:51:43 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 09:57:09 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 10:06:19 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 10:10:32 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 10:12:33 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 11:16:43 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 11:16:50 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 11:19:37 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:04:10 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:04:38 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:06:13 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:06:38 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:07:06 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:07:18 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:07:34 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:08:10 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:08:39 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:08:53 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:09:06 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:16:41 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:16:49 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:22:25 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:22:36 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:22:42 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:25:42 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:27:14 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:28:21 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:31:12 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:33:32 Europe/Berlin] Handling saveFormData action
-[01-Aug-2024 14:37:52 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:47:04 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:47:23 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:50:26 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 14:58:01 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:10:55 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:13:01 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:13:25 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:16:36 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:19:07 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:19:36 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:21:39 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:22:59 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:23:23 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:23:31 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:24:06 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:26:06 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:26:22 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:32:56 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:33:25 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:33:31 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:33:43 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:33:56 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:34:51 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:35:58 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:43:25 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:49:10 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:49:30 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 15:49:51 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:04:04 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:08:57 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:09:02 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:11:42 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:14:53 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:26:21 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:26:49 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:28:20 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:29:20 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:31:35 Europe/Berlin] Handling saveFormData action
-[01-Aug-2024 16:31:35 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:36:09 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:36:09 Europe/Berlin] Handling loadFormData action
-[01-Aug-2024 16:39:48 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:39:48 Europe/Berlin] Handling loadFormData action
-[01-Aug-2024 16:39:55 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:40:39 Europe/Berlin] Handling default action (index)
-[01-Aug-2024 16:41:10 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 08:42:03 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 08:48:18 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 08:59:26 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:07:39 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:13:26 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:14:28 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:20:31 Europe/Berlin] Handling saveFormData action
-[02-Aug-2024 09:20:31 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:22:34 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:29:32 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:53:30 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:53:53 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 09:59:44 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 10:11:53 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 10:17:49 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 10:44:05 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 10:45:50 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 10:47:43 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 10:49:21 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 10:53:56 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 11:02:10 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 11:08:19 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 11:10:03 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 14:29:10 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 14:29:46 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 14:38:51 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 14:43:32 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 14:44:53 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 14:49:02 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 14:49:19 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 15:29:06 Europe/Berlin] Handling default action (index)
-[02-Aug-2024 15:46:31 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 08:26:12 Europe/Berlin] SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
-[05-Aug-2024 08:26:12 Europe/Berlin] PHP Fatal error:  Uncaught Exception: Database connection error: SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\project\consoForm\app\Model.php:60
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\app\Model.php(26): App\Model->connect(Array)
-#1 C:\xampp\htdocs\project\consoForm\app\Model.php(12): App\Model->initializeDatabaseConnection()
-#2 C:\xampp\htdocs\project\consoForm\src\models\Lead.php(15): App\Model->__construct()
-#3 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(20): Models\Lead->__construct()
-#4 C:\xampp\htdocs\project\consoForm\index.php(49): Controllers\Form->__construct()
-#5 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Model.php on line 60
-[05-Aug-2024 08:26:28 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:14:49 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:17:03 Europe/Berlin] Handling saveFormData action
-[05-Aug-2024 09:17:04 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:28:03 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:34:27 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:36:34 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:36:35 Europe/Berlin] Handling loadFormData action
-[05-Aug-2024 09:36:43 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:36:43 Europe/Berlin] Handling loadFormData action
-[05-Aug-2024 09:38:26 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:38:26 Europe/Berlin] Handling loadFormData action
-[05-Aug-2024 09:39:27 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:39:52 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:44:33 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:57:24 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 09:57:32 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 10:00:25 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 10:06:35 Europe/Berlin] Handling default action (index)
-[05-Aug-2024 10:06:51 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 15:59:10 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 16:00:13 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 16:46:22 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 16:49:54 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 16:51:06 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 16:51:19 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 16:54:14 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 16:55:26 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:27:15 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:28:47 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:32:15 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:32:18 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:33:59 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:36:02 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:37:44 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:37:54 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:38:52 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:40:52 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:40:56 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:43:45 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:44:11 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:44:16 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:44:48 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:47:02 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:48:23 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:50:11 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:50:59 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:52:01 Europe/Berlin] Handling default action (index)
-[08-Aug-2024 23:59:54 Europe/Berlin] Handling default action (index)
-[09-Aug-2024 08:14:28 Europe/Berlin] Handling default action (index)
-[09-Aug-2024 08:40:20 Europe/Berlin] Handling default action (index)
-[09-Aug-2024 08:42:44 Europe/Berlin] Handling default action (index)
-[09-Aug-2024 08:44:01 Europe/Berlin] Handling default action (index)
-[09-Aug-2024 08:44:05 Europe/Berlin] Handling default action (index)
-[09-Aug-2024 08:57:00 Europe/Berlin] Handling default action (index)
-[09-Aug-2024 09:40:00 Europe/Berlin] Handling intro action (default)
-[09-Aug-2024 09:40:00 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:31
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(19): App\Controller->render('intro', Array, 'form')
-#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(175): App\Controller->renderFormView('intro', Array)
-#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(28): Controllers\Form->renderFormView('intro', Array)
-#3 C:\xampp\htdocs\project\consoForm\index.php(65): Controllers\Form->intro()
-#4 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 31
-[09-Aug-2024 09:40:26 Europe/Berlin] Handling intro action (default)
-[09-Aug-2024 09:40:26 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:36
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(24): App\Controller->render('intro', Array, 'form')
-#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(169): App\Controller->renderFormView('intro', Array)
-#2 C:\xampp\htdocs\project\consoForm\app\Controller.php(19): Controllers\Form->renderFormView('intro', Array)
-#3 C:\xampp\htdocs\project\consoForm\index.php(65): App\Controller->intro()
-#4 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 36
-[09-Aug-2024 09:46:50 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:48:58 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:51:16 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:53:03 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:53:57 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:54:52 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:55:19 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:57:16 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:58:19 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:58:51 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 09:59:37 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:00:52 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:01:41 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:02:38 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:03:28 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:04:55 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:05:33 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:26:47 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:27:07 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:27:22 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:31:23 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:31:28 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:32:29 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:35:11 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:35:19 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:37:05 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:37:05 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/controllers\intro/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array)
-#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:37:44 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:37:44 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/controllers\intro/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array)
-#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:39:17 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:39:21 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:39:28 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:39:39 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:40:17 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:40:25 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:42:19 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:42:45 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:45:09 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:45:10 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:45:10 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/2-content.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(25): App\Controller->render('2-content', Array, 'form')
-#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(171): App\Controller->renderFormView('2-content', Array)
-#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(41): Controllers\Form->renderFormView('2-content', Array)
-#3 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Form->index()
-#4 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:47:11 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:47:11 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/formPage/2-content.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(25): App\Controller->render('formPage/2-cont...', Array, 'form')
-#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(172): App\Controller->renderFormView('formPage/2-cont...', Array)
-#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(41): Controllers\Form->renderFormView('formPage/2-cont...', Array)
-#3 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Form->index()
-#4 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:47:12 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:47:12 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/formPage/2-content.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(25): App\Controller->render('formPage/2-cont...', Array, 'form')
-#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(172): App\Controller->renderFormView('formPage/2-cont...', Array)
-#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(41): Controllers\Form->renderFormView('formPage/2-cont...', Array)
-#3 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Form->index()
-#4 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:48:02 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:48:13 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:52:48 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:52:51 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:52:52 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:00 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:09 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:10 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:15 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:18 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:25 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:31 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:32 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:34 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:35 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:38 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:38 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/controllers\intro/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array)
-#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:53:46 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:46 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
-#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:53:48 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:53:48 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
-#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:54:14 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:54:15 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
-#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:55:15 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:55:15 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
-#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:56:26 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:56:26 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(17): App\Controller->render('intro', Array, 'firststep')
-#1 C:\xampp\htdocs\project\consoForm\index.php(77): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:56:28 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:56:28 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
-Stack trace:
-#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(17): App\Controller->render('intro', Array, 'firststep')
-#1 C:\xampp\htdocs\project\consoForm\index.php(77): Controllers\Intro->index()
-#2 {main}
-  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
-[09-Aug-2024 10:56:48 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:56:49 Europe/Berlin] Handling form action
-[09-Aug-2024 10:56:56 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:56:57 Europe/Berlin] Handling form action
-[09-Aug-2024 10:56:58 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 10:56:59 Europe/Berlin] Handling form action
-[09-Aug-2024 11:06:28 Europe/Berlin] Handling form action
-[09-Aug-2024 11:06:34 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:06:35 Europe/Berlin] Handling form action
-[09-Aug-2024 11:06:37 Europe/Berlin] Handling form action
-[09-Aug-2024 11:06:39 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:06:40 Europe/Berlin] Handling form action
-[09-Aug-2024 11:10:36 Europe/Berlin] Handling form action
-[09-Aug-2024 11:10:39 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:10:40 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:10:41 Europe/Berlin] Handling form action
-[09-Aug-2024 11:10:42 Europe/Berlin] Handling form action
-[09-Aug-2024 11:10:43 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:10:44 Europe/Berlin] Handling form action
-[09-Aug-2024 11:12:25 Europe/Berlin] Handling form action
-[09-Aug-2024 11:13:34 Europe/Berlin] Handling form action
-[09-Aug-2024 11:13:39 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:13:48 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:13:50 Europe/Berlin] Handling form action
-[09-Aug-2024 11:15:33 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:15:34 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:15:36 Europe/Berlin] Handling form action
-[09-Aug-2024 11:15:42 Europe/Berlin] Handling form action
-[09-Aug-2024 11:21:24 Europe/Berlin] Handling form action
-[09-Aug-2024 11:21:27 Europe/Berlin] Handling form action
-[09-Aug-2024 11:21:28 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:21:30 Europe/Berlin] Handling form action
-[09-Aug-2024 11:21:40 Europe/Berlin] Handling form action
-[09-Aug-2024 11:25:33 Europe/Berlin] Handling form action
-[09-Aug-2024 11:25:52 Europe/Berlin] Handling form action
-[09-Aug-2024 11:25:55 Europe/Berlin] Handling form action
-[09-Aug-2024 11:25:56 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:25:58 Europe/Berlin] Handling form action
-[09-Aug-2024 11:26:08 Europe/Berlin] Handling form action
-[09-Aug-2024 11:26:14 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:26:15 Europe/Berlin] Handling form action
-[09-Aug-2024 11:26:52 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:26:54 Europe/Berlin] Handling form action
-[09-Aug-2024 11:27:00 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:27:01 Europe/Berlin] Handling form action
-[09-Aug-2024 11:27:41 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:27:42 Europe/Berlin] Handling form action
-[09-Aug-2024 11:27:57 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:27:58 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:27:59 Europe/Berlin] Handling form action
-[09-Aug-2024 11:28:31 Europe/Berlin] Handling form action
-[09-Aug-2024 11:28:40 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:28:41 Europe/Berlin] Handling form action
-[09-Aug-2024 11:28:44 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:28:45 Europe/Berlin] Handling form action
-[09-Aug-2024 11:28:47 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:28:48 Europe/Berlin] Handling form action
-[09-Aug-2024 11:30:13 Europe/Berlin] Handling form action
-[09-Aug-2024 11:30:29 Europe/Berlin] Handling form action
-[09-Aug-2024 11:30:43 Europe/Berlin] Handling form action
-[09-Aug-2024 11:34:17 Europe/Berlin] Handling form action
-[09-Aug-2024 11:35:01 Europe/Berlin] Handling form action
-[09-Aug-2024 11:35:05 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:35:05 Europe/Berlin] Handling form action
-[09-Aug-2024 11:35:18 Europe/Berlin] Handling form action
-[09-Aug-2024 11:37:25 Europe/Berlin] Handling form action
-[09-Aug-2024 11:37:39 Europe/Berlin] Handling form action
-[09-Aug-2024 11:39:03 Europe/Berlin] Handling form action
-[09-Aug-2024 11:48:19 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:49:21 Europe/Berlin] Handling form action
-[09-Aug-2024 11:49:39 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:49:41 Europe/Berlin] Handling form action
-[09-Aug-2024 11:49:57 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:50:01 Europe/Berlin] Handling form action
-[09-Aug-2024 11:50:05 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:50:08 Europe/Berlin] Handling form action
-[09-Aug-2024 11:50:11 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:50:13 Europe/Berlin] Handling form action
-[09-Aug-2024 11:50:21 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:51:49 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:51:52 Europe/Berlin] Handling form action
-[09-Aug-2024 11:53:42 Europe/Berlin] Handling form action
-[09-Aug-2024 11:53:55 Europe/Berlin] Handling form action
-[09-Aug-2024 11:54:25 Europe/Berlin] Handling form action
-[09-Aug-2024 11:54:52 Europe/Berlin] Handling form action
-[09-Aug-2024 11:55:09 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 11:55:11 Europe/Berlin] Handling form action
-[09-Aug-2024 11:57:49 Europe/Berlin] Handling form action
-[09-Aug-2024 11:58:48 Europe/Berlin] Handling form action
-[09-Aug-2024 11:59:06 Europe/Berlin] Handling form action
-[09-Aug-2024 12:01:11 Europe/Berlin] Handling form action
-[09-Aug-2024 12:01:18 Europe/Berlin] Handling form action
-[09-Aug-2024 12:01:22 Europe/Berlin] Handling form action
-[09-Aug-2024 12:01:25 Europe/Berlin] Handling index action (default)
-[09-Aug-2024 12:01:27 Europe/Berlin] Handling form action
+[09-Aug-2024 12:20:52 Europe/Berlin] Handling form action
+[09-Aug-2024 12:21:00 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 12:21:01 Europe/Berlin] Handling form action
+[09-Aug-2024 12:21:04 Europe/Berlin] Handling form action
+[09-Aug-2024 12:38:00 Europe/Berlin] Handling form action
+[09-Aug-2024 12:38:02 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 12:38:03 Europe/Berlin] Handling form action
+[09-Aug-2024 12:41:20 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 12:41:30 Europe/Berlin] Handling form action
+[09-Aug-2024 12:42:21 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 12:42:22 Europe/Berlin] Handling form action
+[09-Aug-2024 12:42:34 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 12:42:35 Europe/Berlin] Handling form action
+[09-Aug-2024 12:42:39 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 12:42:40 Europe/Berlin] Handling form action
+[09-Aug-2024 12:42:43 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 12:42:43 Europe/Berlin] Handling form action
+[09-Aug-2024 12:43:47 Europe/Berlin] Handling form action
+[09-Aug-2024 12:43:53 Europe/Berlin] Handling form action
+[09-Aug-2024 12:46:16 Europe/Berlin] Handling form action
+[09-Aug-2024 12:46:22 Europe/Berlin] Handling form action
+[09-Aug-2024 12:47:25 Europe/Berlin] Handling form action
+[09-Aug-2024 12:47:41 Europe/Berlin] Handling form action
+[09-Aug-2024 13:03:48 Europe/Berlin] Handling form action
+[09-Aug-2024 13:04:26 Europe/Berlin] Handling form action
+[09-Aug-2024 13:04:29 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 13:04:30 Europe/Berlin] Handling form action
+[09-Aug-2024 13:04:37 Europe/Berlin] Handling form action
+[09-Aug-2024 13:09:41 Europe/Berlin] Handling form action
+[09-Aug-2024 13:09:43 Europe/Berlin] Handling form action
+[09-Aug-2024 13:09:46 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 13:09:47 Europe/Berlin] Handling form action
+[09-Aug-2024 13:09:57 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 13:09:58 Europe/Berlin] Handling form action
+[09-Aug-2024 13:12:06 Europe/Berlin] Handling form action
+[09-Aug-2024 13:12:10 Europe/Berlin] Handling form action
+[09-Aug-2024 13:12:14 Europe/Berlin] Handling form action
+[09-Aug-2024 13:12:19 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 13:12:20 Europe/Berlin] Handling form action
+[09-Aug-2024 13:17:43 Europe/Berlin] Handling form action
+[09-Aug-2024 13:17:52 Europe/Berlin] Handling form action
+[09-Aug-2024 13:18:29 Europe/Berlin] Handling form action
+[09-Aug-2024 13:18:36 Europe/Berlin] Handling form action
+[09-Aug-2024 13:18:39 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 13:18:40 Europe/Berlin] Handling form action
+[09-Aug-2024 14:05:14 Europe/Berlin] Handling form action
+[09-Aug-2024 14:05:32 Europe/Berlin] Handling form action
+[09-Aug-2024 14:05:44 Europe/Berlin] Handling form action
+[09-Aug-2024 14:06:33 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:06:35 Europe/Berlin] Handling form action
+[09-Aug-2024 14:06:41 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:06:43 Europe/Berlin] Handling form action
+[09-Aug-2024 14:06:49 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:06:50 Europe/Berlin] Handling form action
+[09-Aug-2024 14:06:59 Europe/Berlin] Handling form action
+[09-Aug-2024 14:07:05 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:07:06 Europe/Berlin] Handling form action
+[09-Aug-2024 14:08:49 Europe/Berlin] Handling form action
+[09-Aug-2024 14:08:53 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:08:54 Europe/Berlin] Handling form action
+[09-Aug-2024 14:08:55 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:08:56 Europe/Berlin] Handling form action
+[09-Aug-2024 14:09:02 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:09:03 Europe/Berlin] Handling form action
+[09-Aug-2024 14:09:13 Europe/Berlin] Handling form action
+[09-Aug-2024 14:09:17 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:09:18 Europe/Berlin] Handling form action
+[09-Aug-2024 14:09:43 Europe/Berlin] Handling form action
+[09-Aug-2024 14:14:56 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:15:24 Europe/Berlin] Handling form action
+[09-Aug-2024 14:16:25 Europe/Berlin] Handling form action
+[09-Aug-2024 14:16:42 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:16:50 Europe/Berlin] Handling form action
+[09-Aug-2024 14:18:23 Europe/Berlin] Handling form action
+[09-Aug-2024 14:18:37 Europe/Berlin] Handling form action
+[09-Aug-2024 14:18:45 Europe/Berlin] Handling form action
+[09-Aug-2024 14:20:09 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:21:52 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:21:58 Europe/Berlin] Handling form action
+[09-Aug-2024 14:26:07 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:26:13 Europe/Berlin] Handling form action
+[09-Aug-2024 14:29:53 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:31:25 Europe/Berlin] Handling form action
+[09-Aug-2024 14:31:50 Europe/Berlin] Handling form action
+[09-Aug-2024 14:32:55 Europe/Berlin] Handling form action
+[09-Aug-2024 14:33:12 Europe/Berlin] Handling form action
+[09-Aug-2024 14:34:10 Europe/Berlin] Handling form action
+[09-Aug-2024 14:34:16 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 14:34:20 Europe/Berlin] Handling form action
+[09-Aug-2024 14:35:12 Europe/Berlin] Handling form action
+[09-Aug-2024 14:37:05 Europe/Berlin] Handling form action
+[09-Aug-2024 14:38:42 Europe/Berlin] Handling form action
+[09-Aug-2024 14:39:07 Europe/Berlin] Handling form action
+[09-Aug-2024 14:40:12 Europe/Berlin] Handling form action
+[09-Aug-2024 14:40:54 Europe/Berlin] Handling form action
+[09-Aug-2024 14:41:22 Europe/Berlin] Handling form action
+[09-Aug-2024 14:42:04 Europe/Berlin] Handling form action
+[09-Aug-2024 14:42:30 Europe/Berlin] Handling form action
+[09-Aug-2024 14:45:45 Europe/Berlin] Handling form action

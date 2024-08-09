@@ -44,10 +44,10 @@
                                 include 'formPage/vehicule.php';
                                 break;
                             case 'travaux':
-                                include 'formPage/natureTravaux.php';
+                                include 'formPage/natureTravaux.php'; // 02-content
                                 break;
                             case 'projet':
-                                include 'formPage/projet.php';
+                                include 'formPage/projet.php'; //0-content
                                 break;
                         }
 

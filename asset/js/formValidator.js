@@ -1,3 +1,52 @@
+const options = {
+  'prive': {
+    statut: { show: true },
+    profession: { show: true },
+    typeContrat: { show: true },
+    dateDebut: { show: true }
+  },
+  'public': {
+    statut: { show: true },
+    profession: { show: true },
+    typeContrat: { show: true },
+    dateDebut: { show: true }
+  },
+  'agricole': {
+    statut: { show: true },
+    profession: { show: true },
+    typeContrat: { show: true },
+    dateDebut: { show: true }
+  },
+  'artisans': {
+    statut: { show: true },
+    profession: { show: true },
+    typeContrat: { show: true },
+    dateDebut: { show: true }
+  },
+  'liberales': {
+    statut: { show: true },
+    profession: { show: true },
+    typeContrat: { show: true },
+    dateDebut: { show: true }
+  },
+  'retraites': {
+    statut: { show: true },
+    profession: { show: true },
+    typeContrat: { show: true },
+    dateDebut: { show: true }
+  }
+};
+
+const contrats = {
+  'prive': ['CDI', 'CDD', 'Intérim', 'Stage'],
+  'public': ['Titulaire', 'Contractuel', 'CDD', 'Stage'],
+  'agricole': ['Contrat saisonnier', 'CDI agricole', 'CDD agricole'],
+  'artisans': ['Indépendant', 'Auto-entrepreneur', 'CDI artisanat'],
+  'liberales': ['Profession libérale', 'CDI libéral', 'CDD libéral'],
+  'retraites': ['Retraité privé', 'Retraité public'],
+};
+
+
 class FormValidator {
   constructor(stepsSelector, nextButtonSelector, prevButtonSelector, summarySelector) {
     this.steps = document.querySelectorAll(stepsSelector);
@@ -317,9 +366,9 @@ class FormValidator {
     const secteurActiviteElement = document.getElementById(`${prefix}secteurActivite`);
     const statutElement = document.getElementById(`${prefix}statut`);
     const typeContratSelect = document.getElementById(`${prefix}typeContrat`);
-
+  
     const secteurActivite = secteurActiviteElement.value;
-
+  
     if (secteurActivite === 'agricole' && statutElement.value === 'salarie_agricole') {
       typeContratSelect.innerHTML = '';
       contrats['agricole'].forEach(contrat => {
@@ -346,6 +395,7 @@ class FormValidator {
       typeContratSelect.parentElement.classList.add('d-none');
     }
   }
+  
 
   updateContractOptionsCo(prefix = '') {
     const secteurActiviteElement = document.getElementById(`${prefix}secteurActiviteCo`);

@@ -1,4 +1,3 @@
-// Reste de changeStep.js
 document.addEventListener('DOMContentLoaded', function() {
     // Variables globales
     window.hasCoBorrower = false;
@@ -19,8 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     console.log("hasCoBorrower initial:", window.hasCoBorrower);
-    console.log("stepsWithCoBorrower initial:", window.stepsWithCoBorrower);
-    console.log("stepsWithoutCoBorrower initial:", window.stepsWithoutCoBorrower);
 
     const steps = document.querySelectorAll('.form-container .step');
     const btnOui = document.getElementById('oui');
@@ -29,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnOkModal = document.getElementById('btn-ok-modal');
     const situationFamilialeElement = document.getElementById('situationFamiliale');
 
+    // Initialiser le validateur de formulaire
     const formValidator = new FormValidator(".form-container .step", ".btnNext", ".btnPrev", "#summary");
     console.log("Initial step:", window.currentStep);
 
@@ -42,14 +40,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showCurrentStep() {
-      console.log("showCurrentStep called");
-      hideAllSteps();
-      const currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
-      if (currentStepsArray[window.currentStep]) {
-          document.getElementById(currentStepsArray[window.currentStep]).style.display = 'block';
-      }
-      updateActiveStep();
-  }
+        console.log("showCurrentStep called");
+        hideAllSteps();
+        const currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
+        const currentStepId = currentStepsArray[window.currentStep];
+        if (currentStepId) {
+            const currentStepElement = document.getElementById(currentStepId);
+            if (currentStepElement) {
+                currentStepElement.style.display = 'block';
+            }
+        }
+        updateActiveStep();
+    }
 
     function validateVisibleFields() {
         const isValid = formValidator.validateStep(window.currentStep);
@@ -75,7 +77,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    function setStep(index) {
+        const currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
+        if (index < 0 || index >= currentStepsArray.length) return;
+        hideAllSteps();
+        document.getElementById(currentStepsArray[index]).classList.remove('d-none');
+        window.currentStep = index;
+        showCurrentStep();
+    }
 
+    
     function clearErrorsForCurrentStep() {
         const step = steps[window.currentStep];
         const fields = step.querySelectorAll("input, select, textarea");
@@ -90,36 +102,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function goToStep(stepDelta) {
-      console.log("goToStep called with stepDelta:", stepDelta);
-      if (!validateVisibleFields()) return;
-      let currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
-      let potentialNextStep = window.currentStep + stepDelta;
-  
-      if (stepDelta < 0 && window.currentStep === 13 && window.hasSelectedNon) {
-          potentialNextStep -= 1;
-      }
-  
-      const maxStepIndex = currentStepsArray.length - 1;
-      potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
-      if (window.currentStep !== potentialNextStep) {
-          window.currentStep = potentialNextStep;
-          console.log("New currentStep:", window.currentStep);
-          showCurrentStep();
-      }
-  }
+        console.log("goToStep called with stepDelta:", stepDelta);
+        if (!validateVisibleFields()) return;
+        let currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
+        let potentialNextStep = window.currentStep + stepDelta;
 
-    function setStep(index) {
-        const currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
-        if (index < 0 || index >= currentStepsArray.length) return;
-        hideAllSteps();
-        document.getElementById(currentStepsArray[index]).classList.remove('d-none');
-        window.currentStep = index;
-        showCurrentStep();
+        const maxStepIndex = currentStepsArray.length - 1;
+        potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
+        if (window.currentStep !== potentialNextStep) {
+            window.currentStep = potentialNextStep;
+            console.log("New currentStep:", window.currentStep);
+            showCurrentStep();
+        }
     }
 
     function updateActiveStep() {
         const isMobile = window.innerWidth <= 991;
-        const currentStepsArray = hasCoBorrower ? stepsWithCoBorrower : stepsWithoutCoBorrower;
+        const currentStepsArray = window.hasCoBorrower ? window.stepsWithCoBorrower : window.stepsWithoutCoBorrower;
         const currentFormStep = document.getElementById(currentStepsArray[window.currentStep]);
         const currentCategory = currentFormStep ? currentFormStep.querySelector('[data-category]')?.getAttribute('data-category') : null;
         const progressSteps = document.querySelectorAll('.form-sidebar .sidebar .step');
@@ -163,23 +162,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (btnNon) {
-      btnNon.addEventListener('change', function() {
-          window.hasSelectedNon = btnNon.checked;
-          window.currentStepOnNonSelection = window.currentStep;
-          console.log("btnNon changed, setStep to 13");
-          setStep(13);
-      });
-  }
-  
-  if (btnOui) {
-      btnOui.addEventListener('change', function() {
-          window.hasSelectedNon = false;
-          window.currentStepOnNonSelection = window.currentStep;
-          console.log("btnOui changed, setStep to 12");
-          setStep(12);
-      });
-  }
-  
+        btnNon.addEventListener('change', function() {
+            window.hasSelectedNon = btnNon.checked;
+            window.currentStepOnNonSelection = window.currentStep;
+            console.log("btnNon changed, setStep to 13");
+            setStep(13);
+        });
+    }
+
+    if (btnOui) {
+        btnOui.addEventListener('change', function() {
+            window.hasSelectedNon = false;
+            window.currentStepOnNonSelection = window.currentStep;
+            console.log("btnOui changed, setStep to 12");
+            setStep(12);
+        });
+    }
 
     document.querySelectorAll('.btnPrev, .btnNext').forEach(function(button) {
         button.addEventListener('click', function() {
@@ -194,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initForm();
     window.setStep = setStep;
     window.goToStep = goToStep;
-    
+
     if (btnOkModal) {
         btnOkModal.addEventListener('click', function() {
             modal.hide();
@@ -297,13 +295,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (situationFamilialeElement) {
-      situationFamilialeElement.addEventListener('change', function() {
-          const selectedValue = this.value;
-          window.hasCoBorrower = selectedValue === 'marie' || selectedValue === 'pacse' || selectedValue === 'union';
-          console.log("hasCoBorrower changed:", window.hasCoBorrower);
-      });
-  }
+        situationFamilialeElement.addEventListener('change', function() {
+            const selectedValue = this.value;
+            window.hasCoBorrower = selectedValue === 'marie' || selectedValue === 'pacse' || selectedValue === 'union';
+            console.log("hasCoBorrower changed:", window.hasCoBorrower);
+        });
+    }
 
-  initForm();
-  showCurrentStep();
+    initForm();
+    showCurrentStep();
 });

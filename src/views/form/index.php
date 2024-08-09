@@ -31,27 +31,43 @@
                         <?= htmlspecialchars($toastMessage) ?>
                     </div>
                 <?php endif; ?>
-                <div class="form-wrapper">
+                <div class="form-wrapper" data-selection="<?= htmlspecialchars($_GET['selection'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+
                     <form id="myForm" method="POST" autocomplete="off" class="consumer_credit_steps" accept-charset="UTF-8">
                         <!-- Contenu du formulaire -->
-                        <?php include 'formPage/projet.php'; ?> <!-- etape projet -->
-                        <?php include 'formPage/vehicule.php'; ?> <!-- etape vehicule -->
-                        <?php include 'formPage/natureTravaux.php'; ?> <!-- etape travaux -->
-                        <?php include 'formPage/monCredit.php'; ?> <!-- etape credit -->
-                        <?php include 'formPage/situationPatrimoniale.php'; ?>
-                        <?php include 'formPage/situationFamilliale.php'; ?>
-                        <?php include 'formPage/situationPro.php'; ?>
-                        <?php include 'formPage/situationProCo.php'; ?>
-                        <?php include 'formPage/mesRevenus.php'; ?>
-                        <?php include 'formPage/mesRevenusCo.php'; ?>
-                        <?php include 'formPage/autresRevenus.php'; ?>
-                        <?php include 'formPage/plusieurCredit.php'; ?>
-                        <?php include 'formPage/chargeMensuellesDuFoyer.php'; ?>
-                        <?php include 'formPage/loyer.php'; ?>
-                        <?php include 'formPage/banque.php'; ?>
-                        <?php include 'formPage/coordonneesUn.php'; ?>
-                        <?php include 'formPage/coordonneeUnCo.php'; ?>
-                        <?php include 'formPage/coordonneesDeux.php'; ?>
+                        <?php
+                        // Sélectionner la vue à afficher en fonction du paramètre 'selection'
+                        $selection = $_GET['selection'] ?? 'projet'; // Par défaut, afficher la vue projet
+
+                        switch ($selection) {
+                            case 'vehicule':
+                                include 'formPage/vehicule.php';
+                                break;
+                            case 'travaux':
+                                include 'formPage/natureTravaux.php';
+                                break;
+                            case 'projet':
+                                include 'formPage/projet.php';
+                                break;
+                        }
+
+                        // Toujours inclure les étapes suivantes après la sélection initiale
+                        include 'formPage/monCredit.php';
+                        include 'formPage/situationPatrimoniale.php';
+                        include 'formPage/situationFamilliale.php';
+                        include 'formPage/situationPro.php';
+                        include 'formPage/situationProCo.php';
+                        include 'formPage/mesRevenus.php';
+                        include 'formPage/mesRevenusCo.php';
+                        include 'formPage/autresRevenus.php';
+                        include 'formPage/plusieurCredit.php';
+                        include 'formPage/chargeMensuellesDuFoyer.php';
+                        include 'formPage/loyer.php';
+                        include 'formPage/banque.php';
+                        include 'formPage/coordonneesUn.php';
+                        include 'formPage/coordonneeUnCo.php';
+                        include 'formPage/coordonneesDeux.php';
+                        ?>
                         <div id="loader" class="loader"></div>
                     </form>
                 </div>

@@ -47,11 +47,14 @@ $_SESSION['Adresse_Ip'] = $isLocalhost ? '' : $_SERVER['REMOTE_ADDR'];
 
 // Création d'une instance de contrôleur
 $action = $_GET['action'] ?? 'index'; 
+$controller = null;
 
 if ($action === 'index') {
     $controller = new Intro();
-} else {
+} elseif ($action === 'form') {
     $controller = new Form();
+} else {
+    $controller = new Intro();
 }
 
 // Gestion des actions
@@ -63,6 +66,10 @@ switch ($action) {
     case 'loadFormData':
         error_log("Handling loadFormData action");
         $controller->loadFormData();
+        break;
+    case 'form':
+        error_log("Handling form action");
+        $controller->index();
         break;
     case 'index':
     default:

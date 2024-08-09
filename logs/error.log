@@ -299,3 +299,193 @@ Stack trace:
 [09-Aug-2024 10:03:28 Europe/Berlin] Handling index action (default)
 [09-Aug-2024 10:04:55 Europe/Berlin] Handling index action (default)
 [09-Aug-2024 10:05:33 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:26:47 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:27:07 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:27:22 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:31:23 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:31:28 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:32:29 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:35:11 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:35:19 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:37:05 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:37:05 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/controllers\intro/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array)
+#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:37:44 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:37:44 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/controllers\intro/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array)
+#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:39:17 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:39:21 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:39:28 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:39:39 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:40:17 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:40:25 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:42:19 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:42:45 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:45:09 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:45:10 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:45:10 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/2-content.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(25): App\Controller->render('2-content', Array, 'form')
+#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(171): App\Controller->renderFormView('2-content', Array)
+#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(41): Controllers\Form->renderFormView('2-content', Array)
+#3 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Form->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:47:11 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:47:11 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/formPage/2-content.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(25): App\Controller->render('formPage/2-cont...', Array, 'form')
+#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(172): App\Controller->renderFormView('formPage/2-cont...', Array)
+#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(41): Controllers\Form->renderFormView('formPage/2-cont...', Array)
+#3 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Form->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:47:12 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:47:12 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/formPage/2-content.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(25): App\Controller->render('formPage/2-cont...', Array, 'form')
+#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(172): App\Controller->renderFormView('formPage/2-cont...', Array)
+#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(41): Controllers\Form->renderFormView('formPage/2-cont...', Array)
+#3 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Form->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:48:02 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:48:13 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:52:48 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:52:51 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:52:52 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:00 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:09 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:10 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:15 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:18 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:25 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:31 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:32 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:34 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:35 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:38 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:38 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/controllers\intro/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array)
+#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:53:46 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:46 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
+#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:53:48 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:53:48 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
+#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:54:14 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:54:15 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
+#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:55:15 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:55:15 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(16): App\Controller->render('intro', Array, 'firststep')
+#1 C:\xampp\htdocs\project\consoForm\index.php(70): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:56:26 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:56:26 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(17): App\Controller->render('intro', Array, 'firststep')
+#1 C:\xampp\htdocs\project\consoForm\index.php(77): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:56:28 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:56:28 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/firststep/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\src\controllers\Intro.php(17): App\Controller->render('intro', Array, 'firststep')
+#1 C:\xampp\htdocs\project\consoForm\index.php(77): Controllers\Intro->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 37
+[09-Aug-2024 10:56:48 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:56:49 Europe/Berlin] Handling form action
+[09-Aug-2024 10:56:56 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:56:57 Europe/Berlin] Handling form action
+[09-Aug-2024 10:56:58 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:56:59 Europe/Berlin] Handling form action
+[09-Aug-2024 11:06:28 Europe/Berlin] Handling form action
+[09-Aug-2024 11:06:34 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:06:35 Europe/Berlin] Handling form action
+[09-Aug-2024 11:06:37 Europe/Berlin] Handling form action
+[09-Aug-2024 11:06:39 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:06:40 Europe/Berlin] Handling form action
+[09-Aug-2024 11:10:36 Europe/Berlin] Handling form action
+[09-Aug-2024 11:10:39 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:10:40 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:10:41 Europe/Berlin] Handling form action
+[09-Aug-2024 11:10:42 Europe/Berlin] Handling form action
+[09-Aug-2024 11:10:43 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:10:44 Europe/Berlin] Handling form action
+[09-Aug-2024 11:12:25 Europe/Berlin] Handling form action
+[09-Aug-2024 11:13:34 Europe/Berlin] Handling form action
+[09-Aug-2024 11:13:39 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:13:48 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:13:50 Europe/Berlin] Handling form action
+[09-Aug-2024 11:15:33 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:15:34 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:15:36 Europe/Berlin] Handling form action
+[09-Aug-2024 11:15:42 Europe/Berlin] Handling form action
+[09-Aug-2024 11:21:24 Europe/Berlin] Handling form action
+[09-Aug-2024 11:21:27 Europe/Berlin] Handling form action
+[09-Aug-2024 11:21:28 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:21:30 Europe/Berlin] Handling form action
+[09-Aug-2024 11:21:40 Europe/Berlin] Handling form action
+[09-Aug-2024 11:25:33 Europe/Berlin] Handling form action
+[09-Aug-2024 11:25:52 Europe/Berlin] Handling form action
+[09-Aug-2024 11:25:55 Europe/Berlin] Handling form action
+[09-Aug-2024 11:25:56 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:25:58 Europe/Berlin] Handling form action
+[09-Aug-2024 11:26:08 Europe/Berlin] Handling form action
+[09-Aug-2024 11:26:14 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:26:15 Europe/Berlin] Handling form action
+[09-Aug-2024 11:26:52 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:26:54 Europe/Berlin] Handling form action
+[09-Aug-2024 11:27:00 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:27:01 Europe/Berlin] Handling form action
+[09-Aug-2024 11:27:41 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:27:42 Europe/Berlin] Handling form action
+[09-Aug-2024 11:27:57 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:27:58 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:27:59 Europe/Berlin] Handling form action
+[09-Aug-2024 11:28:31 Europe/Berlin] Handling form action
+[09-Aug-2024 11:28:40 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:28:41 Europe/Berlin] Handling form action
+[09-Aug-2024 11:28:44 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:28:45 Europe/Berlin] Handling form action
+[09-Aug-2024 11:28:47 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:28:48 Europe/Berlin] Handling form action
+[09-Aug-2024 11:30:13 Europe/Berlin] Handling form action
+[09-Aug-2024 11:30:29 Europe/Berlin] Handling form action
+[09-Aug-2024 11:30:43 Europe/Berlin] Handling form action
+[09-Aug-2024 11:34:17 Europe/Berlin] Handling form action
+[09-Aug-2024 11:35:01 Europe/Berlin] Handling form action
+[09-Aug-2024 11:35:05 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 11:35:05 Europe/Berlin] Handling form action
+[09-Aug-2024 11:35:18 Europe/Berlin] Handling form action
+[09-Aug-2024 11:37:25 Europe/Berlin] Handling form action
+[09-Aug-2024 11:37:39 Europe/Berlin] Handling form action
+[09-Aug-2024 11:39:03 Europe/Berlin] Handling form action

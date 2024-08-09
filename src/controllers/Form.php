@@ -27,6 +27,8 @@ class Form extends Controller
         return $_GET['uuid'] ?? null;
     }
 
+    
+
     public function index()
     {
         $uuid = $this->getUuidFromRequest();

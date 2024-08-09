@@ -1,6 +1,11 @@
+premiere etape créer plus qu'à
+gerer la premiere etape vers les differentes vue 
+regarder les etapes comment elles sont gerer pour etre afficher en premier puis le credit 
+
+
+
 sauvegarde a checker 
 coemprunteur qui pourrait poser le probleme de validation 
-gerer la premiere etape vers les differentes vue et regarder les etapes comment elles sont gerer pour etre afficher en premier puis le credit 
 gerer le btn de soumission 
 modal proposition 
 semaine pro gerer le webservice 

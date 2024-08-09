@@ -263,3 +263,39 @@ Stack trace:
 [09-Aug-2024 08:42:44 Europe/Berlin] Handling default action (index)
 [09-Aug-2024 08:44:01 Europe/Berlin] Handling default action (index)
 [09-Aug-2024 08:44:05 Europe/Berlin] Handling default action (index)
+[09-Aug-2024 08:57:00 Europe/Berlin] Handling default action (index)
+[09-Aug-2024 09:40:00 Europe/Berlin] Handling intro action (default)
+[09-Aug-2024 09:40:00 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:31
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(19): App\Controller->render('intro', Array, 'form')
+#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(175): App\Controller->renderFormView('intro', Array)
+#2 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(28): Controllers\Form->renderFormView('intro', Array)
+#3 C:\xampp\htdocs\project\consoForm\index.php(65): Controllers\Form->intro()
+#4 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 31
+[09-Aug-2024 09:40:26 Europe/Berlin] Handling intro action (default)
+[09-Aug-2024 09:40:26 Europe/Berlin] PHP Fatal error:  Uncaught Exception: View file not found: C:\xampp\htdocs\project\consoForm/src/views/form/intro.php in C:\xampp\htdocs\project\consoForm\app\Controller.php:36
+Stack trace:
+#0 C:\xampp\htdocs\project\consoForm\app\Controller.php(24): App\Controller->render('intro', Array, 'form')
+#1 C:\xampp\htdocs\project\consoForm\src\controllers\Form.php(169): App\Controller->renderFormView('intro', Array)
+#2 C:\xampp\htdocs\project\consoForm\app\Controller.php(19): Controllers\Form->renderFormView('intro', Array)
+#3 C:\xampp\htdocs\project\consoForm\index.php(65): App\Controller->intro()
+#4 {main}
+  thrown in C:\xampp\htdocs\project\consoForm\app\Controller.php on line 36
+[09-Aug-2024 09:46:50 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:48:58 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:51:16 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:53:03 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:53:57 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:54:52 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:55:19 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:57:16 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:58:19 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:58:51 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 09:59:37 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:00:52 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:01:41 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:02:38 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:03:28 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:04:55 Europe/Berlin] Handling index action (default)
+[09-Aug-2024 10:05:33 Europe/Berlin] Handling index action (default)

@@ -14,6 +14,12 @@ abstract class Controller
         }
     }
 
+    public function intro()
+    {
+        // Render the view located in views/firststep/intro.php
+        $this->render('intro', [], 'firststep');
+    }
+
     protected function renderFormView(string $viewName, array $data = [])
     {
         $this->render($viewName, $data, 'form');

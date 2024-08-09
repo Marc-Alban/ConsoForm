@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Controllers\Intro;
 use Controllers\Form;
-use Controllers\ApiClient;
 use Dotenv\Dotenv;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -45,24 +45,28 @@ if (session_status() === PHP_SESSION_NONE) {
 $isLocalhost = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']);
 $_SESSION['Adresse_Ip'] = $isLocalhost ? '' : $_SERVER['REMOTE_ADDR'];
 
-// Création d'une instance de contrôleur Form
-$formController = new Form();
+// Création d'une instance de contrôleur
+$action = $_GET['action'] ?? 'index'; 
+
+if ($action === 'index') {
+    $controller = new Intro();
+} else {
+    $controller = new Form();
+}
 
 // Gestion des actions
-$action = $_GET['action'] ?? null;
 switch ($action) {
     case 'saveFormData':
         error_log("Handling saveFormData action");
-        $formController->saveFormData();
+        $controller->saveFormData();
         break;
     case 'loadFormData':
         error_log("Handling loadFormData action");
-        $formController->loadFormData();
+        $controller->loadFormData();
         break;
+    case 'index':
     default:
-        error_log("Handling default action (index)");
-        $formController->index();
+        error_log("Handling index action (default)");
+        $controller->index();
         break;
 }
-
-?>

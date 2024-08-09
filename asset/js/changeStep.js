@@ -96,18 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showCurrentStep() {
         hideAllSteps();
-        let currentStepsArray = [];
-        const choix = getSelectionFromUrl();
-    
-        if (choix === 'projet') {
-            currentStepsArray = window.hasCoBorrowerProjet ? window.stepsWithCoBorrowerProjet : window.stepsWithoutCoBorrowerProjet;
-        } else if (choix === 'vehicule') {
-            currentStepsArray = window.hasCoBorrowerVehicule ? window.stepsWithCoBorrowerVehicule : window.stepsWithoutCoBorrowerVehicule;
-        } else if (choix === 'travaux') {
-            currentStepsArray = window.hasCoBorrowerTravaux ? window.stepsWithCoBorrowerTravaux : window.stepsWithoutCoBorrowerTravaux;
-        } else if (choix === 'credit') {
-            currentStepsArray = window.hasCoBorrowerCredit ? window.stepsWithCoBorrowerCredit : window.stepsWithoutCoBorrowerCredit;
-        }
+        const currentStepsArray = getCurrentStepsArray();
     
         const currentStepId = currentStepsArray[window.currentStep];
         const currentStepElement = document.getElementById(currentStepId);
@@ -119,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         updateActiveStep();
     }
+    
     
     function validateVisibleFields() {
         const isValid = formValidator.validateStep(window.currentStep);
@@ -190,7 +180,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const maxStepIndex = currentStepsArray.length - 1;
         potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
     
-        if (!this.validateStep(window.currentStep)) {
+        // Si nous sommes à la première étape, validez en utilisant validateFirstStep
+        if (window.currentStep === 0 && !this.validateFirstStep()) {
+            return;
+        }
+    
+        // Pour les autres étapes, utilisez validateStep
+        if (window.currentStep > 0 && !this.validateStep(window.currentStep)) {
             this.showErrorsForCurrentStep();
             return;
         }
@@ -206,6 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("New currentStep:", window.currentStep);
         showCurrentStep();
     }
+    
+    
     
     
 
@@ -307,6 +305,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const radioButtons = document.querySelectorAll('.hidden-input');
+    console.log(radioButtons);
+    
     const labelsProjet = document.querySelectorAll('.projet-label');
     const labelsNature = document.querySelectorAll('.nature-label');
     const btnNextProjet = document.querySelector('#btnNextProjet');
@@ -327,6 +327,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function resetSelections() {
         radioButtons.forEach(radio => {
+        console.log('test');
+
             radio.checked = false;
         });
 
@@ -342,7 +344,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     radioButtons.forEach(radio => {
+
         radio.addEventListener('change', function() {
+        console.log('test');
+
             resetSelections();
 
             labelsProjet.forEach(label => {
@@ -361,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             checkSelectionProjet();
             checkSelectionNature();
-
+            
             goToStep(1);
         });
     });

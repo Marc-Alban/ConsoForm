@@ -158,6 +158,13 @@ const options = {
       const stepId = currentStepsArray[window.currentStep];
       const step = document.getElementById(stepId);
   
+      if (!step) {
+          console.error("Step element not found or not visible:", stepId);
+          return false;
+      }
+  
+      let isValid = true;
+  
       if (this.selection === 'projet') {
           const radioButtons = document.querySelectorAll('.hidden-input');
           const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
@@ -170,17 +177,11 @@ const options = {
   
           if (!isAnyRadioChecked) {
               errorContainerProjet.style.display = 'block';
+              isValid = false;
           } else {
               errorContainerProjet.style.display = 'none';
           }
-          return isAnyRadioChecked;
       } else {
-          if (!step) {
-              console.error("Step element not found or not visible:", stepId);
-              return false;
-          }
-  
-          let isValid = true;
           const fields = step.querySelectorAll("input, select, textarea");
   
           fields.forEach((field) => {
@@ -189,9 +190,23 @@ const options = {
               }
           });
   
-          return isValid;
+          // Validation spécifique pour les boutons radio dans les autres étapes
+          const radioGroups = step.querySelectorAll('input[type="radio"]');
+          if (radioGroups.length > 0) {
+              radioGroups.forEach((radio) => {
+                  const name = radio.getAttribute('name');
+                  const isChecked = document.querySelector(`input[name="${name}"]:checked`);
+                  if (!isChecked) {
+                      isValid = false;
+                      this.showError(radio); // Affiche l'erreur si aucun bouton n'est sélectionné
+                  }
+              });
+          }
       }
+  
+      return isValid;
   }
+  
   
   
     formatNumberWithSpaces(number) {
@@ -462,9 +477,11 @@ const options = {
       const errorContainerId = `error-${field.name}`;
       const errorContainer = document.getElementById(errorContainerId);
   
-      if (field.classList.contains('input-number')) {
-          let name = field.getAttribute('name');
-          document.getElementById('clone-' + name).classList.add('error-form');
+      if (field.type === 'radio') {
+          const radioGroup = document.querySelectorAll(`input[name="${field.name}"]`);
+          radioGroup.forEach(radio => {
+              radio.classList.add("error-form");
+          });
       }
   
       if (errorContainer) {
@@ -473,6 +490,23 @@ const options = {
           console.error(`Error container not found for ${field.name}`);
       }
   }
+  hideError(field) {
+    field.classList.remove("error-form");
+    const errorContainerId = `error-${field.name}`;
+    const errorContainer = document.getElementById(errorContainerId);
+
+    if (field.type === 'radio') {
+        const radioGroup = document.querySelectorAll(`input[name="${field.name}"]`);
+        radioGroup.forEach(radio => {
+            radio.classList.remove("error-form");
+        });
+    }
+
+    if (errorContainer) {
+        errorContainer.classList.add("d-none");
+    }
+}
+  
   
   
     hideError(field) {
@@ -599,29 +633,42 @@ const options = {
   }
   
   
-    validateStep(stepIndex) {
-      const currentStepsArray = this.getCurrentStepsArray();
-  
-      const stepId = currentStepsArray[stepIndex];
-      const step = document.getElementById(stepId);
-  
-      if (!step || !this.isVisible(step)) {
-          console.error("Step element not found or not visible:", stepId);
-          return false;
-      }
-  
-      let isValid = true;
-      const fields = step.querySelectorAll("input, select, textarea");
-  
-      fields.forEach((field) => {
-          if (this.isVisible(field) && !this.validateField(field)) {
-              isValid = false;
-          }
-      });
-  
-      return isValid;
-  }
-  
+  validateStep(stepIndex) {
+    const currentStepsArray = this.getCurrentStepsArray();
+
+    const stepId = currentStepsArray[stepIndex];
+    const step = document.getElementById(stepId);
+
+    if (!step || !this.isVisible(step)) {
+        console.error("Step element not found or not visible:", stepId);
+        return false;
+    }
+
+    let isValid = true;
+    const fields = step.querySelectorAll("input, select, textarea");
+
+    fields.forEach((field) => {
+        if (this.isVisible(field) && !this.validateField(field)) {
+            isValid = false;
+        }
+    });
+
+    // Validation spécifique pour les boutons radio
+    const radioGroups = step.querySelectorAll('input[type="radio"]');
+    if (radioGroups.length > 0) {
+        radioGroups.forEach((radio) => {
+            const name = radio.getAttribute('name');
+            const isChecked = document.querySelector(`input[name="${name}"]:checked`);
+            if (!isChecked) {
+                isValid = false;
+                this.showError(radio); // Affiche l'erreur si aucun bouton n'est sélectionné
+            }
+        });
+    }
+
+    return isValid;
+}
+
   
     saveStepData(stepIndex) {
       const step = this.steps[stepIndex];
@@ -681,5 +728,6 @@ const options = {
   document.addEventListener("DOMContentLoaded", () => {
     applyFieldLimits();
     FormValidator.init();
-  });
+});
+
   

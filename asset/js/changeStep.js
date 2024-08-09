@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showCurrentStep() {
         hideAllSteps();
-        const currentStepsArray = getCurrentStepsArray();
+        const currentStepsArray = formValidator.getCurrentStepsArray();
     
         const currentStepId = currentStepsArray[window.currentStep];
         const currentStepElement = document.getElementById(currentStepId);
@@ -108,6 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
         updateActiveStep();
     }
+    
+    
     
     
     function validateVisibleFields() {
@@ -139,7 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         var currentStepsArray= ''
         const choix = getSelectionFromUrl()
-  
+        console.log(choix);
+        
         if(choix == 'projet'){
              currentStepsArray = window.hasCoBorrowerProjet ? window.stepsWithCoBorrowerProjet : window.stepsWithoutCoBorrowerProjet;
         }
@@ -173,21 +176,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
+    
     function goToStep(stepDelta) {
-        const currentStepsArray = this.getCurrentStepsArray();
+        const currentStepsArray = formValidator.getCurrentStepsArray();
     
         let potentialNextStep = window.currentStep + stepDelta;
         const maxStepIndex = currentStepsArray.length - 1;
         potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
     
-        // Si nous sommes à la première étape, validez en utilisant validateFirstStep
-        if (window.currentStep === 0 && !this.validateFirstStep()) {
+        console.log(`Current step: ${window.currentStep}, Potential next step: ${potentialNextStep}`);
+    
+        if (window.currentStep === 0 && !formValidator.validateFirstStep()) {
+            console.log("Validation failed at the first step");
             return;
         }
     
-        // Pour les autres étapes, utilisez validateStep
-        if (window.currentStep > 0 && !this.validateStep(window.currentStep)) {
-            this.showErrorsForCurrentStep();
+        if (window.currentStep > 0 && !formValidator.validateStep(window.currentStep)) {
+            console.log("Validation failed at the current step");
+            formValidator.showErrorsForCurrentStep();
             return;
         }
     
@@ -202,6 +209,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("New currentStep:", window.currentStep);
         showCurrentStep();
     }
+    
+    
     
     
     

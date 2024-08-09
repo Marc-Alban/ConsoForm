@@ -634,12 +634,12 @@ const options = {
   
   
   validateStep(stepIndex) {
-    const currentStepsArray = this.getCurrentStepsArray();
+    const currentStepsArray = formValidator.getCurrentStepsArray();
 
     const stepId = currentStepsArray[stepIndex];
     const step = document.getElementById(stepId);
 
-    if (!step || !this.isVisible(step)) {
+    if (!step || !formValidator.isVisible(step)) {
         console.error("Step element not found or not visible:", stepId);
         return false;
     }
@@ -648,7 +648,7 @@ const options = {
     const fields = step.querySelectorAll("input, select, textarea");
 
     fields.forEach((field) => {
-        if (this.isVisible(field) && !this.validateField(field)) {
+        if (formValidator.isVisible(field) && !formValidator.validateField(field)) {
             isValid = false;
         }
     });
@@ -661,13 +661,14 @@ const options = {
             const isChecked = document.querySelector(`input[name="${name}"]:checked`);
             if (!isChecked) {
                 isValid = false;
-                this.showError(radio); // Affiche l'erreur si aucun bouton n'est sélectionné
+                formValidator.showError(radio); // Affiche l'erreur si aucun bouton n'est sélectionné
             }
         });
     }
 
     return isValid;
 }
+
 
   
     saveStepData(stepIndex) {

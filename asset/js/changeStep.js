@@ -180,12 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function goToStep(stepDelta) {
         const currentStepsArray = formValidator.getCurrentStepsArray();
-    
         let potentialNextStep = window.currentStep + stepDelta;
         const maxStepIndex = currentStepsArray.length - 1;
         potentialNextStep = Math.max(0, Math.min(potentialNextStep, maxStepIndex));
     
-        console.log(`Current step: ${window.currentStep}, Potential next step: ${potentialNextStep}`);
+        console.log("Current step:", window.currentStep, "Potential next step:", potentialNextStep);
     
         if (window.currentStep === 0 && !formValidator.validateFirstStep()) {
             console.log("Validation failed at the first step");
@@ -198,17 +197,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
     
-        while (!document.getElementById(currentStepsArray[potentialNextStep])) {
-            potentialNextStep += stepDelta;
-            if (potentialNextStep < 0 || potentialNextStep > maxStepIndex) {
-                return;
-            }
-        }
-    
         window.currentStep = potentialNextStep;
         console.log("New currentStep:", window.currentStep);
         showCurrentStep();
     }
+    
+    
+    
+    
     
     
     
@@ -353,32 +349,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     radioButtons.forEach(radio => {
-
         radio.addEventListener('change', function() {
-        console.log('test');
-
-            resetSelections();
-
-            labelsProjet.forEach(label => {
-                if (label.getAttribute('for') === this.id) {
-                    label.classList.add('active');
-                    label.style.borderColor = 'red';
-                }
-            });
-
-            labelsNature.forEach(label => {
-                if (label.getAttribute('for') === this.id) {
-                    label.classList.add('active');
-                    label.style.borderColor = 'red';
-                }
-            });
-
-            checkSelectionProjet();
-            checkSelectionNature();
+            console.log('Radio button changed:', radio.id, 'checked:', radio.checked);
             
-            goToStep(1);
+            // Re-valider l'étape après la sélection d'un bouton radio
+            if (formValidator.validateFirstStep()) {
+                formValidator.hideError(radio);
+            } else {
+                console.log("Validation failed after radio button change");
+            }
+    
+            // Déplacement de l'étape uniquement si la validation réussit
+            if (radio.checked) {
+                goToStep(1);
+            }
         });
     });
+    
 
     if (btnNextProjet) {
         btnNextProjet.addEventListener('click', function(e) {

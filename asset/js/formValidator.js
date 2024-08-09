@@ -143,18 +143,7 @@ const options = {
   
     validateFirstStep() {
       const choix = this.selection;
-  
-      let currentStepsArray = [];
-      if (choix == 'projet') {
-          currentStepsArray = window.hasCoBorrowerProjet ? window.stepsWithCoBorrowerProjet : window.stepsWithoutCoBorrowerProjet;
-      } else if (choix == 'vehicule') {
-          currentStepsArray = window.hasCoBorrowerVehicule ? window.stepsWithCoBorrowerVehicule : window.stepsWithoutCoBorrowerVehicule;
-      } else if (choix == 'travaux') {
-          currentStepsArray = window.hasCoBorrowerTravaux ? window.stepsWithCoBorrowerTravaux : window.stepsWithoutCoBorrowerTravaux;
-      } else if (choix == 'credit') {
-          currentStepsArray = window.hasCoBorrowerCredit ? window.stepsWithCoBorrowerCredit : window.stepsWithoutCoBorrowerCredit;
-      }
-  
+      const currentStepsArray = this.getCurrentStepsArray();
       const stepId = currentStepsArray[window.currentStep];
       const step = document.getElementById(stepId);
   
@@ -165,32 +154,40 @@ const options = {
   
       let isValid = true;
   
-      if (this.selection === 'projet') {
-          const radioButtons = document.querySelectorAll('.hidden-input');
+      if (choix === 'projet' || choix === 'travaux') {
+          const radioButtons = step.querySelectorAll('.hidden-input');
           const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
-          const errorContainerProjet = document.getElementById('error-projet');
   
-          if (!errorContainerProjet) {
-              console.error("Error container for project is missing.");
+          // Ajout de logs pour débogage
+          console.log("Radio buttons checked state:", Array.from(radioButtons).map(radio => ({
+              id: radio.id,
+              checked: radio.checked
+          })));
+  
+          const errorContainer = document.getElementById('error-projet') || document.getElementById('error-travaux');
+  
+          if (!errorContainer) {
+              console.error("Error container is missing.");
               return false;
           }
   
           if (!isAnyRadioChecked) {
-              errorContainerProjet.style.display = 'block';
+              errorContainer.style.display = 'block';
+              console.log("Validation failed: No radio button is checked.");
               isValid = false;
           } else {
-              errorContainerProjet.style.display = 'none';
+              errorContainer.style.display = 'none';
+              console.log("Validation passed: A radio button is checked.");
+              isValid = true;  // Ajoutez cette ligne pour garantir que la validation passe si une option est sélectionnée
           }
       } else {
           const fields = step.querySelectorAll("input, select, textarea");
-  
           fields.forEach((field) => {
               if (this.isVisible(field) && !this.validateField(field)) {
                   isValid = false;
               }
           });
   
-          // Validation spécifique pour les boutons radio dans les autres étapes
           const radioGroups = step.querySelectorAll('input[type="radio"]');
           if (radioGroups.length > 0) {
               radioGroups.forEach((radio) => {
@@ -198,7 +195,7 @@ const options = {
                   const isChecked = document.querySelector(`input[name="${name}"]:checked`);
                   if (!isChecked) {
                       isValid = false;
-                      this.showError(radio); // Affiche l'erreur si aucun bouton n'est sélectionné
+                      this.showError(radio);
                   }
               });
           }
@@ -206,6 +203,9 @@ const options = {
   
       return isValid;
   }
+  
+  
+  
   
   
   
@@ -634,12 +634,12 @@ const options = {
   
   
   validateStep(stepIndex) {
-    const currentStepsArray = formValidator.getCurrentStepsArray();
+    const currentStepsArray = this.getCurrentStepsArray();
 
     const stepId = currentStepsArray[stepIndex];
     const step = document.getElementById(stepId);
 
-    if (!step || !formValidator.isVisible(step)) {
+    if (!step || !this.isVisible(step)) {
         console.error("Step element not found or not visible:", stepId);
         return false;
     }
@@ -648,7 +648,7 @@ const options = {
     const fields = step.querySelectorAll("input, select, textarea");
 
     fields.forEach((field) => {
-        if (formValidator.isVisible(field) && !formValidator.validateField(field)) {
+        if (this.isVisible(field) && !this.validateField(field)) {
             isValid = false;
         }
     });
@@ -661,13 +661,14 @@ const options = {
             const isChecked = document.querySelector(`input[name="${name}"]:checked`);
             if (!isChecked) {
                 isValid = false;
-                formValidator.showError(radio); // Affiche l'erreur si aucun bouton n'est sélectionné
+                this.showError(radio); // Affiche l'erreur si aucun bouton n'est sélectionné
             }
         });
     }
 
     return isValid;
 }
+
 
 
   
